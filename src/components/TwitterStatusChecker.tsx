@@ -18,7 +18,8 @@ const TwitterStatusChecker = () => {
     try {
       const response = await apiClient.checkUrl(url);
       setResult(response.isUnavailable);
-      setTweetBody(response.oembedData.html)
+      const body = !response.isUnavailable ? response.oembedData.html : null;
+      setTweetBody(body)
     } catch (error) {
       console.error('Error:', error);
     } finally {
