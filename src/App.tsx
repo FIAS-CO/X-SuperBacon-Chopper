@@ -1,16 +1,20 @@
 import './App.css'
 import TwitterStatusChecker from './components/TwitterStatusChecker';
-
+import TwitterStatusResults from './components/TwitterStatusCheckerResults';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center justify-center">
-      <div className="w-full max-w-4xl">
-        <TwitterStatusChecker />
+    <Router>
+      <div className="container mx-auto py-8">
+        <Routes>
+          <Route path="/" element={<TwitterStatusChecker />} />
+          <Route path="/results" element={<TwitterStatusResults />} />
+        </Routes>
         <div className="mt-4 text-center text-sm text-slate-500">
           <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>
         </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

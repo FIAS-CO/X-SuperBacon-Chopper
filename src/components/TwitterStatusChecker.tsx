@@ -1,51 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Loader2 } from 'lucide-react';
-import { apiClient } from '../services/api';
+import React, { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 
 const TwitterStatusChecker = () => {
-  const [url, setUrl] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [tweetBody, setTweetBody] = useState(null);
+  const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
+  const navigate = useNavigate();
 
-  const handleCheck = async () => {
-    if (!url.trim()) return;
-
-    setLoading(true);
-    try {
-      const response = await apiClient.checkUrl(url);
-      setResult(response.isUnavailable);
-      const body = !response.isUnavailable ? response.oembedData.html : null;
-      setTweetBody(body)
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
+  const addUrlField = () => {
+    setUrls(prev => [...prev, { id: Date.now(), value: '' }]);
   };
 
-  useEffect(() => {
+  const removeUrlField = (id: number) => {
+    setUrls(prev => prev.filter(url => url.id !== id));
+  };
 
-    // scriptを読み込み
+  const handleUrlChange = (id: number, value: string) => {
+    setUrls(prev => prev.map(url =>
+      url.id === id ? { ...url, value } : url
+    ));
+  };
 
-    const script = document.createElement('script');
+  const handleCheckAll = async () => {
+    // フィルターして空のURLを除外
+    const validUrls = urls.filter(url => url.value.trim()).map(url => url.value);
+    if (validUrls.length === 0) return;
 
-    script.src = "https://platform.twitter.com/widgets.js";
+    // URLリストをセッションストレージに保存
+    sessionStorage.setItem('checkUrls', JSON.stringify(validUrls));
 
-    document.body.appendChild(script);
-
-    // アンマウント時に一応scriptタグを消しておく
-
-    return () => {
-
-      document.body.removeChild(script);
-
-    }
-
-  }, [tweetBody])
+    // 結果ページに遷移
+    navigate('/results');
+  };
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
@@ -54,45 +42,43 @@ const TwitterStatusChecker = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="flex gap-2">
-            <Input
-              placeholder="ツイートのURLを入力"
-              value={url}
-              onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setUrl(e.target.value)}
-              className="flex-1"
-            />
-            <Button
-              onClick={handleCheck}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  確認中
-                </>
-              ) : (
-                '確認'
-              )}
-            </Button>
-          </div>
-
-          {result !== null && (
-            <div className="space-y-4">
-              <div className="mt-4 p-4 rounded-lg bg-slate-100">
-                {result ?
-                  "検索除外されています" :
-                  "検索除外されていません"
-                }
-              </div>
-
-              {!result && tweetBody && (
-                <div
-                  className="mt-4"
-                  dangerouslySetInnerHTML={{ __html: tweetBody }}
-                />
+          {urls.map((urlObj) => (
+            <div key={urlObj.id} className="flex gap-2">
+              <Input
+                placeholder="ツイートのURLを入力"
+                value={urlObj.value}
+                onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
+                className="flex-1"
+              />
+              {urls.length > 1 && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => removeUrlField(urlObj.id)}
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
               )}
             </div>
-          )}
+          ))}
+
+          <div className="space-y-2">
+            <Button
+              variant="outline"
+              onClick={addUrlField}
+              className="w-full"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              URLを追加
+            </Button>
+
+            <Button
+              onClick={handleCheckAll}
+              className="w-full"
+            >
+              一括チェック
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
