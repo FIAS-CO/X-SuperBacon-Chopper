@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { loadAd } from './adsense/AdSenseUtil';
+import Adsense, { loadAd } from './adsense/AdSenseUtil';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -42,6 +42,7 @@ const TwitterStatusChecker = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
+      <Adsense />
       <CardHeader>
         <CardTitle>ツイート検索除外チェッカー</CardTitle>
       </CardHeader>
