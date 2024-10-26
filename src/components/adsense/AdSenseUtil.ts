@@ -4,7 +4,7 @@ declare global {
         adsbygoogle: any;
     }
 }
-const hostname = "xsearchbancheckerapi.fia-s.com";
+const hostname = "x-searchban-checker.fia-s.com";
 
 export function loadAd() {
     if (window.location.hostname === hostname) {
