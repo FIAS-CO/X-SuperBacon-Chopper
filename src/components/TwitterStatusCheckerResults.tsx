@@ -4,6 +4,7 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { loadAd } from './adsense/AdSenseUtil';
 
 interface CheckResult {
   url: string;
@@ -16,6 +17,10 @@ const TwitterStatusResults = () => {
   const [results, setResults] = useState<CheckResult[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    loadAd()
+  }, []);
 
   useEffect(() => {
     const checkUrls = async () => {
@@ -96,10 +101,10 @@ const TwitterStatusResults = () => {
               </a>
               <div
                 className={`px-3 py-1 rounded-md flex items-center justify-center md:justify-start shrink-0 ${result.status === 'NOT_FOUND' || result.status === 'UNKNOWN'
-                    ? 'bg-gray-100 text-gray-700'
-                    : result.status === 'FORBIDDEN'
-                      ? 'bg-red-100 text-red-700'
-                      : 'bg-green-100 text-green-700'
+                  ? 'bg-gray-100 text-gray-700'
+                  : result.status === 'FORBIDDEN'
+                    ? 'bg-red-100 text-red-700'
+                    : 'bg-green-100 text-green-700'
                   }`}
               >
                 {result.status === 'NOT_FOUND' || result.status === 'UNKNOWN'
