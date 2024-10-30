@@ -48,7 +48,7 @@ function Adsense(adSlot: string, adFormat: string) {
               data-ad-format={adFormat} //"auto"
               data-ad-client="ca-pub-8151928728657048"
               data-ad-slot={adSlot}//"5127709417"
-              data-full-width-responsive="true"></ins>
+              data-full-width-responsive="false"></ins>
           ) :
           (
             <div style={{ padding: "10px", border: "1px solid #333" }}>
