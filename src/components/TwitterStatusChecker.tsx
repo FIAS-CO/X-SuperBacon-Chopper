@@ -32,6 +32,7 @@ const TwitterStatusChecker = () => {
 
     // URLリストをセッションストレージに保存
     sessionStorage.setItem('checkUrls', JSON.stringify(validUrls));
+    sessionStorage.setItem('inputUrls', JSON.stringify(urls));
 
     // 結果ページに遷移
     navigate('/results');
@@ -47,11 +48,11 @@ const TwitterStatusChecker = () => {
       adsbygoogle.crossOrigin = "anonymous";
       document.head.appendChild(adsbygoogle);
 
-      // DOMが更新された後にAdSenseを再実行
-      window.adsbygoogle = window.adsbygoogle || [];
-      setTimeout(() => {
-        window.adsbygoogle.push({});
-      }, 1000);
+    const savedUrls = sessionStorage.getItem('inputUrls');
+    if (savedUrls) {
+      setUrls(JSON.parse(savedUrls));
+      // 復元後にクリア
+      sessionStorage.removeItem('inputUrls');
     }
   }, []);
 
