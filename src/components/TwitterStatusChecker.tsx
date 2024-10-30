@@ -90,7 +90,7 @@ const TwitterStatusChecker = () => {
               onClick={handleCheckAll}
               className="w-full"
             >
-              一括チェック
+              check start
             </Button>
           </div>
         </div>

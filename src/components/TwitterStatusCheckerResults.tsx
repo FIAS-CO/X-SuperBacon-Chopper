@@ -89,7 +89,7 @@ const TwitterStatusResults = () => {
           {results.map((result, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg border gap-2 md:gap-4"
+              className="flex flex-col text-left md:flex-row md:items-center md:justify-between p-4 rounded-lg border gap-2 md:gap-4"
             >
               <a
                 href={result.url}
@@ -100,15 +100,16 @@ const TwitterStatusResults = () => {
                 {result.url}
               </a>
               <div
-                className={`px-3 py-1 rounded-md flex items-center justify-center md:justify-start shrink-0 ${result.status === 'NOT_FOUND' || result.status === 'UNKNOWN'
-                  ? 'bg-gray-100 text-gray-700'
-                  : result.status === 'FORBIDDEN'
-                    ? 'bg-red-100 text-red-700'
-                    : 'bg-green-100 text-green-700'
+                className={`px-3 py-1 rounded-md flex items-center justify-center md:justify-start shrink-0
+                   ${result.status === 'NOT_FOUND' || result.status === 'UNKNOWN' || result.status === 'INVALID_URL'
+                    ? 'bg-gray-100 text-gray-700'
+                    : result.status === 'FORBIDDEN'
+                      ? 'bg-red-100 text-red-700'
+                      : 'bg-green-100 text-green-700'
                   }`}
               >
-                {result.status === 'NOT_FOUND' || result.status === 'UNKNOWN'
-                  ? 'チェックエラー'
+                {result.status === 'NOT_FOUND' || result.status === 'UNKNOWN' || result.status === 'INVALID_URL'
+                  ? 'エラー'
                   : result.status === 'FORBIDDEN'
                     ? '検索除外'
                     : '検索OK'}
@@ -117,7 +118,25 @@ const TwitterStatusResults = () => {
           ))}
         </div>
       </CardContent>
+      <div className="ml-7 mt-4 text-left text-sm text-slate-500">
+        <p className="mb-2">＜凡例＞</p>
+        <div className="space-y-2">
+          <p>
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs mr-2">検索OK</span>
+            検索除外されていないツイートです。
+          </p>
+          <p>
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">検索除外</span>
+            検索除外されているツイートです。
+          </p>
+          <p>
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-gray-100 text-gray-700 text-xs mr-2">エラー</span>
+            ツイートが存在しない、URLが間違っているなどです。
+          </p>
+        </div>
+      </div>
     </Card>
+
   );
 };
 
