@@ -51,9 +51,6 @@ const TwitterStatusChecker = () => {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <TopPageAdsense1 />
-      <CardHeader>
-        <CardTitle>ツイート検索除外チェッカー</CardTitle>
-      </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {urls.map((urlObj) => (
