@@ -68,11 +68,19 @@ export function TopPageAdsense2() {
   return Adsense("7827668563", "auto")
 }
 
+export function TopPageAdsense3() {
+  return Adsense("8366553175", "autorelaxed")
+}
+
 export function ResultPageAdsense1() {
   return Adsense("6044114922", "horizontal")
 }
 
 export function ResultPageAdsense2() {
   return Adsense("2575341880", "auto")
+}
+
+export function ResultPageAdsense3() {
+  return Adsense("3963439584", "autorelaxed")
 }
 

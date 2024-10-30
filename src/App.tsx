@@ -1,4 +1,5 @@
 import './App.css'
+import { ResultPageAdsense3, TopPageAdsense3 } from './components/adsense/AdSenseUtil';
 import TwitterStatusChecker from './components/TwitterStatusChecker';
 import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -16,6 +17,9 @@ function App() {
         <div className="mt-4 text-center text-sm text-slate-500">
           <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>
         </div>
+
+        <TopPageAdsense3 />
+        <ResultPageAdsense3 />
       </div>
     </Router>
   );
