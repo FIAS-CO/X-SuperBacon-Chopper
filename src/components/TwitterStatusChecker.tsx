@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import Adsense, { loadAd } from './adsense/AdSenseUtil';
+import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -50,7 +50,7 @@ const TwitterStatusChecker = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
-      <Adsense />
+      <TopPageAdsense1 />
       <CardHeader>
         <CardTitle>ツイート検索除外チェッカー</CardTitle>
       </CardHeader>
@@ -95,6 +95,7 @@ const TwitterStatusChecker = () => {
           </div>
         </div>
       </CardContent>
+      <TopPageAdsense2 />
     </Card>
   );
 };

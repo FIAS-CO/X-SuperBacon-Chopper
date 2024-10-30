@@ -24,23 +24,7 @@ export function loadAd() {
   }
 }
 
-function Adsense() {
-  useEffect(() => {
-    if (window.location.hostname === hostname) {
-      // AdSenseスクリプトの初期化
-      const adsbygoogle = document.createElement('script');
-      adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-      adsbygoogle.async = true;
-      adsbygoogle.crossOrigin = "anonymous";
-      document.head.appendChild(adsbygoogle);
-
-      // DOMが更新された後にAdSenseを再実行
-      window.adsbygoogle = window.adsbygoogle || [];
-      setTimeout(() => {
-        window.adsbygoogle.push({});
-      }, 1000);
-    }
-  }, []);
+function Adsense(adSlot: string, adFormat: string) {
 
   return (
     <div style={{ margin: "1.5rem 0" }}>
@@ -50,9 +34,9 @@ function Adsense() {
           <ins className="adsbygoogle"
             style={{ display: "block", textAlign: "center" }}
             data-ad-layout="in-article"
-            data-ad-format="auto"
+            data-ad-format={adFormat} //"auto"
             data-ad-client="ca-pub-8151928728657048"
-            data-ad-slot="5127709417"
+            data-ad-slot={adSlot}//"5127709417"
             data-full-width-responsive="true"></ins>
         ) :
         (
@@ -64,4 +48,19 @@ function Adsense() {
   )
 }
 
-export default Adsense
+export function TopPageAdsense1() {
+  return Adsense("5127709417", "horizontal")
+}
+
+export function TopPageAdsense2() {
+  return Adsense("7827668563", "auto")
+}
+
+export function ResultPageAdsense1() {
+  return Adsense("6044114922", "horizontal")
+}
+
+export function ResultPageAdsense2() {
+  return Adsense("2575341880", "auto")
+}
+

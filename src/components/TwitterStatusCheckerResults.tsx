@@ -4,7 +4,7 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { loadAd } from './adsense/AdSenseUtil';
+import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 interface CheckResult {
   url: string;
@@ -73,6 +73,7 @@ const TwitterStatusResults = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
+      <ResultPageAdsense1 />
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>チェック結果</CardTitle>
         <Button
@@ -135,6 +136,8 @@ const TwitterStatusResults = () => {
           </p>
         </div>
       </div>
+
+      <ResultPageAdsense2 />
     </Card>
 
   );
