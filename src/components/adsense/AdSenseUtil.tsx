@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import SEOMetaTags from "../seo/SEOMetaTag";
 
 declare global {
   interface Window {
@@ -35,24 +36,27 @@ function Adsense(adSlot: string, adFormat: string) {
   }, []);
 
   return (
-    <div style={{ margin: "1.5rem 0" }}>
-      <div style={{ fontSize: "13px" }}>スポンサーリンク</div>
-      {window.location.hostname == hostname ?
-        (
-          <ins className="adsbygoogle"
-            style={{ display: "block", textAlign: "center" }}
-            data-ad-layout="in-article"
-            data-ad-format={adFormat} //"auto"
-            data-ad-client="ca-pub-8151928728657048"
-            data-ad-slot={adSlot}//"5127709417"
-            data-full-width-responsive="true"></ins>
-        ) :
-        (
-          <div style={{ padding: "10px", border: "1px solid #333" }}>
-            広告
-          </div>
-        )}
-    </div>
+    <>
+      <SEOMetaTags />
+      <div style={{ margin: "1.5rem 0" }}>
+        <div style={{ fontSize: "13px" }}>スポンサーリンク</div>
+        {window.location.hostname == hostname ?
+          (
+            <ins className="adsbygoogle"
+              style={{ display: "block", textAlign: "center" }}
+              data-ad-layout="in-article"
+              data-ad-format={adFormat} //"auto"
+              data-ad-client="ca-pub-8151928728657048"
+              data-ad-slot={adSlot}//"5127709417"
+              data-full-width-responsive="true"></ins>
+          ) :
+          (
+            <div style={{ padding: "10px", border: "1px solid #333" }}>
+              広告
+            </div>
+          )}
+      </div>
+    </>
   )
 }
 
