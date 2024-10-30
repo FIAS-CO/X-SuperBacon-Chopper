@@ -1,0 +1,40 @@
+name: Auto Deploy and Publish
+on:
+  push:
+    branches: [ main ]  # mainブランチにプッシュされた時に実行
+jobs:
+  deploy-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    - name: Deploy to Server and Publish
+      env:
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      run: |
+        ssh $SERVER_USER@$SERVER_IP << EOF
+          # サーバー上でのNode.js環境のセットアップ
+          export NVM_DIR="\$HOME/.nvm"
+          [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
+          nvm use 20.17.0 || nvm install 20.17.0
+
+          # プロジェクトディレクトリに移動
+          cd $DEPLOY_PATH || exit 1
+
+          # 最新のコードを取得
+          git pull origin main || exit 1
+
+          # 依存関係のインストール
+          npm install || exit 1
+
+          # プロジェクトのpublish
+          npm run publish || exit 1
+
+          echo "Deployment and publish completed successfully"
+        EOF
