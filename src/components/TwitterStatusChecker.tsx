@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
