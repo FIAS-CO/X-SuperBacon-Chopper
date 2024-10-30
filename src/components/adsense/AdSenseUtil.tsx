@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 declare global {
   interface Window {
     adsbygoogle: any;
@@ -23,6 +25,14 @@ export function loadAd() {
 }
 
 function Adsense(adSlot: string, adFormat: string) {
+  useEffect(() => {
+    if (window.location.hostname === hostname) {
+      window.adsbygoogle = window.adsbygoogle || [];
+      setTimeout(() => {
+        window.adsbygoogle.push({});
+      }, 1000);
+    }
+  }, []);
 
   return (
     <div style={{ margin: "1.5rem 0" }}>
