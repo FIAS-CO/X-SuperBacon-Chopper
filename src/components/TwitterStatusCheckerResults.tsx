@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
@@ -9,9 +9,51 @@ import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSens
 interface CheckResult {
   url: string;
   code: number;
-  status: string;
+  status: TweetStatus;
   message: string;
 }
+
+// ステータスの型定義
+type TweetStatus = 'AVAILABLE' | 'FORBIDDEN' | 'NOT_FOUND' | 'UNKNOWN' | 'INVALID_URL' | 'QUATE_FORBIDDEN';
+
+// ステータスに関する情報を一元管理するオブジェクト
+const STATUS_CONFIG = {
+  AVAILABLE: {
+    text: '検索OK',
+    className: 'bg-green-100 text-green-700'
+  },
+  FORBIDDEN: {
+    text: '検索除外',
+    className: 'bg-red-100 text-red-700'
+  },
+  NOT_FOUND: {
+    text: 'エラー',
+    className: 'bg-gray-100 text-gray-700'
+  },
+  UNKNOWN: {
+    text: 'エラー',
+    className: 'bg-gray-100 text-gray-700'
+  },
+  INVALID_URL: {
+    text: 'エラー',
+    className: 'bg-gray-100 text-gray-700'
+  },
+  QUATE_FORBIDDEN: {
+    text: '引用先除外',
+    className: 'bg-red-100 text-red-700'
+  }
+} as const;
+
+// ステータス表示用のコンポーネント
+const StatusBadge: React.FC<{ status: TweetStatus }> = ({ status }) => {
+  const config = STATUS_CONFIG[status];
+
+  return (
+    <div className={`px-3 py-1 rounded-md inline-flex items-center w-fit ${config.className}`}>
+      {config.text}
+    </div>
+  );
+};
 
 const TwitterStatusResults = () => {
   const [results, setResults] = useState<CheckResult[]>([]);
@@ -24,6 +66,7 @@ const TwitterStatusResults = () => {
 
   useEffect(() => {
     const checkUrls = async () => {
+      console.log("start check urls")
       const urlsJson = sessionStorage.getItem('checkUrls');
       if (!urlsJson) {
         navigate('/');
@@ -100,21 +143,7 @@ const TwitterStatusResults = () => {
               >
                 {result.url}
               </a>
-              <div
-                className={`px-3 py-1 rounded-md flex items-center justify-center md:justify-start shrink-0
-                   ${result.status === 'NOT_FOUND' || result.status === 'UNKNOWN' || result.status === 'INVALID_URL'
-                    ? 'bg-gray-100 text-gray-700'
-                    : result.status === 'FORBIDDEN'
-                      ? 'bg-red-100 text-red-700'
-                      : 'bg-green-100 text-green-700'
-                  }`}
-              >
-                {result.status === 'NOT_FOUND' || result.status === 'UNKNOWN' || result.status === 'INVALID_URL'
-                  ? 'エラー'
-                  : result.status === 'FORBIDDEN'
-                    ? '検索除外'
-                    : '検索OK'}
-              </div>
+              <StatusBadge status={result.status} />
             </div>
           ))}
         </div>
@@ -129,6 +158,10 @@ const TwitterStatusResults = () => {
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">検索除外</span>
             検索除外されているツイートです。
+          </p>
+          <p>
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">引用先除外</span>
+            引用先が検索除外されているツイートです。
           </p>
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-gray-100 text-gray-700 text-xs mr-2">エラー</span>
