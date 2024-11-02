@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
@@ -153,19 +153,19 @@ const TwitterStatusResults = () => {
         <div className="space-y-2">
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs mr-2">検索OK</span>
-            検索除外されていないツイートです。
+            検索除外されていないポストです。
           </p>
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">検索除外</span>
-            検索除外されているツイートです。
+            検索除外されているポストです。
           </p>
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">引用先除外</span>
-            引用先が検索除外されているツイートです。
+            引用先が検索除外されているポストです。
           </p>
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-gray-100 text-gray-700 text-xs mr-2">エラー</span>
-            ツイートが存在しない、URLが間違っているなどです。
+            ポストが存在しない、URLが間違っているなどです。
           </p>
         </div>
       </div>

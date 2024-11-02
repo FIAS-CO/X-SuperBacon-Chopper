@@ -56,7 +56,7 @@ const TwitterStatusChecker = () => {
           {urls.map((urlObj) => (
             <div key={urlObj.id} className="flex gap-2">
               <Input
-                placeholder="ツイートのURLを入力"
+                placeholder="ポストのURLを入力"
                 value={urlObj.value}
                 onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
                 className="flex-1"

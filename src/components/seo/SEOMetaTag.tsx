@@ -12,9 +12,9 @@ interface SEOMetaTagsProps {
 }
 
 const SEOMetaTags = ({
-  title = 'ツイート検索除外チェッカー',
-  description = 'Twitterのツイートが検索から除外されているかどうかを簡単にチェックできるツールです。複数URLの一括チェックに対応しています。',
-  keywords = 'Twitter,ツイート,検索除外,チェッカー,SNS,ソーシャルメディア',
+  title = 'Xポスト検索除外チェッカー',
+  description = 'Xのポストが検索から除外されているかどうかを簡単にチェックできるツールです。複数URLの一括チェックに対応しています。',
+  keywords = 'X,ポスト,Twitter,ツイート,検索除外,チェッカー,SNS,ソーシャルメディア,検索除外,除外検索,調べ方,検索',
   ogTitle,
   ogDescription,
   ogImage = '/api/placeholder/1200/630',
