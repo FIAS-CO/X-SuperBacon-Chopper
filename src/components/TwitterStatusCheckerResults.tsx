@@ -39,7 +39,7 @@ const STATUS_CONFIG = {
     className: 'bg-gray-100 text-gray-700'
   },
   QUATE_FORBIDDEN: {
-    text: '引用先除外',
+    text: '引用元除外',
     className: 'bg-red-100 text-red-700'
   }
 } as const;
@@ -160,8 +160,8 @@ const TwitterStatusResults = () => {
             検索除外されているポストです。
           </p>
           <p>
-            <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">引用先除外</span>
-            引用先が検索除外されているポストです。
+            <span className="inline-flex items-center px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs mr-2">引用元除外</span>
+            引用元が検索除外されているポストです。
           </p>
           <p>
             <span className="inline-flex items-center px-2 py-1 rounded-md bg-gray-100 text-gray-700 text-xs mr-2">エラー</span>
