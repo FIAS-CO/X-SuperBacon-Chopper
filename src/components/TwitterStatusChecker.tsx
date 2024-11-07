@@ -5,6 +5,7 @@ import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { HowToUseExpantionButton } from './HowToUseExpantionButton';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -92,6 +93,7 @@ const TwitterStatusChecker = () => {
           </div>
         </div>
       </CardContent>
+      <HowToUseExpantionButton />
       <TopPageAdsense2 />
     </Card>
   );
