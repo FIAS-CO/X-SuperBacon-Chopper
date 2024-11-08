@@ -5,7 +5,7 @@ import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
-import { HowToUseExpantionButton } from './HowToUseExpantionButton';
+import { CautionExpantionButton, ContactUsExpantionButton, HowToUseExpantionButton } from './ExpantionButton';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -53,7 +53,7 @@ const TwitterStatusChecker = () => {
     <Card className="w-full max-w-2xl mx-auto">
       <TopPageAdsense1 />
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-4 mb-4">
           {urls.map((urlObj) => (
             <div key={urlObj.id} className="flex gap-2">
               <Input
@@ -92,8 +92,10 @@ const TwitterStatusChecker = () => {
             </Button>
           </div>
         </div>
+        <HowToUseExpantionButton />
+        <CautionExpantionButton />
+        <ContactUsExpantionButton />
       </CardContent>
-      <HowToUseExpantionButton />
       <TopPageAdsense2 />
     </Card>
   );
