@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const HowToUseExpantionButton: React.FC = () => {
     return (
-        <ExpantionButton label="How to use">
+        <ExpantionButton label="使い方">
             <p className="mb-4 text-left">
                 ツイートが検索除外されているかどうか確認できます
             </p>
@@ -26,10 +26,9 @@ export const CautionExpantionButton: React.FC = () => {
         <ExpantionButton label="注意事項">
             <div>
                 <ul className="list-disc pl-6 space-y-2 text-left">
-                    <li>このツールの検出結果は100％保証するものではありません。
-                        Twitterの仕様が変わるとこのツールも使えなるかもしれません。</li>
+                    <li>このツールの検出結果は100％保証するものではありません。<br />
+                        X(Twitter)の仕様が変わるとこのツールも使えなるかもしれません。</li>
                     <li>誤作動があっても温かい目で見てください。</li>
-                    <li>いわゆる旧型シャドウバンと呼ばれる症状のアカウントのポストの場合、健全な内容でも「検索除外」と判定されることがあります。</li>
                 </ul>
             </div>
         </ExpantionButton>
