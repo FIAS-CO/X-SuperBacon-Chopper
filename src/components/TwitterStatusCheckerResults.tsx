@@ -4,6 +4,7 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { Checkbox } from './ui/checkbox';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 interface CheckResult {
@@ -60,6 +61,14 @@ const TwitterStatusResults = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // フィルターの状態
+  const [filters, setFilters] = useState({
+    searchOk: true,
+    searchForbidden: true,
+    quoteForbidden: true,
+    error: true
+  });
+
   useEffect(() => {
     loadAd()
   }, []);
@@ -103,6 +112,14 @@ const TwitterStatusResults = () => {
     checkUrls();
   }, [navigate]);
 
+  // 結果をフィルタリング
+  const filteredResults = results.filter(result => {
+    if (result.status === 'AVAILABLE') return filters.searchOk;
+    if (result.status === 'FORBIDDEN') return filters.searchForbidden;
+    if (result.status === 'QUATE_FORBIDDEN') return filters.quoteForbidden;
+    return filters.error; // NOT_FOUND, UNKNOWN, INVALID_URLはすべてerrorとして扱う
+  });
+
   if (loading) {
     return (
       <Card className="w-full max-w-2xl mx-auto">
@@ -129,8 +146,50 @@ const TwitterStatusResults = () => {
         </Button>
       </CardHeader>
       <CardContent>
+        <div className="flex flex-wrap gap-4 mb-4">
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="searchOk"
+              checked={filters.searchOk}
+              onCheckedChange={(checked) =>
+                setFilters(prev => ({ ...prev, searchOk: checked as boolean }))
+              }
+            />
+            <label htmlFor="searchOk">検索OK</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="searchForbidden"
+              checked={filters.searchForbidden}
+              onCheckedChange={(checked) =>
+                setFilters(prev => ({ ...prev, searchForbidden: checked as boolean }))
+              }
+            />
+            <label htmlFor="searchForbidden">検索除外</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="quoteForbidden"
+              checked={filters.quoteForbidden}
+              onCheckedChange={(checked) =>
+                setFilters(prev => ({ ...prev, quoteForbidden: checked as boolean }))
+              }
+            />
+            <label htmlFor="quoteForbidden">引用元除外</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="error"
+              checked={filters.error}
+              onCheckedChange={(checked) =>
+                setFilters(prev => ({ ...prev, error: checked as boolean }))
+              }
+            />
+            <label htmlFor="error">エラー</label>
+          </div>
+        </div>
         <div className="space-y-2">
-          {results.map((result, index) => (
+          {filteredResults.map((result, index) => (
             <div
               key={index}
               className="flex flex-col text-left md:flex-row md:items-center md:justify-between p-4 rounded-lg border gap-2 md:gap-4"
