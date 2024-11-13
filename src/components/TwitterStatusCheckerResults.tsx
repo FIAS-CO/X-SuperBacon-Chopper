@@ -4,7 +4,6 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 interface CheckResult {
@@ -53,6 +52,26 @@ const StatusBadge: React.FC<{ status: TweetStatus }> = ({ status }) => {
     <div className={`px-3 py-1 rounded-md inline-flex items-center w-fit ${config.className}`}>
       {config.text}
     </div>
+  );
+};
+
+const FilterCheckbox: React.FC<{
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}> = ({ id, label, checked, onChange }) => {
+  return (
+    <label className="flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        id={id}
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+      />
+      <span className="ml-2 text-sm text-gray-700">{label}</span>
+    </label>
   );
 };
 
@@ -146,47 +165,31 @@ const TwitterStatusResults = () => {
         </Button>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-wrap gap-4 mb-4">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="searchOk"
-              checked={filters.searchOk}
-              onCheckedChange={(checked) =>
-                setFilters(prev => ({ ...prev, searchOk: checked as boolean }))
-              }
-            />
-            <label htmlFor="searchOk">検索OK</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="searchForbidden"
-              checked={filters.searchForbidden}
-              onCheckedChange={(checked) =>
-                setFilters(prev => ({ ...prev, searchForbidden: checked as boolean }))
-              }
-            />
-            <label htmlFor="searchForbidden">検索除外</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="quoteForbidden"
-              checked={filters.quoteForbidden}
-              onCheckedChange={(checked) =>
-                setFilters(prev => ({ ...prev, quoteForbidden: checked as boolean }))
-              }
-            />
-            <label htmlFor="quoteForbidden">引用元除外</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="error"
-              checked={filters.error}
-              onCheckedChange={(checked) =>
-                setFilters(prev => ({ ...prev, error: checked as boolean }))
-              }
-            />
-            <label htmlFor="error">エラー</label>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <FilterCheckbox
+            id="searchOk"
+            label="検索OK"
+            checked={filters.searchOk}
+            onChange={(checked) => setFilters(prev => ({ ...prev, searchOk: checked }))}
+          />
+          <FilterCheckbox
+            id="searchForbidden"
+            label="検索除外"
+            checked={filters.searchForbidden}
+            onChange={(checked) => setFilters(prev => ({ ...prev, searchForbidden: checked }))}
+          />
+          <FilterCheckbox
+            id="quoteForbidden"
+            label="引用元除外"
+            checked={filters.quoteForbidden}
+            onChange={(checked) => setFilters(prev => ({ ...prev, quoteForbidden: checked }))}
+          />
+          <FilterCheckbox
+            id="error"
+            label="エラー"
+            checked={filters.error}
+            onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
+          />
         </div>
         <div className="space-y-2">
           {filteredResults.map((result, index) => (
