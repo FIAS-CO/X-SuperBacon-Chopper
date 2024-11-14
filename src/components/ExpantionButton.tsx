@@ -4,7 +4,7 @@ export const HowToUseExpantionButton: React.FC = () => {
     return (
         <ExpantionButton label="使い方">
             <p className="mb-4 text-left">
-                ツイートが検索除外されているかどうか確認できます
+                ポスト(ツイート)のURLをテキストボックスに入れることでポストが検索除外されているかどうか確認できます
             </p>
             <p className="mb-4 text-left">
                 ※https://x.com/〇〇/status/XXXXX/photo/1 みたいなURLでもチェックできます
