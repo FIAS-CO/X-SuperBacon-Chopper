@@ -106,9 +106,7 @@ const TwitterStatusResults = () => {
       const ipResponse = await fetch('https://api.ipify.org?format=json');
       const { ip } = await ipResponse.json();
       const encryptedKey = clientEncryption.encrypt(ip || '');
-      console.log(`ip:${ip}`)
 
-      console.log(`encId:${encryptedKey}`)
       const checksPromises = urlList.map(async (url: string) => {
         try {
           const response = await apiClient.checkUrl(url, encryptedKey);
