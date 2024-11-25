@@ -5,6 +5,7 @@ import { apiClient } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
+import { clientEncryption } from './util/ClientEncryption';
 
 interface CheckResult {
   url: string;
@@ -102,9 +103,13 @@ const TwitterStatusResults = () => {
       }
 
       const urlList = JSON.parse(urlsJson);
+      const ipResponse = await fetch('https://api.ipify.org?format=json');
+      const { ip } = await ipResponse.json();
+      const encryptedKey = clientEncryption.encrypt(ip || '');
+
       const checksPromises = urlList.map(async (url: string) => {
         try {
-          const response = await apiClient.checkUrl(url);
+          const response = await apiClient.checkUrl(url, encryptedKey);
           return {
             url,
             code: response.code,
