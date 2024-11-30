@@ -7,15 +7,15 @@ import { Button } from './ui/button';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { clientEncryption } from './util/ClientEncryption';
 
-interface CheckResult {
-  url: string;
+interface TweetStatus {
+  url: string; // APIの方のTweetStatusには無い項目
   code: number;
-  status: TweetStatus;
+  status: Status;
   message: string;
 }
 
 // ステータスの型定義
-type TweetStatus = 'AVAILABLE' | 'FORBIDDEN' | 'NOT_FOUND' | 'UNKNOWN' | 'INVALID_URL' | 'QUATE_FORBIDDEN';
+type Status = 'AVAILABLE' | 'FORBIDDEN' | 'NOT_FOUND' | 'UNKNOWN' | 'INVALID_URL' | 'QUATE_FORBIDDEN';
 
 // ステータスに関する情報を一元管理するオブジェクト
 const STATUS_CONFIG = {
@@ -46,7 +46,7 @@ const STATUS_CONFIG = {
 } as const;
 
 // ステータス表示用のコンポーネント
-const StatusBadge: React.FC<{ status: TweetStatus }> = ({ status }) => {
+const StatusBadge: React.FC<{ status: Status }> = ({ status }) => {
   const config = STATUS_CONFIG[status];
 
   return (
@@ -77,7 +77,7 @@ const FilterCheckbox: React.FC<{
 };
 
 const TwitterStatusResults = () => {
-  const [results, setResults] = useState<CheckResult[]>([]);
+  const [results, setResults] = useState<TweetStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -107,30 +107,29 @@ const TwitterStatusResults = () => {
       const { ip } = await ipResponse.json();
       const encryptedKey = clientEncryption.encrypt(ip || '');
 
-      const checksPromises = urlList.map(async (url: string) => {
-        try {
-          const response = await apiClient.checkUrl(url, encryptedKey);
-          return {
-            url,
-            code: response.code,
-            status: response.status,
-            message: response.message,
-          };
-        } catch (error) {
-          console.error('Error checking URL:', url, error);
-          return {
-            url,
-            code: 500,
-            status: 'UNKNOWN',
-            message: 'Tweet not available',
-          };
-        }
-      });
+      try {
+        const results = await apiClient.checkUrlBatch(urlList, encryptedKey);
+        console.log(results)
 
-      const results = await Promise.all(checksPromises);
-      setResults(results);
-      setLoading(false);
-      sessionStorage.removeItem('checkUrls');
+        const formattedResults: TweetStatus[] = results.map((result: TweetStatus) => ({
+          url: result.url,
+          code: result.code,
+          status: result.status,
+          message: result.message
+        }));
+
+        setResults(formattedResults);
+        setLoading(false);
+        sessionStorage.removeItem('checkUrls');
+      } catch (error) {
+        console.error('Error checking URL:', error);
+        setResults(urlList.map((url: string) => ({
+          url,
+          code: 500,
+          status: 'UNKNOWN' as const,
+          message: 'Failed to check status'
+        })));
+      }
     };
 
     checkUrls();
