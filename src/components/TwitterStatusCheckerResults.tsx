@@ -4,11 +4,12 @@ import { apiClient } from '../services/api';
 import { Card, CardContent } from './ui/card';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { clientEncryption } from './util/ClientEncryption';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, StatusHeader, StatusResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, SessionResult, StatusHeader, StatusResult } from './results/StatusComponents';
 
 const TwitterStatusResults = () => {
   const [results, setResults] = useState<StatusResult[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sessionId, setSessionId] = useState("");
   const navigate = useNavigate();
 
   // フィルターの状態
@@ -39,13 +40,14 @@ const TwitterStatusResults = () => {
 
       try {
         const results = await apiClient.checkUrlBatch(urlList, encryptedKey);
-        console.log(results)
+        console.log(`result: ${results}`)
 
-        const formattedResults: StatusResult[] = results.map((result: StatusResult) => ({
+        const formattedResults: StatusResult[] = results.sessionResults.map((result: StatusResult) => ({
           url: result.url,
           status: result.status
         }));
 
+        setSessionId(results.sessionId);
         setResults(formattedResults);
         setLoading(false);
         sessionStorage.removeItem('checkUrls');

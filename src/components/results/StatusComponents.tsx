@@ -95,11 +95,15 @@ export const StatusHeader: React.FC<{
     );
 };
 
+export interface SessionResult {
+    sessionId: string;
+    sessionResults: StatusResult[];
+}
+
 export interface StatusResult {
     url: string;
     status?: Status;
 }
-
 
 export const ResultList: React.FC<{
     results: StatusResult[];
@@ -118,6 +122,14 @@ export const ResultList: React.FC<{
         if (status === 'QUATE_FORBIDDEN') return filters.quoteForbidden;
         return filters.error; // NOT_FOUND, UNKNOWN, INVALID_URLはすべてerrorとして扱う
     });
+
+    if (results.length === 0) {
+        return (
+            <div className="text-center py-8 text-gray-500">
+                No Data.
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-2">

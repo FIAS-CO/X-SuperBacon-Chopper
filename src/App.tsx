@@ -3,6 +3,7 @@ import { TopPageAdsense3 } from './components/adsense/AdSenseUtil';
 import TwitterStatusChecker from './components/TwitterStatusChecker';
 import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TwitterStatusHistory from './components/TwitterStatusHistory';
 function App() {
   return (
     <Router>
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TwitterStatusChecker />} />
           <Route path="/results" element={<TwitterStatusResults />} />
+          <Route path="/history/:sessionId" element={<TwitterStatusHistory />} />
         </Routes>
         <div className="mt-4 text-center text-sm text-slate-500">
           <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>
