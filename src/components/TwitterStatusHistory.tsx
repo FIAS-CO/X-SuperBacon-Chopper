@@ -3,9 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { FilterCheckbox, LoadingCard, ResultList, StatusResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, StatusResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
-import { loadAd } from './adsense/AdSenseUtil';
+import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 const TwitterStatusHistory = () => {
   const [results, setResults] = useState<StatusResult[]>([]);
@@ -52,6 +52,7 @@ const TwitterStatusHistory = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
+      <ResultPageAdsense1 />
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>チェック履歴</CardTitle>
         <Button
@@ -92,6 +93,8 @@ const TwitterStatusHistory = () => {
         </div>
         <ResultList results={results} filters={filters} />
       </CardContent>
+      <Legend />
+      <ResultPageAdsense2 />
     </Card>
   );
 };
