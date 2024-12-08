@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { FilterCheckbox, LoadingCard, ResultList, StatusResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
+import { loadAd } from './adsense/AdSenseUtil';
 
 const TwitterStatusHistory = () => {
   const [results, setResults] = useState<StatusResult[]>([]);
@@ -18,6 +19,10 @@ const TwitterStatusHistory = () => {
     quoteForbidden: true,
     error: true
   });
+
+  useEffect(() => {
+    loadAd()
+  }, []);
 
   useEffect(() => {
     const fetchHistory = async () => {
