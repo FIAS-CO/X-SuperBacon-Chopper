@@ -3,12 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, StatusResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 const TwitterStatusHistory = () => {
   const [results, setResults] = useState<StatusResult[]>([]);
+  const [timestamp, setTimestamp] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { sessionId } = useParams();
@@ -31,9 +32,9 @@ const TwitterStatusHistory = () => {
           navigate('/');
           return;
         }
-        const results = await apiClient.getHistory(sessionId);
-        console.log(results)
-        setResults(results);
+        const data = await apiClient.getHistory(sessionId);
+        setResults(data.results);
+        setTimestamp(data.timestamp);
       } catch (error) {
         console.error('Error fetching history:', error);
       } finally {
@@ -92,6 +93,7 @@ const TwitterStatusHistory = () => {
           />
         </div>
         <ResultList results={results} filters={filters} />
+        {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
       </CardContent>
       <Legend />
       <ResultPageAdsense2 />

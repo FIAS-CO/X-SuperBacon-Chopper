@@ -4,15 +4,13 @@ import { apiClient } from '../services/api';
 import { Card, CardContent } from './ui/card';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { clientEncryption } from './util/ClientEncryption';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, SessionResult, StatusHeader, StatusResult } from './results/StatusComponents';
-import { Share } from 'lucide-react';
-import { Button } from './ui/button';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, StatusResult } from './results/StatusComponents';
 
 const TwitterStatusResults = () => {
   const [results, setResults] = useState<StatusResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [sessionId, setSessionId] = useState("");
-  const [checkTimestamp, setCheckTimestamp] = useState("");
+  const [timestamp, setCheckTimestamp] = useState("");
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
@@ -74,18 +72,6 @@ const TwitterStatusResults = () => {
     checkUrls();
   }, [navigate]);
 
-  const handleTweet = () => {
-    const totalCount = results.length;
-    const forbiddenCount = results.filter(r =>
-      r.status === 'FORBIDDEN' || r.status === 'QUATE_FORBIDDEN'
-    ).length;
-
-    const tweetText = `${checkTimestamp}に${totalCount}件の投稿をチェックし${forbiddenCount}件が検索除外されていました`;
-    const url = `https://x-searchban-checker.fia-s.com/history/${sessionId}`;
-    const encodedText = encodeURIComponent(`${tweetText}\n${url}\n#検索除外チェッカー`);
-    window.open(`https://twitter.com/intent/tweet?text=${encodedText}`, '_blank');
-  };
-
   if (loading) {
     return <LoadingCard message='チェック中...' />
   }
@@ -122,28 +108,7 @@ const TwitterStatusResults = () => {
           />
         </div>
         <ResultList results={results} filters={filters} />
-
-        <div className="mt-6 space-y-4">
-          <div className="p-4 bg-gray-50 rounded-lg break-all">
-            <p className="text-sm text-gray-600 mb-2">履歴ページ:</p>
-            <a
-              href={`https://x-searchban-checker.fia-s.com/history/${sessionId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              https://x-searchban-checker.fia-s.com/history/{sessionId}
-            </a>
-          </div>
-
-          <Button
-            onClick={handleTweet}
-            className="w-full"
-          >
-            <Share className="w-4 h-4 mr-2" />
-            結果をツイート
-          </Button>
-        </div>
+        {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
       </CardContent>
       <Legend />
 

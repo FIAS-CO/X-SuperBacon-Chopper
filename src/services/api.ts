@@ -30,16 +30,19 @@ export const apiClient = {
         };
     },
 
-    async getHistory(sessionId: string): Promise<StatusResult[]> {
+    async getHistory(sessionId: string): Promise<{ results: StatusResult[]; timestamp: string }> {
         const response = await fetch(`${API_BASE_URL}/api/get-history-by-session-id?id=${sessionId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch history');
         }
-        const data = await response.json();
-        return data.map((item: any) => ({
-            url: item.url,
-            status: item.checkStatus
-        }));
+        const { results, timestamp } = await response.json();
+        return {
+            results: results.map((item: any) => ({
+                url: item.url,
+                status: item.checkStatus
+            })),
+            timestamp
+        };
     },
 
     async getOembed(url: string) {
