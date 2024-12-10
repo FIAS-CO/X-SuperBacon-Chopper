@@ -184,34 +184,32 @@ interface ShareResultsProps {
 }
 
 export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, timestamp }) => {
-    const baseUrl = 'https://x-searchban-checker.fia-s.com';
-    const historyUrl = `${baseUrl}/history/${sessionId}`;
-
     const handleTweet = () => {
         const totalCount = results.length;
-        const forbiddenCount = results.filter(r =>
-            r.status === 'FORBIDDEN' || r.status === 'QUATE_FORBIDDEN'
-        ).length;
+        const okCount = results.filter(r => r.status === 'AVAILABLE').length;
+        const forbiddenCount = results.filter(r => r.status === 'FORBIDDEN').length;
+        const quoteForbiddenCount = results.filter(r => r.status === 'QUATE_FORBIDDEN').length;
 
-        const tweetText = `${timestamp}に${totalCount}件の投稿をチェックし${forbiddenCount}件が検索除外されていました`;
-        const encodedText = encodeURIComponent(`${tweetText}\n${historyUrl}\n#検索除外チェッカー`);
+        let tweetLines = [
+            `${timestamp}に${totalCount}件の投稿をチェックしました！`,
+            `✅${okCount}件が検索OKでした`,
+            `❌${forbiddenCount}件が検索除外されていました`
+        ];
+
+        if (quoteForbiddenCount > 0) {
+            tweetLines.push(`🔁${quoteForbiddenCount}件が引用元で検索除外されていました`);
+        }
+
+        tweetLines.push(`検索結果URL：https://x-searchban-checker.fia-s.com/history/${sessionId}`);
+        tweetLines.push('#検索除外チェッカー');
+
+        const tweetText = tweetLines.join('\n');
+        const encodedText = encodeURIComponent(tweetText);
         window.open(`https://twitter.com/intent/tweet?text=${encodedText}`, '_blank');
     };
 
     return (
         <div className="mt-6 space-y-4">
-            <div className="p-4 bg-gray-50 rounded-lg break-all">
-                <p className="text-sm text-gray-600 mb-2">履歴ページ:</p>
-                <a
-                    href={historyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
-                >
-                    {historyUrl}
-                </a>
-            </div>
-
             <Button
                 onClick={handleTweet}
                 className="w-full"
