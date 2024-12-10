@@ -7,7 +7,7 @@ import TwitterStatusHistory from './components/TwitterStatusHistory';
 
 function App() {
   return (
-    <div className="fixed inset-0 bg-slate-100"> {/* 画面全体をカバーする背景レイヤー */}
+    <div className="fixed inset-0 bg-slate-100 overflow-auto"> {/* 画面全体をカバーする背景レイヤー */}
       <div className="relative"> {/* コンテンツを配置するための相対位置の親要素 */}
         <Router>
           <div className="max-w-2xl mx-auto py-8 bg-slate-100">
