@@ -215,6 +215,7 @@ export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, 
             <Button
                 onClick={handleTweet}
                 className="w-full"
+                variant="twitter"
             >
                 <Share className="w-4 h-4 mr-2" />
                 結果をポスト
