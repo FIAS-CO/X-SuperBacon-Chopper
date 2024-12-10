@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
@@ -88,6 +88,7 @@ const TwitterStatusChecker = () => {
               onClick={handleCheckAll}
               className="w-full"
             >
+              <Search className="w-4 h-4 mr-2" />
               check start
             </Button>
           </div>
