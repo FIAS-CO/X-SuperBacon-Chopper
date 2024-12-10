@@ -199,7 +199,7 @@ export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, 
         if (quoteForbiddenCount > 0) {
             tweetLines.push(`🔁${quoteForbiddenCount}件が引用元で検索除外されていました`);
         }
-
+        tweetLines.push(``)
         tweetLines.push(`検索結果URL：https://x-searchban-checker.fia-s.com/history/${sessionId}`);
         tweetLines.push('#検索除外チェッカー');
 
