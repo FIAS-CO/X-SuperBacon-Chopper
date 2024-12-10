@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Plus, Minus, Search } from 'lucide-react';
+import { Plus, Minus, Search, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, HowToUseExpantionButton } from './ExpantionButton';
+
+import '@mescius/inputman/CSS/gc.inputman-js.css';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -23,6 +25,10 @@ const TwitterStatusChecker = () => {
     setUrls(prev => prev.map(url =>
       url.id === id ? { ...url, value } : url
     ));
+  };
+
+  const clearUrlField = (id: number) => {
+    handleUrlChange(id, '');
   };
 
   const handleCheckAll = async () => {
@@ -56,12 +62,24 @@ const TwitterStatusChecker = () => {
         <div className="space-y-4 mb-4">
           {urls.map((urlObj) => (
             <div key={urlObj.id} className="flex gap-2">
-              <Input
-                placeholder="ポストのURLを入力"
-                value={urlObj.value}
-                onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
-                className="flex-1"
-              />
+              <div className="flex-1 relative">
+                <Input
+                  placeholder="ポストのURLを入力"
+                  value={urlObj.value}
+                  onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
+                  className="pr-8"
+                />
+                {urlObj.value && (
+                  <button
+                    type="button"
+                    onClick={() => clearUrlField(urlObj.id)}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 px-2 text-gray-400 hover:text-gray-600 bg-transparent border-0 cursor-pointer"
+                    aria-label="入力をクリア"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
               {urls.length > 1 && (
                 <Button
                   variant="outline"
