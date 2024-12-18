@@ -128,7 +128,7 @@ const ShadowbanChecker = () => {
                         </div>
 
                         {!results && (
-                            <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                                 <p>シャドウバンとは、X (Twitter) において、アカウントがロックや凍結されていないにも関わらず、検索結果や返信一覧に表示されなく(ずらく)なる状態のことです。</p>
                             </div>
                         )}
