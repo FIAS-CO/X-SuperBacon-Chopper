@@ -4,6 +4,7 @@ import TwitterStatusChecker from './components/TwitterStatusChecker';
 import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TwitterStatusHistory from './components/TwitterStatusHistory';
+import ShadowbanChecker from './components/ShadowbanChecker';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/" element={<TwitterStatusChecker />} />
               <Route path="/results" element={<TwitterStatusResults />} />
               <Route path="/history/:sessionId" element={<TwitterStatusHistory />} />
+              <Route path="/shadowbanchecker" element={<ShadowbanChecker />} />
             </Routes>
             <div className="mt-4 text-center text-sm text-slate-500">
               <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>

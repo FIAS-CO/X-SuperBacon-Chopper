@@ -1,4 +1,4 @@
-import { SessionResult, StatusResult } from "../components/results/StatusComponents";
+import { SessionResult, StatusResult, UserCheckResult } from "../components/results/StatusComponents";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 export const apiClient = {
@@ -48,5 +48,16 @@ export const apiClient = {
     async getOembed(url: string) {
         const response = await fetch(`${API_BASE_URL}/api/oembed?url=${encodeURIComponent(url)}`)
         return response.json()
+    },
+
+    async checkByUser(screenName: string): Promise<UserCheckResult> {
+        const response = await fetch(`${API_BASE_URL}/api/check-by-user?screen_name=${encodeURIComponent(screenName)}`);
+
+        if (!response.ok) {
+            throw new Error('Failed to check user status');
+        }
+
+        const { user, ...checkResult } = await response.json();
+        return checkResult;
     }
 }
