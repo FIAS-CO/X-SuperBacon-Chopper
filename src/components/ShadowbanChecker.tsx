@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -12,7 +12,7 @@ import {
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
 import { UserCheckResult } from './results/StatusComponents';
-import { TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -95,6 +95,10 @@ const ShadowbanChecker = () => {
     ];
 
     const stateMessage = getUserStateMessage();
+
+    useEffect(() => {
+        loadAd()
+    }, []);
 
     return (
         <>
