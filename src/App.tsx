@@ -12,9 +12,6 @@ function App() {
       <div className="relative min-h-full"> {/* コンテンツを配置するための相対位置の親要素 */}
         <Router>
           <div className="max-w-2xl mx-auto py-8 bg-slate-100">
-            <h1 className="text-4xl font-bold text-center mb-8">
-              Xポスト検索除外チェッカー
-            </h1>
             <Routes>
               <Route path="/" element={<TwitterStatusChecker />} />
               <Route path="/results" element={<TwitterStatusResults />} />

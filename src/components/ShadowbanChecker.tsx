@@ -97,71 +97,75 @@ const ShadowbanChecker = () => {
     const stateMessage = getUserStateMessage();
 
     return (
-        <Card className="w-full max-w-2xl mx-auto">
+        <>
+            <h1 className="text-4xl font-bold text-center mb-8">
+                Xシャドウバンチェッカー
+            </h1>
+            <Card className="w-full max-w-2xl mx-auto">
                 <TopPageAdsense1 />
-            <CardContent className="p-6">
-                <div className="space-y-4">
-                    <div className="flex gap-2">
-                        <div className="relative flex-1">
-                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <span className="text-gray-500 text-xl">@</span>
+                <CardContent className="p-6">
+                    <div className="space-y-4">
+                        <div className="flex gap-2">
+                            <div className="relative flex-1">
+                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <span className="text-gray-500 text-xl">@</span>
+                                </div>
+                                <Input
+                                    placeholder="ユーザー名を入力"
+                                    value={screenName}
+                                    onChange={(e) => setScreenName(e.target.value)}
+                                    className="pl-8 text-xl h-12"
+                                />
                             </div>
-                            <Input
-                                placeholder="ユーザー名を入力"
-                                value={screenName}
-                                onChange={(e) => setScreenName(e.target.value)}
-                                className="pl-8 text-xl h-12"
-                            />
+                            <Button
+                                onClick={handleCheck}
+                                disabled={!screenName || loading}
+                                className="text-xl h-12"
+                            >
+                                <Search className="w-5 h-5 mr-2" />
+                                check
+                            </Button>
                         </div>
-                        <Button
-                            onClick={handleCheck}
-                            disabled={!screenName || loading}
-                            className="text-xl h-12"
-                        >
-                            <Search className="w-5 h-5 mr-2" />
-                            check
-                        </Button>
+
+                        {!results && (
+                            <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <p>シャドウバンとは、X (Twitter) において、アカウントがロックや凍結されていないにも関わらず、検索結果や返信一覧に表示されなく(ずらく)なる状態のことです。</p>
+                            </div>
+                        )}
+                        {stateMessage && (
+                            <Alert variant="destructive">
+                                <AlertTitle>{stateMessage.title}</AlertTitle>
+                                <AlertDescription>{stateMessage.description}</AlertDescription>
+                            </Alert>
+                        )}
+
+                        {error && (
+                            <Alert variant="destructive">
+                                <AlertTitle>エラー</AlertTitle>
+                                <AlertDescription>{error}</AlertDescription>
+                            </Alert>
+                        )}
+
+                        <Accordion type="multiple" className="w-full">
+                            {items.map(item => (
+                                <AccordionItem key={item.id} value={item.id}>
+                                    <AccordionTrigger className="hover:no-underline">
+                                        <div className="flex items-center gap-2">
+                                            <StatusIcon status={item.status} />
+                                            <span>{item.title}</span>
+                                        </div>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        {item.description}
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
+                        </Accordion>
                     </div>
-
-                    {stateMessage && (
-                        <Alert variant="destructive">
-                            <AlertTitle>{stateMessage.title}</AlertTitle>
-                            <AlertDescription>{stateMessage.description}</AlertDescription>
-                        </Alert>
-                    )}
-
-                    {error && (
-                        <Alert variant="destructive">
-                            <AlertTitle>エラー</AlertTitle>
-                            <AlertDescription>{error}</AlertDescription>
-                        </Alert>
-                    )}
-
-                    <Accordion type="multiple" className="w-full">
-                        {items.map(item => (
-                            <AccordionItem key={item.id} value={item.id}>
-                                <AccordionTrigger className="hover:no-underline">
-                                    <div className="flex items-center gap-2">
-                                        <StatusIcon status={item.status} />
-                                        <span>{item.title}</span>
-                                    </div>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    {item.description}
-                                </AccordionContent>
-                            </AccordionItem>
-                        ))}
-                    </Accordion>
-
-                    {!results && (
-                        <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                            <p>シャドウバンとは、X (Twitter) において、アカウントがロックや凍結されていないにも関わらず、検索結果や返信一覧に表示されなく(ずらく)なる状態のことです。</p>
-                        </div>
-                    )}
-                </div>
-            </CardContent>
+                </CardContent>
                 <TopPageAdsense2 />
-        </Card>
+            </Card>
+        </>
     );
 };
 

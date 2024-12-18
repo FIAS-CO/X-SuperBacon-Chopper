@@ -52,52 +52,57 @@ const TwitterStatusHistory = () => {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <ResultPageAdsense1 />
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>チェック履歴</CardTitle>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => navigate('/')}
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          入力画面に戻る
-        </Button>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <FilterCheckbox
-            id="searchOk"
-            label="検索OK"
-            checked={filters.searchOk}
-            onChange={(checked) => setFilters(prev => ({ ...prev, searchOk: checked }))}
-          />
-          <FilterCheckbox
-            id="searchForbidden"
-            label="検索除外"
-            checked={filters.searchForbidden}
-            onChange={(checked) => setFilters(prev => ({ ...prev, searchForbidden: checked }))}
-          />
-          <FilterCheckbox
-            id="quoteForbidden"
-            label="引用元除外"
-            checked={filters.quoteForbidden}
-            onChange={(checked) => setFilters(prev => ({ ...prev, quoteForbidden: checked }))}
-          />
-          <FilterCheckbox
-            id="error"
-            label="エラー"
-            checked={filters.error}
-            onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
-          />
-        </div>
-        <ResultList results={results} filters={filters} />
-        {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
-      </CardContent>
-      <Legend />
-      <ResultPageAdsense2 />
-    </Card>
+    <>
+      <h1 className="text-4xl font-bold text-center mb-8">
+        Xポスト検索除外チェッカー
+      </h1>
+      <Card className="w-full max-w-2xl mx-auto">
+        <ResultPageAdsense1 />
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle>チェック履歴</CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/')}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            入力画面に戻る
+          </Button>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <FilterCheckbox
+              id="searchOk"
+              label="検索OK"
+              checked={filters.searchOk}
+              onChange={(checked) => setFilters(prev => ({ ...prev, searchOk: checked }))}
+            />
+            <FilterCheckbox
+              id="searchForbidden"
+              label="検索除外"
+              checked={filters.searchForbidden}
+              onChange={(checked) => setFilters(prev => ({ ...prev, searchForbidden: checked }))}
+            />
+            <FilterCheckbox
+              id="quoteForbidden"
+              label="引用元除外"
+              checked={filters.quoteForbidden}
+              onChange={(checked) => setFilters(prev => ({ ...prev, quoteForbidden: checked }))}
+            />
+            <FilterCheckbox
+              id="error"
+              label="エラー"
+              checked={filters.error}
+              onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
+            />
+          </div>
+          <ResultList results={results} filters={filters} />
+          {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
+        </CardContent>
+        <Legend />
+        <ResultPageAdsense2 />
+      </Card>
+    </>
   );
 };
 

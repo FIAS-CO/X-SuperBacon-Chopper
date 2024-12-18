@@ -54,67 +54,72 @@ const TwitterStatusChecker = () => {
   }, []);
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <TopPageAdsense1 />
-      <CardContent>
-        <div className="space-y-4 mb-4">
-          {urls.map((urlObj) => (
-            <div key={urlObj.id} className="flex gap-2">
-              <div className="flex-1 relative">
-                <Input
-                  placeholder="ポストのURLを入力"
-                  value={urlObj.value}
-                  onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
-                  className="pr-8"
-                />
-                {urlObj.value && (
-                  <button
-                    type="button"
-                    onClick={() => clearUrlField(urlObj.id)}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 px-2 text-gray-400 hover:text-gray-600 bg-transparent border-0 cursor-pointer"
-                    aria-label="入力をクリア"
+    <>
+      <h1 className="text-4xl font-bold text-center mb-8">
+        Xポスト検索除外チェッカー
+      </h1>
+      <Card className="w-full max-w-2xl mx-auto">
+        <TopPageAdsense1 />
+        <CardContent>
+          <div className="space-y-4 mb-4">
+            {urls.map((urlObj) => (
+              <div key={urlObj.id} className="flex gap-2">
+                <div className="flex-1 relative">
+                  <Input
+                    placeholder="ポストのURLを入力"
+                    value={urlObj.value}
+                    onChange={(e) => handleUrlChange(urlObj.id, e.target.value)}
+                    className="pr-8"
+                  />
+                  {urlObj.value && (
+                    <button
+                      type="button"
+                      onClick={() => clearUrlField(urlObj.id)}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 px-2 text-gray-400 hover:text-gray-600 bg-transparent border-0 cursor-pointer"
+                      aria-label="入力をクリア"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+                {urls.length > 1 && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => removeUrlField(urlObj.id)}
                   >
-                    <X className="h-4 w-4" />
-                  </button>
+                    <Minus className="h-4 w-4" />
+                  </Button>
                 )}
               </div>
-              {urls.length > 1 && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => removeUrlField(urlObj.id)}
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-              )}
+            ))}
+
+            <div className="space-y-2">
+              <Button
+                variant="outline"
+                onClick={addUrlField}
+                className="w-full"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                URLを追加
+              </Button>
+
+              <Button
+                onClick={handleCheckAll}
+                className="w-full"
+              >
+                <Search className="w-4 h-4 mr-2" />
+                check start
+              </Button>
             </div>
-          ))}
-
-          <div className="space-y-2">
-            <Button
-              variant="outline"
-              onClick={addUrlField}
-              className="w-full"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              URLを追加
-            </Button>
-
-            <Button
-              onClick={handleCheckAll}
-              className="w-full"
-            >
-              <Search className="w-4 h-4 mr-2" />
-              check start
-            </Button>
           </div>
-        </div>
-        <HowToUseExpantionButton />
-        <CautionExpantionButton />
-        <ContactUsExpantionButton />
-      </CardContent>
-      <TopPageAdsense2 />
-    </Card>
+          <HowToUseExpantionButton />
+          <CautionExpantionButton />
+          <ContactUsExpantionButton />
+        </CardContent>
+        <TopPageAdsense2 />
+      </Card>
+    </>
   );
 };
 
