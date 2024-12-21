@@ -16,7 +16,7 @@ import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil'
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
-    const [results, setResults] = useState<UserCheckResult | null>(null);
+    const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 

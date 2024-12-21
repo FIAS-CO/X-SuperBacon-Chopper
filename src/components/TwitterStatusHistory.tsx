@@ -3,12 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, TweetCheckResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 
 const TwitterStatusHistory = () => {
-  const [results, setResults] = useState<StatusResult[]>([]);
+  const [results, setResults] = useState<TweetCheckResult[]>([]);
   const [timestamp, setTimestamp] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

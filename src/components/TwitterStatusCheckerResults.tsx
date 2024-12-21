@@ -4,10 +4,10 @@ import { apiClient } from '../services/api';
 import { Card, CardContent } from './ui/card';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { clientEncryption } from './util/ClientEncryption';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, StatusResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 
 const TwitterStatusResults = () => {
-  const [results, setResults] = useState<StatusResult[]>([]);
+  const [results, setResults] = useState<TweetCheckResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [sessionId, setSessionId] = useState("");
   const [timestamp, setCheckTimestamp] = useState("");
@@ -49,7 +49,7 @@ const TwitterStatusResults = () => {
 
       try {
         const results = await apiClient.checkUrlBatch(urlList, encryptedKey);
-        const formattedResults: StatusResult[] = results.sessionResults.map((result: StatusResult) => ({
+        const formattedResults: TweetCheckResult[] = results.sessionResults.map((result: TweetCheckResult) => ({
           url: result.url,
           status: result.status
         }));

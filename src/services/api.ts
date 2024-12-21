@@ -1,4 +1,4 @@
-import { SessionResult, StatusResult, UserCheckResult } from "../components/results/StatusComponents";
+import { SessionResult, TweetCheckResult, ShadowBanCheckResult } from "../components/results/StatusComponents";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 export const apiClient = {
@@ -22,7 +22,7 @@ export const apiClient = {
         const data = await response.json();
 
         return {
-            sessionResults: data.results.map((result: any): StatusResult => ({
+            sessionResults: data.results.map((result: any): TweetCheckResult => ({
                 url: result.url,
                 status: result.status
             })),
@@ -30,7 +30,7 @@ export const apiClient = {
         };
     },
 
-    async getHistory(sessionId: string): Promise<{ results: StatusResult[]; timestamp: string }> {
+    async getHistory(sessionId: string): Promise<{ results: TweetCheckResult[]; timestamp: string }> {
         const response = await fetch(`${API_BASE_URL}/api/get-history-by-session-id?id=${sessionId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch history');
@@ -50,7 +50,7 @@ export const apiClient = {
         return response.json()
     },
 
-    async checkByUser(screenName: string): Promise<UserCheckResult> {
+    async checkByUser(screenName: string): Promise<ShadowBanCheckResult> {
         const response = await fetch(`${API_BASE_URL}/api/check-by-user?screen_name=${encodeURIComponent(screenName)}`);
 
         if (!response.ok) {

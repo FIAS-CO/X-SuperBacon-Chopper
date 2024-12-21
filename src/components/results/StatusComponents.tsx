@@ -97,16 +97,16 @@ export const StatusHeader: React.FC<{
 
 export interface SessionResult {
     sessionId: string;
-    sessionResults: StatusResult[];
+    sessionResults: TweetCheckResult[];
 }
 
-export interface StatusResult {
+export interface TweetCheckResult {
     url: string;
     status?: Status;
 }
 
 export const ResultList: React.FC<{
-    results: StatusResult[];
+    results: TweetCheckResult[];
     filters: {
         searchOk: boolean;
         searchForbidden: boolean;
@@ -179,7 +179,7 @@ export const Legend: React.FC = () => (
 
 interface ShareResultsProps {
     sessionId: string;
-    results: StatusResult[];
+    results: TweetCheckResult[];
     timestamp: string;
 }
 
@@ -222,7 +222,7 @@ export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, 
     );
 };
 
-export interface UserCheckResult {
+export interface ShadowBanCheckResult {
     not_found: boolean;
     suspend: boolean;
     protect: boolean;
@@ -232,4 +232,5 @@ export interface UserCheckResult {
     no_reply: boolean;
     ghost_ban: boolean;
     reply_deboosting: boolean;
+    tweets: CheckResult[];
 }
