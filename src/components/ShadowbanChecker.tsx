@@ -11,7 +11,7 @@ import {
     AccordionTrigger,
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
-import { UserCheckResult } from './results/StatusComponents';
+import { FilterCheckbox, Legend, ResultList, ShadowBanCheckResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 
 const ShadowbanChecker = () => {
@@ -19,6 +19,13 @@ const ShadowbanChecker = () => {
     const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const [filters, setFilters] = useState({
+        searchOk: true,
+        searchForbidden: true,
+        quoteForbidden: true,
+        error: true
+    });
 
     const handleCheck = async () => {
         if (!screenName) return;
@@ -126,8 +133,7 @@ const ShadowbanChecker = () => {
                                 disabled={!screenName || loading}
                                 className="text-xl h-12"
                             >
-                                <Search className="w-5 h-5 mr-2" />
-                                check
+                                <Search className="w-5 h-5" />
                             </Button>
                         </div>
 
@@ -167,6 +173,40 @@ const ShadowbanChecker = () => {
                         </Accordion>
                     </div>
                 </CardContent>
+                {results?.tweets &&
+                    <>
+                        <CardContent>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                                <FilterCheckbox
+                                    id="searchOk"
+                                    label="検索OK"
+                                    checked={filters.searchOk}
+                                    onChange={(checked) => setFilters(prev => ({ ...prev, searchOk: checked }))}
+                                />
+                                <FilterCheckbox
+                                    id="searchForbidden"
+                                    label="検索除外"
+                                    checked={filters.searchForbidden}
+                                    onChange={(checked) => setFilters(prev => ({ ...prev, searchForbidden: checked }))}
+                                />
+                                <FilterCheckbox
+                                    id="quoteForbidden"
+                                    label="引用元除外"
+                                    checked={filters.quoteForbidden}
+                                    onChange={(checked) => setFilters(prev => ({ ...prev, quoteForbidden: checked }))}
+                                />
+                                <FilterCheckbox
+                                    id="error"
+                                    label="エラー"
+                                    checked={filters.error}
+                                    onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
+                                />
+                            </div>
+                            <ResultList results={results?.tweets} filters={filters} />
+                        </CardContent>
+                        <Legend />
+                    </>
+                }
                 <TopPageAdsense2 />
             </Card>
         </>

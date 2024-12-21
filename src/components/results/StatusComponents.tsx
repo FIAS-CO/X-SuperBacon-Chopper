@@ -232,5 +232,5 @@ export interface ShadowBanCheckResult {
     no_reply: boolean;
     ghost_ban: boolean;
     reply_deboosting: boolean;
-    tweets: CheckResult[];
+    tweets: TweetCheckResult[];
 }
