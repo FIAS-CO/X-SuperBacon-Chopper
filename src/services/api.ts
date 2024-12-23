@@ -52,7 +52,8 @@ export const apiClient = {
     },
 
     async checkByUser(screenName: string): Promise<ShadowBanCheckResult> {
-        const response = await fetch(`${API_BASE_URL}/api/check-by-user?screen_name=${encodeURIComponent(screenName)}`);
+        const key = await _getEncryptedIpAsync()
+        const response = await fetch(`${API_BASE_URL}/api/check-by-user?screen_name=${encodeURIComponent(screenName)}&key=${key}`);
 
         if (!response.ok) {
             throw new Error('Failed to check user status');
