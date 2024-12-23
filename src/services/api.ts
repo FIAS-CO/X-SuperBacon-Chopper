@@ -1,4 +1,5 @@
 import { SessionResult, TweetCheckResult, ShadowBanCheckResult } from "../components/results/StatusComponents";
+import { ClientEncryption } from "../components/util/ClientEncryption";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 export const apiClient = {
@@ -59,5 +60,24 @@ export const apiClient = {
 
         const { user, ...checkResult } = await response.json();
         return checkResult;
-    }
+    },
+
+    async getEncryptedIpAsync(): Promise<string> {
+        return await _getEncryptedIpAsync();
+    },
 }
+
+async function _getEncryptedIpAsync(): Promise<string> {
+    const ip = await _getUserIpAsync();
+    const encryptedKey = new ClientEncryption().encrypt(ip || '');
+
+    return encryptedKey;
+}
+
+async function _getUserIpAsync(): Promise<string> {
+    const ipResponse = await fetch('https://api.ipify.org?format=json');
+    const { ip } = await ipResponse.json();
+
+    return ip;
+}
+

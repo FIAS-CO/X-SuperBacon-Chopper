@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../services/api';
 import { Card, CardContent } from './ui/card';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
-import { clientEncryption } from './util/ClientEncryption';
 import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 
 const TwitterStatusResults = () => {
@@ -43,9 +42,7 @@ const TwitterStatusResults = () => {
       }));
 
       const urlList = JSON.parse(urlsJson);
-      const ipResponse = await fetch('https://api.ipify.org?format=json');
-      const { ip } = await ipResponse.json();
-      const encryptedKey = clientEncryption.encrypt(ip || '');
+      const encryptedKey = await apiClient.getEncryptedIpAsync();
 
       try {
         const results = await apiClient.checkUrlBatch(urlList, encryptedKey);
