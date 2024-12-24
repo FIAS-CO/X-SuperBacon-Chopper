@@ -13,6 +13,7 @@ import {
 import { apiClient } from '../services/api';
 import { FilterCheckbox, Legend, ResultList, ShadowBanCheckResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { CautionExpantionButton, ContactUsExpantionButton } from './ExpantionButton';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -105,12 +106,13 @@ const ShadowbanChecker = () => {
 
     useEffect(() => {
         loadAd()
+        document.title = 'X（Twitter）Shadowban Checker F（シャドウバンチェッカー エフ）';
     }, []);
 
     return (
         <>
             <h1 className="text-4xl font-bold text-center mb-8">
-                Xシャドウバンチェッカー
+                X（Twitter）Shadowban Checker F
             </h1>
             <Card className="w-full max-w-2xl mx-auto">
                 <TopPageAdsense1 />
@@ -119,13 +121,19 @@ const ShadowbanChecker = () => {
                         <div className="flex gap-2">
                             <div className="relative flex-1">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <span className="text-gray-500 text-xl">@</span>
+                                    <span className="text-xl">@</span>
                                 </div>
                                 <Input
-                                    placeholder="ユーザー名を入力"
+                                    placeholder="Username"
                                     value={screenName}
                                     onChange={(e) => setScreenName(e.target.value)}
                                     className="pl-8 text-xl h-12"
+                                    onKeyDown={e => {
+                                        if (e.key == 'Enter' && screenName) {
+                                            handleCheck()
+                                        }
+                                    }
+                                    }
                                 />
                             </div>
                             <Button
@@ -137,7 +145,7 @@ const ShadowbanChecker = () => {
                             </Button>
                         </div>
 
-                        {!results && (
+                        {!results && !loading && (
                             <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
                                 <p>＜Shadowbanとは＞</p>
                                 <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す俗語です。</p>
@@ -147,6 +155,12 @@ const ShadowbanChecker = () => {
                                 <p>本サイトで確認できる4種類のBANは公式の名称ではなく、ネットを中心に呼称される俗称を採用したものとなります。</p>
                             </div>
                         )}
+                        {loading && (
+                            <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
+                                <p>只今チェック中です。10秒ほどお待ちください...</p>
+                            </div>
+                        )
+                        }
                         {stateMessage && (
                             <Alert variant="destructive">
                                 <AlertTitle>{stateMessage.title}</AlertTitle>
@@ -208,10 +222,14 @@ const ShadowbanChecker = () => {
                                 />
                             </div>
                             <ResultList results={results?.tweets} filters={filters} />
+                            <Legend />
                         </CardContent>
-                        <Legend />
                     </>
                 }
+                <CardContent className='mt-3'>
+                    <CautionExpantionButton />
+                    <ContactUsExpantionButton />
+                </CardContent>
                 <TopPageAdsense2 />
             </Card>
         </>
