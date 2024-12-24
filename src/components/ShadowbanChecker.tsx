@@ -77,26 +77,26 @@ const ShadowbanChecker = () => {
     const items = [
         {
             id: "search-suggestion",
-            title: "検索候補からの除外",
-            description: "検索画面において、検索候補から該当のアカウントが表示されなくなります。",
+            title: "Search Suggestion Ban",
+            description: "検索画面において候補から当該アカウントが表示されなくなる場合があります。",
             status: getAdjustedStatus(results?.search_suggestion_ban)
         },
         {
             id: "search-ban",
-            title: "検索結果からの除外",
-            description: "検索結果から、該当のアカウントのツイートやアカウントが表示されなくなります。",
+            title: "Search Ban",
+            description: "検索結果からアカウントやツイートが表示されなくなります。\n※ハッシュタグなど利用しても表示されません。\nまた「おすすめ」欄にも表示されにくくなる場合があります。",
             status: getAdjustedStatus(results?.search_ban)
         },
         {
             id: "ghost-ban",
-            title: "返信一覧からの除外",
-            description: "ポストに対する返信が返信一覧から表示されなくなり、ポスト投稿主への通知もされなくなります。",
+            title: "Ghost Ban",
+            description: "リプライが表示されない場合があります。\n（ポスト投稿主にも表示されない場合があります）",
             status: getAdjustedStatus(results?.ghost_ban)
         },
         {
             id: "reply-deboosting",
-            title: "返信一覧での表示順の低下",
-            description: "ポストに対する返信が返信一覧にて、下部に表示されるようになります。また、「さらに返信を表示する」をタップするまで返信が表示されなくなる場合があります。",
+            title: "Reply Deboosting",
+            description: "リプライが「さらに返信を表示する」をタップしないと表示されなくなる場合があります。",
             status: getAdjustedStatus(results?.reply_deboosting)
         }
     ];
@@ -138,8 +138,13 @@ const ShadowbanChecker = () => {
                         </div>
 
                         {!results && (
-                            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                                <p>シャドウバンとは、X (Twitter) において、アカウントがロックや凍結されていないにも関わらず、検索結果や返信一覧に表示されなく(ずらく)なる状態のことです。</p>
+                            <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
+                                <p>＜Shadowbanとは＞</p>
+                                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す俗語です。</p>
+                                <p>本サイトはX（Twitter）におけるアカウントがシャドウバン状態でないかをチェックするものです。</p>
+                                <br />
+                                <p>ただし、X（Twitter）社は公式にはシャドウバンを行っていないと明言しています。</p>
+                                <p>本サイトで確認できる4種類のBANは公式の名称ではなく、ネットを中心に呼称される俗称を採用したものとなります。</p>
                             </div>
                         )}
                         {stateMessage && (
@@ -165,7 +170,7 @@ const ShadowbanChecker = () => {
                                             <span>{item.title}</span>
                                         </div>
                                     </AccordionTrigger>
-                                    <AccordionContent>
+                                    <AccordionContent className='whitespace-pre-wrap'>
                                         {item.description}
                                     </AccordionContent>
                                 </AccordionItem>
