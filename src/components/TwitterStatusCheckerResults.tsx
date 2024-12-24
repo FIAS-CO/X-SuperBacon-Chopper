@@ -110,8 +110,8 @@ const TwitterStatusResults = () => {
           </div>
           <ResultList results={results} filters={filters} />
           {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
+          <Legend />
         </CardContent>
-        <Legend />
 
         <ResultPageAdsense2 />
       </Card>
