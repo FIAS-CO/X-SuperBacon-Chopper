@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Search, Ban, Check, HelpCircle } from 'lucide-react';
+import { Search, Ban, Check, HelpCircle, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import {
     Accordion,
@@ -135,6 +135,16 @@ const ShadowbanChecker = () => {
                                     }
                                     }
                                 />
+                                {screenName && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setScreenName('')}
+                                        className="absolute right-0 top-1/2 -translate-y-1/2 px-2 text-gray-400 hover:text-gray-600 bg-transparent border-0 cursor-pointer"
+                                        aria-label="入力をクリア"
+                                    >
+                                        <X className="h-6 w-6" />
+                                    </button>
+                                )}
                             </div>
                             <Button
                                 onClick={handleCheck}
