@@ -39,7 +39,7 @@ export const ContactUsExpantionButton: React.FC = () => {
     return (
         <ExpantionButton label="問い合わせ先">
             <p className="mb-4 text-left">
-                <a href="https://x.com/TAIYO_SUN_2024" target="_blank">タイヨー(@TAIYO_SUN_2024)</a> もしくは <a href="https://x.com/sig_re" target="_blank">しぐれ(@sig_re)</a> までDMかリプください。
+                <a href="https://x.com/TAIYO_SUN_2024" target="_blank">タイヨー(@TAIYO_SUN_2024)</a>までDMかリプください。
             </p>
         </ExpantionButton >
     )
