@@ -158,7 +158,7 @@ const ShadowbanChecker = () => {
                         {!results && !loading && (
                             <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
                                 <p>＜Shadowbanとは＞</p>
-                                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す俗語です。</p>
+                                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す通称です。</p>
                                 <p>本サイトはX（Twitter）におけるアカウントがシャドウバン状態でないかをチェックするものです。</p>
                                 <br />
                                 <p>ただし、X（Twitter）社は公式にはシャドウバンを行っていないと明言しています。</p>
