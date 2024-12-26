@@ -45,6 +45,19 @@ export const ContactUsExpantionButton: React.FC = () => {
     )
 }
 
+export const WhatIsShadowbanExpantionButton: React.FC = () => {
+    return (
+        <ExpantionButton label="Shadowbanとは">
+            <p className="mb-4 text-left">
+                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す通称です。</p>
+                <p>本サイトはX（Twitter）におけるアカウントがシャドウバン状態でないかをチェックするものです。</p>
+                <br />
+                <p>ただし、X（Twitter）社は公式にはシャドウバンを行っていないと明言しています。</p>
+                <p>本サイトで確認できる4種類のBANは公式の名称ではなく、ネットを中心に呼称される俗称を採用したものとなります。</p>            </p>
+        </ExpantionButton >
+    )
+}
+
 interface ExpantionButtonProps {
     label: string;
     children: React.ReactNode;

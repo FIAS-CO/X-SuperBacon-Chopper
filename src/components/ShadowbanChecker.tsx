@@ -13,7 +13,7 @@ import {
 import { apiClient } from '../services/api';
 import { FilterCheckbox, Legend, ResultList, ShadowBanCheckResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
-import { CautionExpantionButton, ContactUsExpantionButton } from './ExpantionButton';
+import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -156,14 +156,7 @@ const ShadowbanChecker = () => {
                         </div>
 
                         {!results && !loading && (
-                            <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
-                                <p>＜Shadowbanとは＞</p>
-                                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す通称です。</p>
-                                <p>本サイトはX（Twitter）におけるアカウントがシャドウバン状態でないかをチェックするものです。</p>
-                                <br />
-                                <p>ただし、X（Twitter）社は公式にはシャドウバンを行っていないと明言しています。</p>
-                                <p>本サイトで確認できる4種類のBANは公式の名称ではなく、ネットを中心に呼称される俗称を採用したものとなります。</p>
-                            </div>
+                            <WhatIsShadowbanExpantionButton />
                         )}
                         {loading && (
                             <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
