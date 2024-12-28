@@ -20,6 +20,8 @@ const ShadowbanChecker = () => {
     const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [checkSearchban, setCheckSearchban] = useState(true);
+    const [checkRepost, setCheckRepost] = useState(false);
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -34,7 +36,7 @@ const ShadowbanChecker = () => {
         setLoading(true);
         setError('');
         try {
-            const checkResults = await apiClient.checkByUser(screenName);
+            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
         } catch (err) {
             setError('チェック中にエラーが発生しました。しばらく待ってから再度お試しください。');
@@ -154,13 +156,37 @@ const ShadowbanChecker = () => {
                                 <Search className="w-5 h-5" />
                             </Button>
                         </div>
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                id="searchban-check"
+                                checked={checkSearchban}
+                                onChange={(e) => setCheckSearchban(e.target.checked)}
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                            />
+                            <label htmlFor="searchban-check" className="text-sm text-gray-600">
+                                最新20ポストが検索除外されているかチェックする
+                            </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                id="repost-check"
+                                checked={checkRepost}
+                                onChange={(e) => setCheckRepost(e.target.checked)}
+                                className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}
+                            />
+                            <label htmlFor="repost-check" className={`text-sm text-gray-600 ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
+                                リポスト、引用ポストをチェック対象に含める
+                            </label>
+                        </div>
 
                         {!results && !loading && (
                             <WhatIsShadowbanExpantionButton />
                         )}
                         {loading && (
                             <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
-                                <p>只今チェック中です。10秒ほどお待ちください...</p>
+                                <p>{checkSearchban ? "チェック中。10秒ほどお待ちください..." : "チェック中..."}</p>
                             </div>
                         )
                         }
