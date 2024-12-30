@@ -1,3 +1,8 @@
+# Site URL
+https://x-searchban-checker.fia-s.com
+
+https://x-searchban-checker.fia-s.com/shadowbanchecker
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

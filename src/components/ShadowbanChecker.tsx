@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Search, Ban, Check, HelpCircle } from 'lucide-react';
+import { Search, Ban, Check, HelpCircle, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import {
     Accordion,
@@ -13,12 +13,15 @@ import {
 import { apiClient } from '../services/api';
 import { FilterCheckbox, Legend, ResultList, ShadowBanCheckResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
     const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [checkSearchban, setCheckSearchban] = useState(true);
+    const [checkRepost, setCheckRepost] = useState(false);
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -33,7 +36,7 @@ const ShadowbanChecker = () => {
         setLoading(true);
         setError('');
         try {
-            const checkResults = await apiClient.checkByUser(screenName);
+            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
         } catch (err) {
             setError('チェック中にエラーが発生しました。しばらく待ってから再度お試しください。');
@@ -77,26 +80,26 @@ const ShadowbanChecker = () => {
     const items = [
         {
             id: "search-suggestion",
-            title: "検索候補からの除外",
-            description: "検索画面において、検索候補から該当のアカウントが表示されなくなります。",
+            title: "Search Suggestion Ban",
+            description: "検索画面において候補から当該アカウントが表示されなくなる場合があります。",
             status: getAdjustedStatus(results?.search_suggestion_ban)
         },
         {
             id: "search-ban",
-            title: "検索結果からの除外",
-            description: "検索結果から、該当のアカウントのツイートやアカウントが表示されなくなります。",
+            title: "Search Ban",
+            description: "検索結果からアカウントやツイートが表示されなくなります。\n※ハッシュタグなど利用しても表示されません。\nまた「おすすめ」欄にも表示されにくくなる場合があります。",
             status: getAdjustedStatus(results?.search_ban)
         },
         {
             id: "ghost-ban",
-            title: "返信一覧からの除外",
-            description: "ポストに対する返信が返信一覧から表示されなくなり、ポスト投稿主への通知もされなくなります。",
+            title: "Ghost Ban",
+            description: "リプライが表示されない場合があります。\n（ポスト投稿主にも表示されない場合があります）",
             status: getAdjustedStatus(results?.ghost_ban)
         },
         {
             id: "reply-deboosting",
-            title: "返信一覧での表示順の低下",
-            description: "ポストに対する返信が返信一覧にて、下部に表示されるようになります。また、「さらに返信を表示する」をタップするまで返信が表示されなくなる場合があります。",
+            title: "Reply Deboosting",
+            description: "リプライが「さらに返信を表示する」をタップしないと表示されなくなる場合があります。",
             status: getAdjustedStatus(results?.reply_deboosting)
         }
     ];
@@ -105,12 +108,13 @@ const ShadowbanChecker = () => {
 
     useEffect(() => {
         loadAd()
+        document.title = 'X（Twitter）Shadowban Checker F（シャドウバンチェッカー エフ）';
     }, []);
 
     return (
         <>
             <h1 className="text-4xl font-bold text-center mb-8">
-                Xシャドウバンチェッカー
+                X（Twitter）Shadowban Checker F
             </h1>
             <Card className="w-full max-w-2xl mx-auto">
                 <TopPageAdsense1 />
@@ -119,14 +123,30 @@ const ShadowbanChecker = () => {
                         <div className="flex gap-2">
                             <div className="relative flex-1">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <span className="text-gray-500 text-xl">@</span>
+                                    <span className="text-xl">@</span>
                                 </div>
                                 <Input
-                                    placeholder="ユーザー名を入力"
+                                    placeholder="Username"
                                     value={screenName}
                                     onChange={(e) => setScreenName(e.target.value)}
                                     className="pl-8 text-xl h-12"
+                                    onKeyDown={e => {
+                                        if (e.key == 'Enter' && screenName) {
+                                            handleCheck()
+                                        }
+                                    }
+                                    }
                                 />
+                                {screenName && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setScreenName('')}
+                                        className="absolute right-0 top-1/2 -translate-y-1/2 px-2 text-gray-400 hover:text-gray-600 bg-transparent border-0 cursor-pointer"
+                                        aria-label="入力をクリア"
+                                    >
+                                        <X className="h-6 w-6" />
+                                    </button>
+                                )}
                             </div>
                             <Button
                                 onClick={handleCheck}
@@ -136,12 +156,40 @@ const ShadowbanChecker = () => {
                                 <Search className="w-5 h-5" />
                             </Button>
                         </div>
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                id="searchban-check"
+                                checked={checkSearchban}
+                                onChange={(e) => setCheckSearchban(e.target.checked)}
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                            />
+                            <label htmlFor="searchban-check" className="text-sm text-gray-600">
+                                直近20件のポスト+固定ポストの検索除外をチェックする
+                            </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                id="repost-check"
+                                checked={checkRepost}
+                                onChange={(e) => setCheckRepost(e.target.checked)}
+                                className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}
+                            />
+                            <label htmlFor="repost-check" className={`text-sm text-gray-600 ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
+                                リポスト、引用ポストも含めてチェックする
+                            </label>
+                        </div>
 
-                        {!results && (
-                            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                                <p>シャドウバンとは、X (Twitter) において、アカウントがロックや凍結されていないにも関わらず、検索結果や返信一覧に表示されなく(ずらく)なる状態のことです。</p>
-                            </div>
+                        {!results && !loading && (
+                            <WhatIsShadowbanExpantionButton />
                         )}
+                        {loading && (
+                            <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
+                                <p>{checkSearchban ? "チェック中。10秒ほどお待ちください..." : "チェック中..."}</p>
+                            </div>
+                        )
+                        }
                         {stateMessage && (
                             <Alert variant="destructive">
                                 <AlertTitle>{stateMessage.title}</AlertTitle>
@@ -165,7 +213,7 @@ const ShadowbanChecker = () => {
                                             <span>{item.title}</span>
                                         </div>
                                     </AccordionTrigger>
-                                    <AccordionContent>
+                                    <AccordionContent className='whitespace-pre-wrap'>
                                         {item.description}
                                     </AccordionContent>
                                 </AccordionItem>
@@ -203,10 +251,14 @@ const ShadowbanChecker = () => {
                                 />
                             </div>
                             <ResultList results={results?.tweets} filters={filters} />
+                            <Legend />
                         </CardContent>
-                        <Legend />
                     </>
                 }
+                <CardContent className='mt-3'>
+                    <CautionExpantionButton />
+                    <ContactUsExpantionButton />
+                </CardContent>
                 <TopPageAdsense2 />
             </Card>
         </>

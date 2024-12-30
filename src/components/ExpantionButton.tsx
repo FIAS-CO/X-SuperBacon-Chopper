@@ -39,8 +39,21 @@ export const ContactUsExpantionButton: React.FC = () => {
     return (
         <ExpantionButton label="問い合わせ先">
             <p className="mb-4 text-left">
-                <a href="https://x.com/TAIYO_SUN_2024" target="_blank">タイヨー(@TAIYO_SUN_2024)</a> もしくは <a href="https://x.com/sig_re" target="_blank">しぐれ(@sig_re)</a> までDMかリプください。
+                <a href="https://x.com/TAIYO_SUN_2024" target="_blank">タイヨー(@TAIYO_SUN_2024)</a>までDMかリプください。
             </p>
+        </ExpantionButton >
+    )
+}
+
+export const WhatIsShadowbanExpantionButton: React.FC = () => {
+    return (
+        <ExpantionButton label="Shadowbanとは">
+            <p className="mb-4 text-left">
+                <p>SNSアカウントや投稿が他のユーザーに表示されにくくなる、または表示されない現象を指す通称です。</p>
+                <p>本サイトはX（Twitter）におけるアカウントがシャドウバン状態でないかをチェックするものです。</p>
+                <br />
+                <p>ただし、X（Twitter）社は公式にはシャドウバンを行っていないと明言しています。</p>
+                <p>本サイトで確認できる4種類のBANは公式の名称ではなく、ネットを中心に呼称される俗称を採用したものとなります。</p>            </p>
         </ExpantionButton >
     )
 }

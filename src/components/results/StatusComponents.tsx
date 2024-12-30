@@ -154,7 +154,7 @@ export const ResultList: React.FC<{
 };
 
 export const Legend: React.FC = () => (
-    <div className="ml-7 mt-4 text-left text-sm text-slate-500">
+    <div className="mt-4 text-left text-sm text-slate-500">
         <p className="mb-2">＜凡例＞</p>
         <div className="space-y-2">
             <p>
