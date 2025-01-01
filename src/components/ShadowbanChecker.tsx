@@ -57,19 +57,19 @@ const ShadowbanChecker = () => {
         if (results.not_found) {
             return {
                 title: "ユーザーが見つかりません",
-                description: "指定されたユーザー名のアカウントが存在しないか、削除された可能性があります。"
+                description: "指定されたユーザー名のアカウントが存在しないか削除されているため、チェックすることができません。"
             };
         }
         if (results.suspend) {
             return {
                 title: "凍結されたアカウントです",
-                description: "このアカウントは現在凍結されています。"
+                description: "このアカウントは現在凍結されているため、チェックすることができません。"
             };
         }
         if (results.protect) {
             return {
                 title: "非公開アカウントです",
-                description: "このアカウントは非公開設定となっているため、フォロワーのみがポストを閲覧できます。"
+                description: "このアカウントは非公開設定となっているため、チェックすることができません。"
             };
         }
         if (results.no_tweet) {
