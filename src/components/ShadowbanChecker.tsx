@@ -62,8 +62,20 @@ const ShadowbanChecker = () => {
         }
         if (results.suspend) {
             return {
-                title: "凍結されたユーザーかもしれません",
-                description: "このアカウントは凍結されている可能性があります。"
+                title: "凍結されたアカウントです",
+                description: "このアカウントは現在凍結されています。"
+            };
+        }
+        if (results.protect) {
+            return {
+                title: "非公開アカウントです",
+                description: "このアカウントは非公開設定となっているため、フォロワーのみがポストを閲覧できます。"
+            };
+        }
+        if (results.no_tweet) {
+            return {
+                title: "ポストが存在しません",
+                description: "このアカウントはまだポストを投稿していません。"
             };
         }
         return null;
@@ -71,7 +83,7 @@ const ShadowbanChecker = () => {
 
     // ユーザーの状態に応じてステータスを調整
     const getAdjustedStatus = (originalStatus: boolean | undefined) => {
-        if (results?.not_found || results?.suspend) {
+        if (results?.not_found || results?.suspend || results?.protect) {
             return undefined;
         }
         return originalStatus;
@@ -190,7 +202,7 @@ const ShadowbanChecker = () => {
                             </div>
                         )
                         }
-                        {stateMessage && (
+                        {!loading && stateMessage && (
                             <Alert variant="destructive">
                                 <AlertTitle>{stateMessage.title}</AlertTitle>
                                 <AlertDescription>{stateMessage.description}</AlertDescription>
