@@ -53,7 +53,7 @@ const TwitterStatusHistory = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center mb-8">
+      <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
         Xポスト検索除外チェッカー
       </h1>
       <Card className="w-full max-w-2xl mx-auto">
