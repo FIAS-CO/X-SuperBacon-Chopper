@@ -38,7 +38,7 @@ function Adsense(adSlot: string, adFormat: string) {
   return (
     <>
       <SEOMetaTags />
-      <div style={{ margin: "1.5rem 0" }}>
+      <div>
         <div style={{ fontSize: "13px" }}>スポンサーリンク</div>
         {window.location.hostname == hostname ?
           (

@@ -129,9 +129,9 @@ const ShadowbanChecker = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
             <Card className="w-full max-w-2xl mx-auto">
-                <TopPageAdsense1 />
                 <CardContent className="p-6">
-                    <div className="space-y-4">
+                    <TopPageAdsense1 />
+                    <div className="space-y-4 mt-6">
                         <div className="flex gap-2">
                             <div className="relative flex-1">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -270,8 +270,8 @@ const ShadowbanChecker = () => {
                 <CardContent className='mt-3'>
                     <CautionExpantionButton />
                     <ContactUsExpantionButton />
+                    <TopPageAdsense2 />
                 </CardContent>
-                <TopPageAdsense2 />
             </Card>
         </>
     );
