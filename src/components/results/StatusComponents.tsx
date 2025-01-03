@@ -231,7 +231,80 @@ export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, 
     );
 };
 
+interface ShareShadowBanProps extends ShadowBanCheckResult {
+    screenName: string;
+}
+
+export const ShareShadowBanResult: React.FC<ShareShadowBanProps> = (props) => {
+    const handleTweet = () => {
+        const getStatusIcon = (isBanned?: boolean) => isBanned ? '❌' : '✅';
+
+        let tweetLines = [
+            `Check @${props.screenName} Success!`,
+            `＜Result＞`,
+            `${getStatusIcon(props.search_suggestion_ban)} Search Suggestion Ban`,
+            `${getStatusIcon(props.search_ban)} Search Ban`,
+            `${getStatusIcon(props.ghost_ban)} Ghost Ban`,
+            `${getStatusIcon(props.reply_deboosting)} Reply Deboosting`,
+            ``
+        ];
+
+        const searchbanDisplayString = (forbiddenCount: number, quoteForbiddenCount: number) => {
+            const prefix = '直近20件のポストに';
+
+            if (forbiddenCount === 0 && quoteForbiddenCount === 0) {
+                return `${prefix}検索除外はありませんでした`;
+            }
+
+            const parts = [];
+            if (forbiddenCount > 0) {
+                parts.push(`検索除外が${forbiddenCount}件`);
+            }
+            if (quoteForbiddenCount > 0) {
+                parts.push(`引用検索除外が${quoteForbiddenCount}件`);
+            }
+
+            const statusText = parts.length > 1 ? parts.join('、') : parts[0];
+            return `${prefix}${statusText}ありました`;
+        };
+
+        if (props.tweets && props.tweets.length !== 0) {
+            const forbiddenCount = props.tweets ? props.tweets.filter(t => t.status === 'FORBIDDEN').length : 0;
+            const quoteForbiddenCount = props.tweets.filter(t => t.status === 'QUATE_FORBIDDEN').length;
+
+            tweetLines.push(searchbanDisplayString(forbiddenCount, quoteForbiddenCount));
+            tweetLines.push(``);
+        }
+        tweetLines.push(`#shadowban`);
+        tweetLines.push('https://x-searchban-checker.fia-s.com/shadowbanchecker');
+
+        const tweetText = tweetLines.join('\n');
+        const encodedText = encodeURIComponent(tweetText);
+        window.open(`https://twitter.com/intent/tweet?text=${encodedText}`, '_blank');
+    };
+
+    return (
+        <div className="mt-6 space-y-4">
+            <button
+                onClick={handleTweet}
+                className="w-full flex items-center justify-center gap-2 bg-black text-white rounded-full py-3 px-4 font-medium text-xl hover:bg-gray-800 transition-colors"
+            >
+                <XIcon />
+                ポストする
+            </button>
+        </div>
+
+    )
+}
+
+const XIcon = () => (
+    <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+        <path d="M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.946 1.328 7.91 11.078h-3.246zm0 0" />
+    </svg>
+);
+
 export interface ShadowBanCheckResult {
+    screenName: string;
     not_found: boolean;
     suspend: boolean;
     protect: boolean;
@@ -242,4 +315,9 @@ export interface ShadowBanCheckResult {
     ghost_ban: boolean;
     reply_deboosting: boolean;
     tweets: TweetCheckResult[];
+}
+
+export function checkSucceed(result: ShadowBanCheckResult | null): boolean {
+    if (!result) return false;
+    return !result.not_found && !result.suspend && !result.protect;
 }

@@ -60,7 +60,7 @@ export const apiClient = {
         }
 
         const { user, ...checkResult } = await response.json();
-        return checkResult;
+        return { screenName, ...checkResult };
     },
 
     async getEncryptedIpAsync(): Promise<string> {

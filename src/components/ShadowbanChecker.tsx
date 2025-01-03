@@ -11,7 +11,7 @@ import {
     AccordionTrigger,
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
-import { FilterCheckbox, Legend, ResultList, ShadowBanCheckResult } from './results/StatusComponents';
+import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult, ShareShadowBanResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 
@@ -232,6 +232,7 @@ const ShadowbanChecker = () => {
                             ))}
                         </Accordion>
                     </div>
+                    {checkSucceed(results) && <ShareShadowBanResult {...results!} />}
                 </CardContent>
                 {results?.tweets &&
                     <>
@@ -264,6 +265,8 @@ const ShadowbanChecker = () => {
                             </div>
                             <ResultList results={results?.tweets} filters={filters} />
                             <Legend />
+                            {results.tweets?.length !== 0 && <ShareShadowBanResult {...results!} />}
+
                         </CardContent>
                     </>
                 }
