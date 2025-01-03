@@ -1,8 +1,8 @@
-
 import { useNavigate } from 'react-router-dom';
 import { Loader2, ArrowLeft, Share } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import pinIcon from '../../assets/pin.svg';  // 適切な相対パスに調整してください
 
 // ステータスの型定義
 export type Status = 'AVAILABLE' | 'FORBIDDEN' | 'NOT_FOUND' | 'UNKNOWN' | 'INVALID_URL' | 'QUATE_FORBIDDEN';
@@ -103,6 +103,7 @@ export interface SessionResult {
 export interface TweetCheckResult {
     url: string;
     status?: Status;
+    isPinned?: boolean;
 }
 
 export const ResultList: React.FC<{
@@ -138,14 +139,22 @@ export const ResultList: React.FC<{
                     key={index}
                     className="flex flex-col text-left md:flex-row md:items-center md:justify-between p-4 rounded-lg border gap-2 md:gap-4"
                 >
-                    <a
-                        href={result.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline break-all md:flex-1 md:min-w-0"
-                    >
-                        {result.url}
-                    </a>
+                    <div className="flex flex-col gap-2 md:flex-1 md:min-w-0">
+                        {result.isPinned && (
+                            <div className="flex items-center gap-1 text-gray-600 text-sm">
+                                <img src={pinIcon} alt="pin" className="w-4 h-4" />
+                                <span>固定ポスト</span>
+                            </div>
+                        )}
+                        <a
+                            href={result.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline break-all md:flex-1 md:min-w-0"
+                        >
+                            {result.url}
+                        </a>
+                    </div>
                     <StatusBadge status={result.status || 'UNKNOWN'} />
                 </div>
             ))}
