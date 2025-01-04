@@ -1,0 +1,8 @@
+# メンテナンスページに切り替え
+sudo ln -sf maintenance-page.html default.html
+
+# リダイレクトページに切り替え
+sudo ln -sf redirect-page.html default.html
+
+sudo nginx -t        # 設定のテスト
+sudo nginx -s reload # 設定の再読み込み
