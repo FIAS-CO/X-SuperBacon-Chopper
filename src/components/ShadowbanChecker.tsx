@@ -22,7 +22,7 @@ const ShadowbanChecker = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [checkSearchban, setCheckSearchban] = useState(true);
-    const [checkRepost, setCheckRepost] = useState(false);
+    const [checkRepost, setCheckRepost] = useState(true);
 
     const [filters, setFilters] = useState({
         searchOk: true,
