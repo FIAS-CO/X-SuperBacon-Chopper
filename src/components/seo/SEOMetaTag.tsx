@@ -12,7 +12,7 @@ interface SEOMetaTagsProps {
 }
 
 const SEOMetaTags = ({
-  title = 'Xポスト検索除外チェッカー',
+  title = 'X（Twitter）Shadowban Checker F（シャドウバンチェッカー エフ）',
   description = 'Xのポストが検索から除外されているかどうかを簡単にチェックできるツールです。複数URLの一括チェックに対応しています。',
   keywords = 'X,ポスト,Twitter,ツイート,検索除外,チェッカー,SNS,ソーシャルメディア,検索除外,除外検索,調べ方,検索',
   ogTitle,
