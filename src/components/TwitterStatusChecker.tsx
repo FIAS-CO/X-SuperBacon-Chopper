@@ -40,7 +40,7 @@ const TwitterStatusChecker = () => {
     sessionStorage.setItem('inputUrls', JSON.stringify(urls));
 
     // 結果ページに遷移
-    navigate('/results');
+    navigate('/tweetcheck/results');
   };
 
   React.useEffect(() => {

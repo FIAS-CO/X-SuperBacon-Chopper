@@ -86,7 +86,7 @@ export const StatusHeader: React.FC<{
             <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/tweetcheck')}
             >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 入力画面に戻る
@@ -209,7 +209,7 @@ export const ShareResults: React.FC<ShareResultsProps> = ({ sessionId, results, 
             tweetLines.push(`🔁${quoteForbiddenCount}件が引用元で検索除外されていました`);
         }
         tweetLines.push(``)
-        tweetLines.push(`検索結果URL：https://x-searchban-checker.fia-s.com/history/${sessionId}`);
+        tweetLines.push(`検索結果URL：https://x-shadowban-checker.fia-s.com/tweetcheck/history/${sessionId}`);
         tweetLines.push('#検索除外チェッカー');
 
         const tweetText = tweetLines.join('\n');
@@ -276,7 +276,7 @@ export const ShareShadowBanResult: React.FC<ShareShadowBanProps> = (props) => {
             tweetLines.push(``);
         }
         tweetLines.push(`#shadowban`);
-        tweetLines.push('https://x-searchban-checker.fia-s.com/shadowbanchecker');
+        tweetLines.push('https://x-shadowban-checker.fia-s.com/');
 
         const tweetText = tweetLines.join('\n');
         const encodedText = encodeURIComponent(tweetText);

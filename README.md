@@ -1,7 +1,5 @@
 # Site URL
-https://x-searchban-checker.fia-s.com
-
-https://x-searchban-checker.fia-s.com/shadowbanchecker
+https://x-shadowban-checker.fia-s.com
 
 # React + TypeScript + Vite
 
