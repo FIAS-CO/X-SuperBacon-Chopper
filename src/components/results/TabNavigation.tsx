@@ -19,9 +19,9 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
         )}
 
         {isShadowbanTab ? (
-          <Link to="/tweetcheck" className={linkTabStyles}>Searchban Checker</Link>
+          <Link to="/tweetcheck" className={linkTabStyles}>Tweet Checker</Link>
         ) : (
-          <div className={activeTabStyles}>Searchban Checker</div>
+          <div className={activeTabStyles}>Tweet Checker</div>
         )}
       </div>
     </div>
