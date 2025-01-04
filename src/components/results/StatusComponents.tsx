@@ -237,11 +237,10 @@ interface ShareShadowBanProps extends ShadowBanCheckResult {
 
 export const ShareShadowBanResult: React.FC<ShareShadowBanProps> = (props) => {
     const handleTweet = () => {
-        const getStatusIcon = (isBanned?: boolean) => isBanned ? '❌' : '✅';
+        const getStatusIcon = (isBanned?: boolean) => isBanned ? '❌' : '☑';
 
         let tweetLines = [
-            `Check @${props.screenName} Success!`,
-            `＜Result＞`,
+            `Check @${props.screenName} Result`,
             `${getStatusIcon(props.search_suggestion_ban)} Search Suggestion Ban`,
             `${getStatusIcon(props.search_ban)} Search Ban`,
             `${getStatusIcon(props.ghost_ban)} Ghost Ban`,
