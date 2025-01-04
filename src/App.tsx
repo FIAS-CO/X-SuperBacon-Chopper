@@ -13,10 +13,10 @@ function App() {
         <Router>
           <div className="max-w-2xl mx-auto py-8 bg-slate-100">
             <Routes>
-              <Route path="/" element={<TwitterStatusChecker />} />
-              <Route path="/results" element={<TwitterStatusResults />} />
-              <Route path="/history/:sessionId" element={<TwitterStatusHistory />} />
-              <Route path="/shadowbanchecker" element={<ShadowbanChecker />} />
+              <Route path="/" element={<ShadowbanChecker />} />
+              <Route path="/tweetcheck" element={<TwitterStatusChecker />} />
+              <Route path="/tweetcheck/results" element={<TwitterStatusResults />} />
+              <Route path="/tweetcheck/history/:sessionId" element={<TwitterStatusHistory />} />
             </Routes>
             <div className="mt-4 text-center text-sm text-slate-500">
               <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>

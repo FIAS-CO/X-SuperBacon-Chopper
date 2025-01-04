@@ -6,6 +6,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, HowToUseExpantionButton } from './ExpantionButton';
+import TabNavigation from './results/TabNavigation';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -55,6 +56,7 @@ const TwitterStatusChecker = () => {
 
   return (
     <>
+      <TabNavigation isShadowbanTab={false} />
       <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
         Xポスト検索除外チェッカー
       </h1>

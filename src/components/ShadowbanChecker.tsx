@@ -14,6 +14,7 @@ import { apiClient } from '../services/api';
 import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult, ShareShadowBanResult } from './results/StatusComponents';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
+import TabNavigation from './results/TabNavigation';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -125,6 +126,7 @@ const ShadowbanChecker = () => {
 
     return (
         <>
+            <TabNavigation isShadowbanTab={true} />
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
             </h1>
