@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, TweetCheckResult } from './results/StatusComponents';
+import { Card, CardContent } from './ui/card';
+import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import TabNavigation from './results/TabNavigation';
@@ -59,18 +57,10 @@ const TwitterStatusHistory = () => {
         Xポスト検索除外チェッカー
       </h1>
       <Card className="w-full max-w-2xl mx-auto">
-        <ResultPageAdsense1 />
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>チェック履歴</CardTitle>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => navigate('/')}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            入力画面に戻る
-          </Button>
-        </CardHeader>
+        <div className="px-6 pt-6">
+          <ResultPageAdsense1 />
+        </div>
+        <StatusHeader title="チェック履歴" />
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <FilterCheckbox
@@ -100,9 +90,9 @@ const TwitterStatusHistory = () => {
           </div>
           <ResultList results={results} filters={filters} />
           {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
+          <Legend />
+          <ResultPageAdsense2 />
         </CardContent>
-        <Legend />
-        <ResultPageAdsense2 />
       </Card>
     </>
   );

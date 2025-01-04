@@ -61,9 +61,11 @@ const TwitterStatusChecker = () => {
         Xポスト検索除外チェッカー
       </h1>
       <Card className="w-full max-w-2xl mx-auto">
-        <TopPageAdsense1 />
+        <div className="px-6 pt-6">
+          <TopPageAdsense1 />
+        </div>
         <CardContent>
-          <div className="space-y-4 mb-4">
+          <div className="space-y-4 mb-4 mt-4">
             {urls.map((urlObj) => (
               <div key={urlObj.id} className="flex gap-2">
                 <div className="flex-1 relative">
@@ -118,8 +120,8 @@ const TwitterStatusChecker = () => {
           <HowToUseExpantionButton />
           <CautionExpantionButton />
           <ContactUsExpantionButton />
+          <TopPageAdsense2 />
         </CardContent>
-        <TopPageAdsense2 />
       </Card>
     </>
   );

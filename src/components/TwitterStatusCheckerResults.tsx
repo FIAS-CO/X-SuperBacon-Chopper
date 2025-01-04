@@ -81,9 +81,11 @@ const TwitterStatusResults = () => {
         Xポスト検索除外チェッカー
       </h1>
       <Card className="w-full max-w-2xl mx-auto">
-        <ResultPageAdsense1 />
+        <div className="px-6 pt-6">
+          <ResultPageAdsense1 />
+        </div>
         <StatusHeader title="チェック結果" />
-        <CardContent>
+        <CardContent className="p-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <FilterCheckbox
               id="searchOk"
@@ -113,9 +115,8 @@ const TwitterStatusResults = () => {
           <ResultList results={results} filters={filters} />
           {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
           <Legend />
+          <ResultPageAdsense2 />
         </CardContent>
-
-        <ResultPageAdsense2 />
       </Card>
     </>
   );
