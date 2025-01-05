@@ -179,7 +179,7 @@ const ShadowbanChecker = () => {
                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                             />
                             <label htmlFor="searchban-check" className="text-sm text-gray-600">
-                                固定ポストを含む直近20件のポストの検索除外をチェックする
+                                直近20件のポストの検索除外をチェックする
                             </label>
                         </div>
                         <div className="flex items-center space-x-2">
