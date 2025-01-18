@@ -39,7 +39,7 @@ const ShadowbanChecker = () => {
         try {
             const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
-            if (results?.api_status.userSearchGroup.rate_limit) {
+            if (checkResults?.api_status.userSearchGroup.rate_limit) {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
             }
         } catch (err) {
@@ -93,7 +93,7 @@ const ShadowbanChecker = () => {
 
     // ユーザーの状態に応じてステータスを調整
     const getAdjustedStatus = (originalStatus: boolean | undefined) => {
-        if (results?.not_found || results?.suspend || results?.protect) {
+        if (results?.not_found || results?.suspend || results?.protect || results?.api_status.userSearchGroup.rate_limit) {
             return undefined;
         }
         return originalStatus;
