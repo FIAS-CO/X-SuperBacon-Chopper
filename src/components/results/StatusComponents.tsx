@@ -114,7 +114,8 @@ export const ResultList: React.FC<{
         quoteForbidden: boolean;
         error: boolean;
     };
-}> = ({ results, filters }) => {
+    messageForNoData: string;
+}> = ({ results, filters, messageForNoData: messageForError }) => {
     const filteredResults = results.filter(result => {
         const status = result.status;
         if (!status) return false;
@@ -127,7 +128,7 @@ export const ResultList: React.FC<{
     if (results.length === 0) {
         return (
             <div className="text-center py-8 text-gray-500">
-                No Data.
+                {messageForError}
             </div>
         );
     }
@@ -314,6 +315,16 @@ export interface ShadowBanCheckResult {
     ghost_ban: boolean;
     reply_deboosting: boolean;
     tweets: TweetCheckResult[];
+    api_status: {
+        userSearchGroup: {
+            rate_limit: boolean,
+            error: string | undefined
+        },
+        userTimelineGroup: {
+            rate_limit: boolean,
+            error: string | undefined
+        }
+    }
 }
 
 export function checkSucceed(result: ShadowBanCheckResult | null): boolean {

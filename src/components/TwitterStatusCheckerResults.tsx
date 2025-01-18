@@ -112,7 +112,7 @@ const TwitterStatusResults = () => {
               onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
             />
           </div>
-          <ResultList results={results} filters={filters} />
+          <ResultList results={results} filters={filters} messageForNoData={'No Data.'} />
           {sessionId && <ShareResults sessionId={sessionId} results={results} timestamp={timestamp} />}
           <Legend />
           <ResultPageAdsense2 />

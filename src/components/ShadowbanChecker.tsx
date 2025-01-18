@@ -39,6 +39,9 @@ const ShadowbanChecker = () => {
         try {
             const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
+            if (results?.api_status.userSearchGroup.rate_limit) {
+                setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
+            }
         } catch (err) {
             setError('チェック中にエラーが発生しました。しばらく待ってから再度お試しください。');
         } finally {
@@ -51,6 +54,12 @@ const ShadowbanChecker = () => {
         if (props.status === false) return <Check className="h-5 w-5 text-green-500" />;
         return <HelpCircle className="h-5 w-5 text-blue-500" />;
     };
+
+    const messageForNoData = () => {
+        if (results?.no_tweet) return 'No Data.';
+        if (results?.api_status.userTimelineGroup.rate_limit) return 'サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。';
+        return '取得に失敗しました。'
+    }
 
     // ユーザーの状態に応じてメッセージを生成
     const getUserStateMessage = () => {
@@ -265,7 +274,7 @@ const ShadowbanChecker = () => {
                                     onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
                                 />
                             </div>
-                            <ResultList results={results?.tweets} filters={filters} />
+                            <ResultList results={results?.tweets} filters={filters} messageForNoData={messageForNoData()} />
                             <Legend />
                             {results.tweets?.length !== 0 && <ShareShadowBanResult {...results!} />}
 
