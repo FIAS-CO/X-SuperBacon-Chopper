@@ -27,7 +27,7 @@ export const CautionExpantionButton: React.FC = () => {
             <div>
                 <ul className="list-disc pl-6 space-y-2 text-left">
                     <li>このツールの検出結果は100％保証するものではありません。<br />
-                        X(Twitter)の仕様が変わるとこのツールも使えなるかもしれません。</li>
+                        X(Twitter)の仕様が変わるとこのツールも使えなくなるかもしれません。</li>
                     <li>誤作動があっても温かい目で見てください。</li>
                 </ul>
             </div>
