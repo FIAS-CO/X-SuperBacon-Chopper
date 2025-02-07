@@ -5,6 +5,7 @@ import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TwitterStatusHistory from './components/TwitterStatusHistory';
 import ShadowbanChecker from './components/ShadowbanChecker';
+import ShadowbanCheckerCopy from './components/ShadowbanCheckerCopy';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <div className="max-w-2xl mx-auto py-8 bg-slate-100">
             <Routes>
               <Route path="/" element={<ShadowbanChecker />} />
+              <Route path="/adtest" element={<ShadowbanCheckerCopy />} />
               <Route path="/tweetcheck" element={<TwitterStatusChecker />} />
               <Route path="/tweetcheck/results" element={<TwitterStatusResults />} />
               <Route path="/tweetcheck/history/:sessionId" element={<TwitterStatusHistory />} />
