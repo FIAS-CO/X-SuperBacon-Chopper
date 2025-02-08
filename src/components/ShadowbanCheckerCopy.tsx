@@ -15,6 +15,7 @@ import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult,
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
+import { DMMAffiliate } from './adsense/DMMAffiliate';
 
 const ShadowbanCheckerCopy = () => {
     const [screenName, setScreenName] = useState('');
@@ -139,6 +140,7 @@ const ShadowbanCheckerCopy = () => {
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
             </h1>
+
             <Card className="w-full max-w-2xl mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
@@ -287,17 +289,19 @@ const ShadowbanCheckerCopy = () => {
                     <TopPageAdsense2 />
                 </CardContent>
             </Card>
-            <ins className="dmm-widget-placement" data-id="d13a33f706f3a7b7819f5588e31ca956" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="d13a33f706f3a7b7819f5588e31ca956"></script>
-            <ins className="dmm-widget-placement" data-id="52c17e6b90bdf0f1a9451696e77725d9" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="52c17e6b90bdf0f1a9451696e77725d9"></script>
-            <ins className="dmm-widget-placement" data-id="8f2ed623efc808fdf4b24121f5bb89c9" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="8f2ed623efc808fdf4b24121f5bb89c9"></script>
-            <ins className="dmm-widget-placement" data-id="646e27ba7227e55cdad1b3f0969020f4" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="646e27ba7227e55cdad1b3f0969020f4"></script>
-            <ins className="dmm-widget-placement" data-id="23bebe263abfdd00008a2898c4a46b79" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="23bebe263abfdd00008a2898c4a46b79"></script>
-            <ins className="dmm-widget-placement" data-id="cab751fa3a7968718630a3550f29da41" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="cab751fa3a7968718630a3550f29da41"></script>
-            <ins className="dmm-widget-placement" data-id="ab81ac98caa60630e46732ae1da75bc0" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="ab81ac98caa60630e46732ae1da75bc0"></script>
-            <ins className="dmm-widget-placement" data-id="516781b0e3fd33a9f4fb549b71a04dac" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="516781b0e3fd33a9f4fb549b71a04dac"></script>
-            <ins className="dmm-widget-placement" data-id="06b022d33118f38aa6a1407ef8cd8df2" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="06b022d33118f38aa6a1407ef8cd8df2"></script>
-            <ins className="dmm-widget-placement" data-id="19e2a00544bdf591b30dc8055caa7c7c" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="19e2a00544bdf591b30dc8055caa7c7c"></script>
-            <ins className="dmm-widget-placement" data-id="62d9c04d41167c1b99964ab347f2d17a" style={{ background: "transparent" }}></ins><script src="https://widget-view.dmm.com/js/placement.js" className="dmm-widget-scripts" data-id="62d9c04d41167c1b99964ab347f2d17a"></script>
+            <div>
+                <DMMAffiliate id="d13a33f706f3a7b7819f5588e31ca956" size="300x250" isSmartphone={true} />
+                <DMMAffiliate id="52c17e6b90bdf0f1a9451696e77725d9" size="336x280" />
+                <DMMAffiliate id="646e27ba7227e55cdad1b3f0969020f4" size="300x600" />
+                <DMMAffiliate id="23bebe263abfdd00008a2898c4a46b79" size="320x100" isSmartphone={true} />
+                <DMMAffiliate id="cab751fa3a7968718630a3550f29da41" size="120x600" />
+                <DMMAffiliate id="ab81ac98caa60630e46732ae1da75bc0" size="120x240" />
+                <DMMAffiliate id="516781b0e3fd33a9f4fb549b71a04dac" size="160x600" />
+                <DMMAffiliate id="06b022d33118f38aa6a1407ef8cd8df2" size="250x250" isSmartphone={true} />
+                <DMMAffiliate id="19e2a00544bdf591b30dc8055caa7c7c" size="200x200" isSmartphone={true} />
+                <DMMAffiliate id="62d9c04d41167c1b99964ab347f2d17a" size="180x150" isSmartphone={true} />
+                <DMMAffiliate id="8f2ed623efc808fdf4b24121f5bb89c9" size="728x90" />
+            </div>
         </>
     );
 };
