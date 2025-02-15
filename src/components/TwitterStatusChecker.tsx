@@ -7,6 +7,7 @@ import { Button } from './ui/button';
 import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, HowToUseExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
+import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -117,6 +118,7 @@ const TwitterStatusChecker = () => {
               </Button>
             </div>
           </div>
+          <ResponsiveDMMAd />
           <HowToUseExpantionButton />
           <CautionExpantionButton />
           <ContactUsExpantionButton />
