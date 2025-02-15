@@ -1,12 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 
-interface DMMProps {
-    id: string;
-    size: string;
-    isSmartphone?: boolean;
+export const ResponsiveDMMAd = () => {
+    let width = window.innerWidth
+
+    if (width >= 728) {
+        return (<DMMAffiliate id="92588f6af3d070a657f0c15b8941e8f1" />);
+    } else if (width >= 370) {
+        return (<DMMAffiliate id="38de82848cc7f4e9c7973c5f2a04dbc0" />)
+    }
+    return (<DMMAffiliate id="6d604a977999f8116e8f60236365088b" />)
 }
 
-export const DMMAffiliate: React.FC<DMMProps> = ({ id, size, isSmartphone }) => {
+/*
+2つ以上配置すると一番下の広告しか表示されない
+*/
+interface DMMProps {
+    id: string;
+}
+export const DMMAffiliate: React.FC<DMMProps> = ({ id }) => {
     const adRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -37,11 +48,6 @@ export const DMMAffiliate: React.FC<DMMProps> = ({ id, size, isSmartphone }) => 
     }, [id]);
 
     return (
-        <div>
-            <div className="text-sm text-gray-600 mb-1">
-                {size} ID={id.substring(0, 6)} {isSmartphone && 'スマホフラグ=1'}
-            </div>
-            <div ref={adRef} />
-        </div>
+        <div ref={adRef} style={{ width: '720px', overflow: 'hidden' }} />
     );
 };
