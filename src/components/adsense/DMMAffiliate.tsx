@@ -13,6 +13,20 @@ export const ResponsiveDMMAd = () => {
     );
 }
 
+export const ResponsiveDMMAd2 = () => {
+    const width = window.innerWidth
+    const id = width >= 728 ? "92588f6af3d070a657f0c15b8941e8f1"
+        : width >= 370 ? "38de82848cc7f4e9c7973c5f2a04dbc0"
+            : "6d604a977999f8116e8f60236365088b;";
+
+    return (
+        <div className="mb-3">
+            <DMMAffiliate id={id} />
+        </div>
+    );
+}
+
+
 /*
 2つ以上配置すると一番下の広告しか表示されない
 */
@@ -50,6 +64,6 @@ export const DMMAffiliate: React.FC<DMMProps> = ({ id }) => {
     }, [id]);
 
     return (
-        <div ref={adRef} style={{ width: '720px', overflow: 'hidden' }} />
+        <div ref={adRef} />
     );
 };
