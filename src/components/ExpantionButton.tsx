@@ -70,7 +70,7 @@ export const ExpantionButton: React.FC<ExpantionButtonProps> = ({ label, childre
     const [isGraphVisible, setIsGraphVisible] = useState(false);
     return (
 
-        <div className="mb-6">
+        <div className="mb-3">
             <button
                 onClick={() => setIsGraphVisible(!isGraphVisible)}
                 className="w-full bg-white dark:bg-gray-800 rounded-lg shadow p-2 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
