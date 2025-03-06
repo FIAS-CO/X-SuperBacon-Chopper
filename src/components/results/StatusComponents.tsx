@@ -261,7 +261,7 @@ export const ShareShadowBanResult: React.FC<ShareShadowBanProps> = (props) => {
                 parts.push(`検索除外が${forbiddenCount}件`);
             }
             if (quoteForbiddenCount > 0) {
-                parts.push(`引用検索除外が${quoteForbiddenCount}件`);
+                parts.push(`引用元検索除外が${quoteForbiddenCount}件`);
             }
 
             const statusText = parts.length > 1 ? parts.join('、') : parts[0];
