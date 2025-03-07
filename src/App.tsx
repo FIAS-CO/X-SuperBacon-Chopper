@@ -21,7 +21,7 @@ function App() {
             <div className="mt-4 text-center text-sm text-slate-500">
               <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>
             </div>
-            <TopPageAdsense3 />
+            {/* <TopPageAdsense3 /> */}
           </div>
         </Router>
       </div>
