@@ -16,7 +16,6 @@ import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil'
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
-import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -141,7 +140,6 @@ const ShadowbanChecker = () => {
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
             </h1>
-            <ApiErrorNotification />
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />

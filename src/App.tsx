@@ -1,5 +1,4 @@
 import './App.css'
-import { TopPageAdsense3 } from './components/adsense/AdSenseUtil';
 import TwitterStatusChecker from './components/TwitterStatusChecker';
 import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
