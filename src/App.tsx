@@ -4,6 +4,7 @@ import TwitterStatusResults from './components/TwitterStatusCheckerResults';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TwitterStatusHistory from './components/TwitterStatusHistory';
 import ShadowbanChecker from './components/ShadowbanChecker';
+import { TopPageAdsense3 } from './components/adsense/AdSenseUtil';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <div className="mt-4 text-center text-sm text-slate-500">
               <p>Xの投稿URLを入力することで、その投稿が検索除外されているかどうかを確認できます。</p>
             </div>
-            {/* <TopPageAdsense3 /> */}
+            <TopPageAdsense3 />
           </div>
         </Router>
       </div>
