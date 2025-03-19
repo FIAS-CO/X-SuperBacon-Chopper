@@ -12,7 +12,7 @@ import {
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
 import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult, ShareShadowBanResult } from './results/StatusComponents';
-import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { loadAd, TopPageAdsense1, TopPageAdsense2, TopPageAdsense3 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
@@ -130,7 +130,7 @@ const ShadowbanChecker = () => {
     const stateMessage = getUserStateMessage();
 
     useEffect(() => {
-        loadAd()
+        loadAd();
         document.title = 'X（Twitter）Shadowban Checker F（シャドウバンチェッカー エフ）';
     }, []);
 
@@ -289,6 +289,8 @@ const ShadowbanChecker = () => {
                     <TopPageAdsense2 />
                 </CardContent>
             </Card>
+
+            <TopPageAdsense3 />
         </>
     );
 };

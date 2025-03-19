@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent } from './ui/card';
 import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 import { apiClient } from '../services/api';
-import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
+import { loadAd, ResultPageAdsense1, ResultPageAdsense2, TopPageAdsense3 } from './adsense/AdSenseUtil';
 import TabNavigation from './results/TabNavigation';
 
 const TwitterStatusHistory = () => {
@@ -94,6 +94,7 @@ const TwitterStatusHistory = () => {
           <ResultPageAdsense2 />
         </CardContent>
       </Card>
+      <TopPageAdsense3 />
     </>
   );
 };
