@@ -10,7 +10,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
   const linkTabStyles = "flex-1 text-center py-4 px-4 text-gray-500 hover:text-gray-700";
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-6">
+    <div className="w-full max-w-screen-xl mx-auto mb-6">
       <div className="flex border-b border-gray-200">
         {isShadowbanTab ? (
           <div className={activeTabStyles}>Shadowban Checker</div>

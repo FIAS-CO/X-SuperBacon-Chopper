@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
  */
 export const ApiErrorNotification: React.FC = () => {
     return (
-        <Alert variant="destructive" className="mb-6 max-w-2xl mx-auto">
+        <Alert variant="destructive" className="mb-6 max-w-screen-xl mx-auto">
             <AlertCircle className="h-5 w-5" />
             <AlertTitle className="ml-2 font-semibold">お知らせ</AlertTitle>
             <AlertDescription className="ml-7 text-sm">

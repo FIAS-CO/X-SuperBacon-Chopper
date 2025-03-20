@@ -67,7 +67,7 @@ export const FilterCheckbox: React.FC<{
 };
 
 export const LoadingCard: React.FC<{ message: string }> = ({ message }) => (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-screen-xl mx-auto">
         <CardContent className="flex items-center justify-center py-8">
             <Loader2 className="w-6 h-6 animate-spin" />
             <span className="ml-2">{message}</span>
