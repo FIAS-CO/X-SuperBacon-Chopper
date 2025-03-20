@@ -65,7 +65,7 @@ export function TopPageAdsense1() {
 }
 
 export function TopPageAdsense2() {
-  return Adsense("7827668563", "auto")
+  return Adsense("7827668563", "rectangle")
 }
 
 export function TopPageAdsense3() {
