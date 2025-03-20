@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../services/api';
 import { Card, CardContent } from './ui/card';
-import { loadAd, ResultPageAdsense1, ResultPageAdsense2, TopPageAdsense3 } from './adsense/AdSenseUtil';
+import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 import TabNavigation from './results/TabNavigation';
 
@@ -118,7 +118,6 @@ const TwitterStatusResults = () => {
           <ResultPageAdsense2 />
         </CardContent>
       </Card>
-      <TopPageAdsense3 />
     </>
   );
 };
