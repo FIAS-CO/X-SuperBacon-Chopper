@@ -8,6 +8,7 @@ import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil'
 import { CautionExpantionButton, ContactUsExpantionButton, HowToUseExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
+import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const TwitterStatusChecker = () => {
   const [urls, setUrls] = useState([{ id: Date.now(), value: '' }]);
@@ -61,6 +62,8 @@ const TwitterStatusChecker = () => {
       <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
         Xポスト検索除外チェッカー
       </h1>
+
+      <ApiErrorNotification />
       <Card className="w-full max-w-screen-xl mx-auto">
         <div className="px-6 pt-6">
           <TopPageAdsense1 />
