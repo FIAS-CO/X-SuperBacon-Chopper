@@ -5,7 +5,6 @@ import { Card, CardContent } from './ui/card';
 import { loadAd, ResultPageAdsense1, ResultPageAdsense2 } from './adsense/AdSenseUtil';
 import { FilterCheckbox, Legend, LoadingCard, ResultList, ShareResults, StatusHeader, TweetCheckResult } from './results/StatusComponents';
 import TabNavigation from './results/TabNavigation';
-import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const TwitterStatusResults = () => {
   const [results, setResults] = useState<TweetCheckResult[]>([]);
@@ -82,7 +81,7 @@ const TwitterStatusResults = () => {
         Xポスト検索除外チェッカー
       </h1>
 
-      <ApiErrorNotification />
+      {/* <ApiErrorNotification /> */}
       <Card className="w-full max-w-screen-xl mx-auto">
         <div className="px-6 pt-6">
           <ResultPageAdsense1 />
