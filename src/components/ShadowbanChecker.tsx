@@ -44,7 +44,7 @@ const ShadowbanChecker = () => {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
             }
         } catch (err) {
-            setError('チェック中にエラーが発生しました。しばらく待ってから再度お試しください。');
+            setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
         } finally {
             setLoading(false);
         }
