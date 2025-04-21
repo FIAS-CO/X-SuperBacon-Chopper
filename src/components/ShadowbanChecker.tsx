@@ -207,9 +207,6 @@ const ShadowbanChecker = () => {
                             </label>
                         </div>
 
-                        {!results && !loading && (
-                            <WhatIsShadowbanExpantionButton />
-                        )}
                         {loading && (
                             <div className="mt-4 p-7 bg-gray-50 rounded-lg text-left">
                                 <p>{checkSearchban ? "チェック中。10秒ほどお待ちください..." : "チェック中..."}</p>
@@ -286,6 +283,7 @@ const ShadowbanChecker = () => {
                 }
                 <CardContent className='mt-3'>
                     <ResponsiveDMMAd />
+                    <WhatIsShadowbanExpantionButton />
                     <CautionExpantionButton />
                     <ContactUsExpantionButton />
                     <TopPageAdsense2 />
