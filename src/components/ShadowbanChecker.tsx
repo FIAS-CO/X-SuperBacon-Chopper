@@ -23,8 +23,8 @@ const ShadowbanChecker = () => {
     const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [checkSearchban, setCheckSearchban] = useState(false);
-    const [checkRepost, setCheckRepost] = useState(false);
+    const [checkSearchban, setCheckSearchban] = useState(true);
+    const [checkRepost, setCheckRepost] = useState(true);
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -189,10 +189,10 @@ const ShadowbanChecker = () => {
                                 type="checkbox"
                                 id="searchban-check"
                                 checked={checkSearchban}
-                                onChange={(e) => { }} //{(e) => setCheckSearchban(e.target.checked)}
+                                onChange={(e) => setCheckSearchban(e.target.checked)}
                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                             />
-                            <label htmlFor="searchban-check" className="text-sm text-gray-600  line-through">
+                            <label htmlFor="searchban-check" className="text-sm text-gray-600">
                                 直近20件のポストが検索除外されているかチェックする
                             </label>
                         </div>
@@ -201,10 +201,10 @@ const ShadowbanChecker = () => {
                                 type="checkbox"
                                 id="repost-check"
                                 checked={checkRepost}
-                                onChange={(e) => { }} //{(e) => setCheckRepost(e.target.checked)}
+                                onChange={(e) => setCheckRepost(e.target.checked)}
                                 className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}
                             />
-                            <label htmlFor="repost-check" className={`text-sm text-gray-600 ${!checkSearchban ? 'opacity-50 pointer-events-none line-through' : ''}`}>
+                            <label htmlFor="repost-check" className={`text-sm text-gray-600 ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
                                 リポスト、引用ポストも含めてチェックする
                             </label>
                         </div>
