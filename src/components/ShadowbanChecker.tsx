@@ -36,6 +36,8 @@ const ShadowbanChecker = () => {
     const handleCheck = async () => {
         if (!screenName) return;
 
+        setError('チェックが失敗しました。復旧までしばらくお待ち下さい。');
+
         setLoading(true);
         setError('');
         try {
