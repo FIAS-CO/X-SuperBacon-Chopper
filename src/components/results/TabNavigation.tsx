@@ -9,7 +9,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
   const activeTabStyles = "flex-1 text-center py-4 px-4 border-b-2 border-blue-500 text-blue-600 font-medium";
   const linkTabStyles = "flex-1 text-center py-4 px-4 text-gray-500 hover:text-gray-700";
   const shadowbanTabName = "Shadowban Checker";
-  const postbanTabName = "PostBan Checker";
+  const postbanTabName = "Postban Checker";
 
   return (
     <div className="w-full max-w-screen-xl mx-auto mb-6">
