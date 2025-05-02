@@ -17,6 +17,7 @@ import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpant
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
+import { IdChecker } from './util/IdChecker';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -34,18 +35,24 @@ const ShadowbanChecker = () => {
     });
 
     const handleCheck = async () => {
-        if (!screenName) return;
-        setLoading(true);
-        setError('');
         try {
+            setError('');
+
+            const validation = IdChecker.validateScreenName(screenName);
+
+            if (!validation.isValid) {
+                setError(validation.errorMessage);
+                return;
+            }
+
+            setLoading(true);
             const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
             if (checkResults?.api_status.userSearchGroup.rate_limit) {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
             }
         } catch (err) {
-            // setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-            setError('チェックが失敗しました。復旧までしばらくお待ち下さい。');
+            setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
         } finally {
             setLoading(false);
         }
