@@ -35,21 +35,20 @@ const ShadowbanChecker = () => {
 
     const handleCheck = async () => {
         if (!screenName) return;
-        setError('チェックが失敗しました。復旧までしばらくお待ち下さい。');
-        // setLoading(true);
-        // setError('');
-        // try {
-        //     const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
-        //     setResults(checkResults);
-        //     if (checkResults?.api_status.userSearchGroup.rate_limit) {
-        //         setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
-        //     }
-        // } catch (err) {
-        //     // setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-        //     setError('チェックが失敗しました。復旧までしばらくお待ち下さい。');
-        // } finally {
-        //     setLoading(false);
-        // }
+        setLoading(true);
+        setError('');
+        try {
+            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
+            setResults(checkResults);
+            if (checkResults?.api_status.userSearchGroup.rate_limit) {
+                setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
+            }
+        } catch (err) {
+            // setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+            setError('チェックが失敗しました。復旧までしばらくお待ち下さい。');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const StatusIcon = (props: { status: boolean | undefined }) => {
