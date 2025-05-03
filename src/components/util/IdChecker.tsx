@@ -8,7 +8,7 @@ export class IdChecker {
         // 空のユーザー名は画面側でボタンが押せないのでチェック無し
 
         // 長さのチェック
-        if (screenName.length < 5 || screenName.length > 15) {
+        if (screenName.length > 15) {
             return { isValid: false, errorMessage: 'ユーザー名は5〜15文字にしてください' };
         }
 
