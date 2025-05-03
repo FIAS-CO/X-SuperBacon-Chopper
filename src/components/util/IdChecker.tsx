@@ -9,7 +9,7 @@ export class IdChecker {
 
         // 長さのチェック
         if (screenName.length > 15) {
-            return { isValid: false, errorMessage: 'ユーザー名は5〜15文字にしてください' };
+            return { isValid: false, errorMessage: 'ユーザー名は1〜15文字にしてください' };
         }
 
         // 半角英数字とアンダースコアのみ許可する正規表現
