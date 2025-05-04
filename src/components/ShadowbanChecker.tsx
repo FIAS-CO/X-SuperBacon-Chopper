@@ -35,7 +35,7 @@ const ShadowbanChecker = () => {
     });
 
     const handleCheck = async () => {
-        setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+        setError('ただいまチェックが利用できません。');
         // try {
         //     setError('');
 
