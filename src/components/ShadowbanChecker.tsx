@@ -17,7 +17,6 @@ import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpant
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
-import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -149,7 +148,7 @@ const ShadowbanChecker = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            <ApiErrorNotification />
+            {/* <ApiErrorNotification /> */}
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
