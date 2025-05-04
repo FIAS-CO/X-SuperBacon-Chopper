@@ -10,15 +10,17 @@ export const ApiErrorNotification: React.FC = () => {
     return (
         <Alert variant="destructive" className="mb-6 max-w-screen-xl mx-auto">
             <AlertCircle className="h-5 w-5" />
-            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/04/26)</AlertTitle>
+            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/05/04)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
-                Xの仕様変更に伴いシャドウバンチェッカーが正常に動作しなくなっております。<br />
+                いつもご利用いただきありがとうございます。<br />
+                現在、多くの皆様にご利用いただいていることで、サーバー負荷によりチェッカーが正常に動かなくなっております。<br />
+                安定稼働までしばらくお待ち下さい。<br />
                 ※Xポスト検索除外チェッカーは正常に機能しております。<br />
-                復旧するまでご迷惑をおかけしますが、しばらくお待ち下さい。<br />
                 <br />
-                Due to X's specification changes, the shadow ban checker is not functioning properly.<br />
-                * The X post search exclusion checker is functioning normally.<br />
-                We apologize for the inconvenience until it is restored. Please wait for a while.
+                Thank you for using our service.<br />
+                Currently, due to high traffic and many users accessing the site, the checker is not functioning properly because of server load.<br />
+                Please wait for a while until the service becomes stable.<br />
+                *The X Post Exclusion Checker is functioning normally.
             </AlertDescription>
         </Alert>
     );
