@@ -35,7 +35,7 @@ const ShadowbanChecker = () => {
     });
 
     const handleCheck = async () => {
-        setError('ただいまチェックが利用できません。');
+        setError('ただいまチェックを利用できません。復旧までしばらくお待ち下さい。');
         // try {
         //     setError('');
 
