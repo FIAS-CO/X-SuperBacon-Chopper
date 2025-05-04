@@ -17,6 +17,7 @@ import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpant
 import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
+import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -34,27 +35,28 @@ const ShadowbanChecker = () => {
     });
 
     const handleCheck = async () => {
-        try {
-            setError('');
+        setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+        // try {
+        //     setError('');
 
-            const validation = IdChecker.validateScreenName(screenName);
+        //     const validation = IdChecker.validateScreenName(screenName);
 
-            if (!validation.isValid) {
-                setError(validation.errorMessage);
-                return;
-            }
+        //     if (!validation.isValid) {
+        //         setError(validation.errorMessage);
+        //         return;
+        //     }
 
-            setLoading(true);
-            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
-            setResults(checkResults);
-            if (checkResults?.api_status.userSearchGroup.rate_limit) {
-                setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
-            }
-        } catch (err) {
-            setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-        } finally {
-            setLoading(false);
-        }
+        //     setLoading(true);
+        //     const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
+        //     setResults(checkResults);
+        //     if (checkResults?.api_status.userSearchGroup.rate_limit) {
+        //         setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
+        //     }
+        // } catch (err) {
+        //     setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
     const StatusIcon = (props: { status: boolean | undefined }) => {
@@ -148,7 +150,7 @@ const ShadowbanChecker = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            {/* <ApiErrorNotification /> */}
+            <ApiErrorNotification />
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
