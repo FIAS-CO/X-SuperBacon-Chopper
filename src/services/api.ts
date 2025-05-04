@@ -51,12 +51,31 @@ export const apiClient = {
         return response.json()
     },
 
-    async checkByUser(screenName: string, searchban: boolean, repost: boolean): Promise<ShadowBanCheckResult> {
+    async checkByUser(screenName: string, searchban: boolean, repost: boolean, turnstileToken: string): Promise<ShadowBanCheckResult> {
         const key = await _getEncryptedIpAsync()
-        const response = await fetch(`${API_BASE_URL}/api/check-by-user?screen_name=${encodeURIComponent(screenName)}&key=${key}&searchban=${searchban}&repost=${repost}`);
+        const response = await fetch(`${API_BASE_URL}/api/check-by-user`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                screen_name: screenName,
+                key: key,
+                searchban: searchban,
+                repost: repost,
+                turnstileToken: turnstileToken
+            }),
+        });
 
         if (!response.ok) {
-            throw new Error('Failed to check user status');
+            // エラーレスポンスの解析
+            const errorData = await response.json();
+            const error = new Error(`Failed to check user status: ${errorData.message || 'Unknown error'}`);
+            (error as any).response = {
+                status: response.status,
+                data: errorData
+            };
+            throw error;
         }
 
         const { user, ...checkResult } = await response.json();
