@@ -1,33 +1,53 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useImperativeHandle, useRef, forwardRef } from 'react';
 
 declare global {
     interface Window {
-        turnstile?: any
+        turnstile?: any;
     }
 }
 
 type TurnstileProps = {
-    onSuccess?: (token: string) => void
-}
+    onSuccess?: (token: string) => void;
+};
 
-export const Turnstile = ({ onSuccess }: TurnstileProps) => {
-    const ref = useRef<HTMLDivElement>(null)
-    const renderedRef = useRef(false)
-    const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
+export type TurnstileHandle = {
+    execute: () => void;
+};
 
-    useEffect(() => {
-        console.log(`Turnstile site key: ${siteKey}`)
-        if (!window.turnstile) return
+export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
+    ({ onSuccess }, ref) => {
+        const containerRef = useRef<HTMLDivElement>(null);
+        const widgetIdRef = useRef<string | null>(null);
+        const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
 
-        if (ref.current && !renderedRef.current) {
-            window.turnstile.render(ref.current, {
+        useEffect(() => {
+            if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
+
+            const id = window.turnstile.render(containerRef.current, {
                 sitekey: siteKey,
-                size: 'invisible',  // ウィジェット非表示モード
+                size: 'invisible',
                 callback: (token: string) => onSuccess?.(token),
-            })
-            renderedRef.current = true
-        }
-    }, [siteKey, onSuccess])
+            });
+            widgetIdRef.current = id;
 
-    return <div ref={ref}></div>
-}
+            // クリーンアップが必要な場合のみこの return を有効にする
+            // return () => {
+            //   if (widgetIdRef.current) {
+            //     window.turnstile.remove(widgetIdRef.current);
+            //     widgetIdRef.current = null;
+            //   }
+            // };
+        }, [siteKey, onSuccess]);
+
+        useImperativeHandle(ref, () => ({
+            execute: () => {
+                if (widgetIdRef.current) {
+                    window.turnstile.reset(widgetIdRef.current);
+                    window.turnstile.execute(widgetIdRef.current);
+                }
+            },
+        }));
+
+        return <div ref={containerRef}></div>;
+    }
+);

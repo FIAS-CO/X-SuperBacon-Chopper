@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -18,7 +18,7 @@ import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
-import { Turnstile } from './Turnstile';
+import { Turnstile, TurnstileHandle } from './Turnstile';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -28,6 +28,7 @@ const ShadowbanChecker = () => {
     const [checkSearchban, setCheckSearchban] = useState(true);
     const [checkRepost, setCheckRepost] = useState(true);
     const [turnstileToken, setTurnstileToken] = useState('');
+    const turnstileRef = useRef<TurnstileHandle>(null)
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -35,6 +36,11 @@ const ShadowbanChecker = () => {
         quoteForbidden: true,
         error: true
     });
+
+    const generateTurnstileToken = async () => {
+        // トークン取得をトリガー。setTurnstileTokenされる。
+        turnstileRef.current?.execute()
+    }
 
     const handleCheck = async () => {
         try {
@@ -45,6 +51,13 @@ const ShadowbanChecker = () => {
             if (!validation.isValid) {
                 setError(validation.errorMessage);
                 return;
+            }
+
+            generateTurnstileToken();
+            if (import.meta.env.DEV) {
+                console.log('turnstileToken', turnstileToken);
+            } else {
+                console.log('Token is set:', turnstileToken !== '');
             }
 
             setLoading(true);
@@ -311,12 +324,7 @@ const ShadowbanChecker = () => {
                 </CardContent>
             </Card>
 
-            <Turnstile
-                onSuccess={(token) => {
-                    console.log("Turnstile token:", token);
-                    setTurnstileToken(token)
-                }}
-            />
+            <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken} />
         </>
     );
 };
