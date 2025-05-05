@@ -22,6 +22,7 @@ export const Turnstile = ({ onSuccess }: TurnstileProps) => {
         if (ref.current && !renderedRef.current) {
             window.turnstile.render(ref.current, {
                 sitekey: siteKey,
+                size: 'invisible',  // ウィジェット非表示モード
                 callback: (token: string) => onSuccess?.(token),
             })
             renderedRef.current = true
