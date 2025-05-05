@@ -16,6 +16,7 @@ export const Turnstile = ({ onSuccess }: TurnstileProps) => {
     const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
 
     useEffect(() => {
+        console.log(`Turnstile site key: ${siteKey}`)
         if (!window.turnstile) return
 
         if (ref.current && !renderedRef.current) {
