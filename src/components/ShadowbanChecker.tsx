@@ -313,6 +313,7 @@ const ShadowbanChecker = () => {
 
             <Turnstile
                 onSuccess={(token) => {
+                    console.log("Turnstile token:", token);
                     setTurnstileToken(token)
                 }}
             />
