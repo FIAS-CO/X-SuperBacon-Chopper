@@ -18,8 +18,7 @@ import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
-import { Turnstile, TurnstileHandle } from './Turnstile';
-import { TurnstileTest } from './TurnstileTest';
+import { TurnstileTest, TurnstileHandle } from './TurnstileTest';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');

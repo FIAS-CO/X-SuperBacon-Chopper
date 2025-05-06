@@ -41,30 +41,18 @@ export const TurnstileTest = forwardRef<TurnstileHandle, TurnstileProps>(
             let isMounted = true;
 
             loadTurnstile().then(() => {
-                console.log('Turnstile script loaded');
                 if (!isMounted) return;
-                console.log('Is mounted.');
                 if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
-                console.log('before render');
 
                 const id = window.turnstile.render(containerRef.current, {
                     sitekey: siteKey,
                     size: 'invisible',
                     callback: (token: string) => onSuccess?.(token),
                 });
-                console.log('after render', id);
                 widgetIdRef.current = id;
                 onReady?.();
             });
 
-
-            // クリーンアップが必要な場合のみこの return を有効にする
-            // return () => {
-            //   if (widgetIdRef.current) {
-            //     window.turnstile.remove(widgetIdRef.current);
-            //     widgetIdRef.current = null;
-            //   }
-            // };
             return () => {
                 isMounted = false;
                 if (widgetIdRef.current) {
