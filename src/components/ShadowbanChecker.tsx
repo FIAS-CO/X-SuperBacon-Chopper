@@ -28,6 +28,7 @@ const ShadowbanChecker = () => {
     const [checkSearchban, setCheckSearchban] = useState(true);
     const [checkRepost, setCheckRepost] = useState(true);
     const [turnstileToken, setTurnstileToken] = useState('');
+    const [turnstileReady, setTurnstileReady] = useState(false);
     const turnstileRef = useRef<TurnstileHandle>(null)
 
     const [filters, setFilters] = useState({
@@ -170,6 +171,11 @@ const ShadowbanChecker = () => {
 
     return (
         <>
+            <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken}
+                onReady={() => {
+                    console.log('Turnstile is ready');
+                    setTurnstileReady(true)
+                }} />
             <TabNavigation isShadowbanTab={true} />
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
@@ -210,7 +216,7 @@ const ShadowbanChecker = () => {
                             </div>
                             <Button
                                 onClick={handleCheck}
-                                disabled={!screenName || loading}
+                                disabled={!screenName || !turnstileReady || loading}
                                 className="text-xl h-12"
                             >
                                 <Search className="w-5 h-5" />
@@ -323,8 +329,6 @@ const ShadowbanChecker = () => {
                     <TopPageAdsense2 />
                 </CardContent>
             </Card>
-
-            <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken} />
         </>
     );
 };

@@ -8,6 +8,7 @@ declare global {
 
 type TurnstileProps = {
     onSuccess?: (token: string) => void;
+    onReady?: () => void;
 };
 
 export type TurnstileHandle = {
@@ -15,7 +16,7 @@ export type TurnstileHandle = {
 };
 
 export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
-    ({ onSuccess }, ref) => {
+    ({ onSuccess, onReady }, ref) => {
         const containerRef = useRef<HTMLDivElement>(null);
         const widgetIdRef = useRef<string | null>(null);
         const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
@@ -29,6 +30,7 @@ export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
                 callback: (token: string) => onSuccess?.(token),
             });
             widgetIdRef.current = id;
+            onReady?.()
 
             // クリーンアップが必要な場合のみこの return を有効にする
             // return () => {
