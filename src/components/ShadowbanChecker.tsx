@@ -173,7 +173,7 @@ const ShadowbanChecker = () => {
         <>
             <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken}
                 onReady={() => {
-                    console.log('Turnstile is ready');
+                    console.log('Authentication is ready');
                     setTurnstileReady(true)
                 }} />
             <TabNavigation isShadowbanTab={true} />
