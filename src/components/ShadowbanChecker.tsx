@@ -216,7 +216,7 @@ const ShadowbanChecker = () => {
                             </div>
                             <Button
                                 onClick={handleCheck}
-                                disabled={!screenName || !turnstileReady || loading}
+                                disabled={!screenName || loading}
                                 className="text-xl h-12"
                             >
                                 <Search className="w-5 h-5" />
