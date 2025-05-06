@@ -61,6 +61,17 @@ export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
             //     widgetIdRef.current = null;
             //   }
             // };
+            return () => {
+                isMounted = false;
+                if (widgetIdRef.current) {
+                    try {
+                        window.turnstile?.remove(widgetIdRef.current);
+                    } catch (e) {
+                        console.warn('Failed to remove Turnstile widget', e);
+                    }
+                    widgetIdRef.current = null;
+                }
+            };
         }, [siteKey, onSuccess]);
 
         useImperativeHandle(ref, () => ({
