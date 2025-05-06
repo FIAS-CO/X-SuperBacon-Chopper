@@ -19,6 +19,7 @@ import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
 import { Turnstile, TurnstileHandle } from './Turnstile';
+import { TurnstileTest } from './TurnstileTest';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -171,7 +172,7 @@ const ShadowbanChecker = () => {
 
     return (
         <>
-            <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken}
+            <TurnstileTest ref={turnstileRef} onSuccess={setTurnstileToken}
                 onReady={() => {
                     console.log('Turnstile is ready');
                     setTurnstileReady(true)

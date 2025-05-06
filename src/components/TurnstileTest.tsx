@@ -15,7 +15,7 @@ export type TurnstileHandle = {
     execute: () => void;
 };
 
-export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
+export const TurnstileTest = forwardRef<TurnstileHandle, TurnstileProps>(
     ({ onSuccess, onReady }, ref) => {
         const containerRef = useRef<HTMLDivElement>(null);
         const widgetIdRef = useRef<string | null>(null);
@@ -41,14 +41,18 @@ export const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
             let isMounted = true;
 
             loadTurnstile().then(() => {
+                console.log('Turnstile script loaded');
                 if (!isMounted) return;
+                console.log('Is mounted.');
                 if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
+                console.log('before render');
 
                 const id = window.turnstile.render(containerRef.current, {
                     sitekey: siteKey,
                     size: 'invisible',
                     callback: (token: string) => onSuccess?.(token),
                 });
+                console.log('after render', id);
                 widgetIdRef.current = id;
                 onReady?.();
             });
