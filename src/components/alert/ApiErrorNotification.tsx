@@ -13,12 +13,14 @@ export const ApiErrorNotification: React.FC = () => {
             <AlertTitle className="ml-2 font-semibold">お知らせ(2025/05/06)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
                 いつもご利用いただきありがとうございます。<br />
-                シャドウバンチェッカーを暫定的に再開いたしました。<br />
-                何か問題があったらごめんなさい。<br />
+                たびたびの障害でご迷惑をおかけして申し訳ありません。<br />
+                ゴールデンウィークから大量アクセスによる攻撃でチェックを安定して提供できなくなっております。<br />
+                どうにかならないか試しておりますので、様子を見つつご利用いただけますと幸いです。<br />
                 <br />
-                Thanks as always for using the site!<br />
-                The Shadowban Checker is back up for now.<br />
-                Sorry if anything's not working quite right!
+                Thank you for using our service as always.<br />
+                We sincerely apologize for the repeated disruptions.<br />
+                Since Golden Week, we have been unable to provide stable checks due to attacks involving heavy traffic.<br />
+                We are doing our best to find a solution, so we would appreciate it if you could continue to use the service while keeping an eye on the situation.
             </AlertDescription>
         </Alert>
     );
