@@ -45,41 +45,42 @@ const ShadowbanChecker = () => {
 
     const handleCheck = async () => {
         try {
-            setError('');
+            setError('サービスを停止しています。再開までしばらくお待ち下さい。');
+            //     setError('');
 
-            const validation = IdChecker.validateScreenName(screenName);
+            //     const validation = IdChecker.validateScreenName(screenName);
 
-            if (!validation.isValid) {
-                setError(validation.errorMessage);
-                return;
-            }
+            //     if (!validation.isValid) {
+            //         setError(validation.errorMessage);
+            //         return;
+            //     }
 
-            generateTurnstileToken();
-            if (import.meta.env.DEV) {
-                console.log('turnstileToken', turnstileToken);
-            } else {
-                console.log('Token is set:', turnstileToken !== '');
-            }
+            //     generateTurnstileToken();
+            //     if (import.meta.env.DEV) {
+            //         console.log('turnstileToken', turnstileToken);
+            //     } else {
+            //         console.log('Token is set:', turnstileToken !== '');
+            //     }
 
-            setLoading(true);
-            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost, turnstileToken);
-            setResults(checkResults);
-            if (checkResults?.api_status.userSearchGroup.rate_limit) {
-                setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
-            }
-        } catch (err) {
-            if (err instanceof Error) {
-                // エラーオブジェクトにresponseプロパティが存在するか確認
-                const apiError = err as any;
-                if (apiError.response && apiError.response.data && apiError.response.data.code) {
-                    const errorData = apiError.response.data;
-                    setError(`サイトでエラーが発生しました(コード：${errorData.code})。ページを更新して再度お試しください。何度も発生するようでしたらタイヨー(X:@taiyo_sun_2024)までご連絡ください。`);
-                } else {
-                    setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-                }
-            } else {
-                setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-            }
+            //     setLoading(true);
+            //     const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost, turnstileToken);
+            //     setResults(checkResults);
+            //     if (checkResults?.api_status.userSearchGroup.rate_limit) {
+            //         setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
+            //     }
+            // } catch (err) {
+            //     if (err instanceof Error) {
+            //         // エラーオブジェクトにresponseプロパティが存在するか確認
+            //         const apiError = err as any;
+            //         if (apiError.response && apiError.response.data && apiError.response.data.code) {
+            //             const errorData = apiError.response.data;
+            //             setError(`サイトでエラーが発生しました(コード：${errorData.code})。ページを更新して再度お試しください。何度も発生するようでしたらタイヨー(X:@taiyo_sun_2024)までご連絡ください。`);
+            //         } else {
+            //             setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+            //         }
+            //     } else {
+            //         setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+            //     }
         } finally {
             setLoading(false);
         }
