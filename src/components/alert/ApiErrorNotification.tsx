@@ -10,17 +10,17 @@ export const ApiErrorNotification: React.FC = () => {
     return (
         <Alert variant="destructive" className="mb-6 max-w-screen-xl mx-auto">
             <AlertCircle className="h-5 w-5" />
-            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/05/06)</AlertTitle>
+            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/05/08)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
                 いつもご利用いただきありがとうございます。<br />
                 たびたびの障害でご迷惑をおかけして申し訳ありません。<br />
-                ゴールデンウィークから大量アクセスによる攻撃でチェックを安定して提供できなくなっております。<br />
-                どうにかならないか試しておりますので、様子を見つつご利用いただけますと幸いです。<br />
+                大量アクセスによる攻撃が続いているため、サービスを一時停止させていただきます。<br />
+                再開までしばらくお待ち下さい。<br />
                 <br />
-                Thank you for using our service as always.<br />
+                Thank you for using our service.<br />
                 We sincerely apologize for the repeated disruptions.<br />
-                Since Golden Week, we have been unable to provide stable checks due to attacks involving heavy traffic.<br />
-                We are doing our best to find a solution, so we would appreciate it if you could continue to use the service while keeping an eye on the situation.
+                Due to ongoing attacks caused by excessive access, we are temporarily suspending the service.<br />
+                Please wait for a while until it resumes.
             </AlertDescription>
         </Alert>
     );
