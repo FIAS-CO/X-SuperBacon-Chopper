@@ -53,7 +53,7 @@ export const apiClient = {
 
     async checkByUser(screenName: string, searchban: boolean, repost: boolean, turnstileToken: string): Promise<ShadowBanCheckResult> {
         const key = await _getEncryptedIpAsync()
-        const response = await fetch(`${API_BASE_URL}/api/checks-by-user`, {
+        const response = await fetch(`${API_BASE_URL}/api/checks-byuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
