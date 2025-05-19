@@ -1,5 +1,6 @@
 import { SessionResult, TweetCheckResult, ShadowBanCheckResult } from "../components/results/StatusComponents";
 import { ClientEncryption } from "../components/util/ClientEncryption";
+import { solvePoW } from "../components/util/Pow";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 export const apiClient = {
@@ -64,6 +65,43 @@ export const apiClient = {
                 searchban: searchban,
                 repost: repost,
                 turnstileToken: turnstileToken
+            }),
+        });
+
+        if (!response.ok) {
+            // エラーレスポンスの解析
+            const errorData = await response.json();
+            const error = new Error(`Failed to check user status: ${errorData.message || 'Unknown error'}`);
+            (error as any).response = {
+                status: response.status,
+                data: errorData
+            };
+            throw error;
+        }
+
+        const { user, ...checkResult } = await response.json();
+        return { screenName, ...checkResult };
+    },
+
+    async checkByUserInner(screenName: string, searchban: boolean, repost: boolean): Promise<ShadowBanCheckResult> {
+        const res = await fetch(`${API_BASE_URL}/api/pow-challenge`)
+        const { challenge, difficulty } = await res.json();
+
+        const nonce = await solvePoW(challenge, difficulty)
+
+        const key = await _getEncryptedIpAsync()
+        const response = await fetch(`${API_BASE_URL}/api/check-by-user-inner`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Session-Token': challenge,
+                'X-Request-Hash': nonce,
+            },
+            body: JSON.stringify({
+                screen_name: screenName,
+                key: key,
+                searchban: searchban,
+                repost: repost,
             }),
         });
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -18,18 +18,14 @@ import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
-import { TurnstileTest, TurnstileHandle } from './TurnstileTest';
 
-const ShadowbanChecker = () => {
+const ShadowbanCheckerTest = () => {
     const [screenName, setScreenName] = useState('');
     const [results, setResults] = useState<ShadowBanCheckResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [checkSearchban, setCheckSearchban] = useState(true);
     const [checkRepost, setCheckRepost] = useState(true);
-    const [turnstileToken, setTurnstileToken] = useState('');
-    const [turnstileReady, setTurnstileReady] = useState(false);
-    const turnstileRef = useRef<TurnstileHandle>(null)
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -37,11 +33,6 @@ const ShadowbanChecker = () => {
         quoteForbidden: true,
         error: true
     });
-
-    const generateTurnstileToken = async () => {
-        // トークン取得をトリガー。setTurnstileTokenされる。
-        turnstileRef.current?.execute()
-    }
 
     const handleCheck = async () => {
         try {
@@ -54,15 +45,8 @@ const ShadowbanChecker = () => {
                 return;
             }
 
-            generateTurnstileToken();
-            if (import.meta.env.DEV) {
-                console.log('turnstileToken', turnstileToken);
-            } else {
-                console.log('Token is set:', turnstileToken !== '');
-            }
-
             setLoading(true);
-            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost, turnstileToken);
+            const checkResults = await apiClient.checkByUserInner(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
             if (checkResults?.api_status.userSearchGroup.rate_limit) {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
@@ -171,11 +155,6 @@ const ShadowbanChecker = () => {
 
     return (
         <>
-            <TurnstileTest ref={turnstileRef} onSuccess={setTurnstileToken}
-                onReady={() => {
-                    console.log('Turnstile is ready');
-                    setTurnstileReady(true)
-                }} />
             <TabNavigation isShadowbanTab={true} />
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
@@ -216,7 +195,7 @@ const ShadowbanChecker = () => {
                             </div>
                             <Button
                                 onClick={handleCheck}
-                                disabled={!screenName || !turnstileReady || loading}
+                                disabled={!screenName || loading}
                                 className="text-xl h-12"
                             >
                                 <Search className="w-5 h-5" />
@@ -333,4 +312,4 @@ const ShadowbanChecker = () => {
     );
 };
 
-export default ShadowbanChecker;
+export default ShadowbanCheckerTest;

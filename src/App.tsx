@@ -14,7 +14,7 @@ function App() {
           <div className="max-w-3xl mx-auto py-8 bg-slate-100">
             <Routes>
               <Route path="/" element={<ShadowbanChecker />} />
-              <Route path="/sbctest" element={<ShadowbanCheckerTest />} />
+              <Route path="/sbctestqwert" element={<ShadowbanCheckerTest />} />
               <Route path="/tweetcheck" element={<TwitterStatusChecker />} />
               <Route path="/tweetcheck/results" element={<TwitterStatusResults />} />
               <Route path="/tweetcheck/history/:sessionId" element={<TwitterStatusHistory />} />
