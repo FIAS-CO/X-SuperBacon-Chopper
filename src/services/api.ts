@@ -139,7 +139,7 @@ export const apiClient = {
 
 async function _getEncryptedIpAsync(): Promise<string> {
     const ip = await _getUserIpAsync();
-    const encryptedKey = new ClientEncryption().encrypt(ip || '');
+    const encryptedKey = await new ClientEncryption().encrypt(ip || '');
 
     return encryptedKey;
 }
