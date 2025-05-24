@@ -1,9 +1,9 @@
 export class ClientEncryption {
     private async getKey(): Promise<CryptoKey> {
-        const part1 = import.meta.env.VITE_KEY_PART_1;
-        const part2 = import.meta.env.VITE_KEY_PART_2;
-        const part3 = import.meta.env.VITE_KEY_PART_3;
-        const part4 = import.meta.env.VITE_KEY_PART_4;
+        const part1 = import.meta.env.VITE_KEY_FRAG_A;
+        const part2 = import.meta.env.VITE_KEY_FRAG_B;
+        const part3 = import.meta.env.VITE_KEY_FRAG_C;
+        const part4 = import.meta.env.VITE_KEY_FRAG_D;
 
         if (!part1 || !part2 || !part3 || !part4) {
             throw new Error('暗号鍵の一部が未定義です');
@@ -11,8 +11,9 @@ export class ClientEncryption {
 
         // 🔐 難読化構成（合計32文字）
         const combinedKey = part1.slice(0, 6) + part4 + part3.slice(0, 6) + part2 + part3.slice(6) + part1.slice(6);
-
-        const rawKey = new TextEncoder().encode(combinedKey);
+        console.log('combinedKey:', combinedKey, 'length:', combinedKey.length);
+        const rawKey = new TextEncoder().encode(combinedKey.slice(0, 32));
+        console.log('rawKey.byteLength:', rawKey.byteLength);
         return crypto.subtle.importKey('raw', rawKey, 'AES-CBC', false, ['encrypt']);
     }
 
