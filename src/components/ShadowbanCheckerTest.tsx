@@ -56,8 +56,8 @@ const ShadowbanCheckerTest = () => {
                 // エラーオブジェクトにresponseプロパティが存在するか確認
                 const apiError = err as any;
                 if (apiError.response && apiError.response.data && apiError.response.data.code) {
-                    const errorData = apiError.response.data;
-                    setError(`サイトでエラーが発生しました(コード：${errorData.code})。ページを更新して再度お試しください。何度も発生するようでしたらタイヨー(X:@taiyo_sun_2024)までご連絡ください。`);
+                    // const errorData = apiError.response.data;
+                    setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
                 } else {
                     setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
                 }
