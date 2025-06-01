@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -18,7 +18,6 @@ import TabNavigation from './results/TabNavigation';
 import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
 import { ApiErrorNotification } from './alert/ApiErrorNotification';
-import { Turnstile, TurnstileHandle } from './Turnstile';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -27,9 +26,6 @@ const ShadowbanChecker = () => {
     const [error, setError] = useState('');
     const [checkSearchban, setCheckSearchban] = useState(true);
     const [checkRepost, setCheckRepost] = useState(true);
-    const [turnstileToken, setTurnstileToken] = useState('');
-    const [turnstileReady, setTurnstileReady] = useState(false);
-    const turnstileRef = useRef<TurnstileHandle>(null)
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -38,49 +34,36 @@ const ShadowbanChecker = () => {
         error: true
     });
 
-    const generateTurnstileToken = async () => {
-        // トークン取得をトリガー。setTurnstileTokenされる。
-        turnstileRef.current?.execute()
-    }
-
     const handleCheck = async () => {
         try {
-            setError('サービスを停止しています。再開までしばらくお待ち下さい。');
-            //     setError('');
+            setError('');
 
-            //     const validation = IdChecker.validateScreenName(screenName);
+            const validation = IdChecker.validateScreenName(screenName);
 
-            //     if (!validation.isValid) {
-            //         setError(validation.errorMessage);
-            //         return;
-            //     }
+            if (!validation.isValid) {
+                setError(validation.errorMessage);
+                return;
+            }
 
-            //     generateTurnstileToken();
-            //     if (import.meta.env.DEV) {
-            //         console.log('turnstileToken', turnstileToken);
-            //     } else {
-            //         console.log('Token is set:', turnstileToken !== '');
-            //     }
-
-            //     setLoading(true);
-            //     const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost, turnstileToken);
-            //     setResults(checkResults);
-            //     if (checkResults?.api_status.userSearchGroup.rate_limit) {
-            //         setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
-            //     }
-            // } catch (err) {
-            //     if (err instanceof Error) {
-            //         // エラーオブジェクトにresponseプロパティが存在するか確認
-            //         const apiError = err as any;
-            //         if (apiError.response && apiError.response.data && apiError.response.data.code) {
-            //             const errorData = apiError.response.data;
-            //             setError(`サイトでエラーが発生しました(コード：${errorData.code})。ページを更新して再度お試しください。何度も発生するようでしたらタイヨー(X:@taiyo_sun_2024)までご連絡ください。`);
-            //         } else {
-            //             setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-            //         }
-            //     } else {
-            //         setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-            //     }
+            setLoading(true);
+            const checkResults = await apiClient.checkByUserInner(screenName, checkSearchban, checkRepost);
+            setResults(checkResults);
+            if (checkResults?.api_status.userSearchGroup.rate_limit) {
+                setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                // エラーオブジェクトにresponseプロパティが存在するか確認
+                const apiError = err as any;
+                if (apiError.response && apiError.response.data && apiError.response.data.code) {
+                    // const errorData = apiError.response.data;
+                    setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+                } else {
+                    setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+                }
+            } else {
+                setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
+            }
         } finally {
             setLoading(false);
         }
@@ -172,17 +155,12 @@ const ShadowbanChecker = () => {
 
     return (
         <>
-            <Turnstile ref={turnstileRef} onSuccess={setTurnstileToken}
-                onReady={() => {
-                    console.log('Authentication is ready');
-                    setTurnstileReady(true)
-                }} />
             <TabNavigation isShadowbanTab={true} />
             <h1 className="text-4xl font-bold text-center mb-8 mx-auto max-w-screen-xl px-4">
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            <ApiErrorNotification />
+            {/* <ApiErrorNotification /> */}
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
@@ -217,7 +195,7 @@ const ShadowbanChecker = () => {
                             </div>
                             <Button
                                 onClick={handleCheck}
-                                disabled={!screenName || !turnstileReady || loading}
+                                disabled={!screenName || loading}
                                 className="text-xl h-12"
                             >
                                 <Search className="w-5 h-5" />
