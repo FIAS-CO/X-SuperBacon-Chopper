@@ -52,19 +52,37 @@ export const apiClient = {
         return response.json()
     },
 
-    async checkByUser(screenName: string, searchban: boolean, repost: boolean, turnstileToken: string): Promise<ShadowBanCheckResult> {
+    async checkByUser(screenName: string, searchban: boolean, repost: boolean): Promise<ShadowBanCheckResult> {
         const key = await _getEncryptedIpAsync()
-        const response = await fetch(`${API_BASE_URL}/api/checks-byuser`, {
+        const res = await fetch(`${API_BASE_URL}/api/generate-keyvalue`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 screen_name: screenName,
                 key: key,
                 searchban: searchban,
                 repost: repost,
-                turnstileToken: turnstileToken
+            }),
+        });
+        const { key: challenge, value: difficultyValue } = await res.json();
+        const difficulty = difficultyValue / 123456789;
+
+        const nonce = await solvePoW(challenge, difficulty)
+
+        const response = await fetch(`${API_BASE_URL}/api/check-by-user`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Session-Token': challenge,
+                'X-Request-Hash': nonce,
+            },
+            body: JSON.stringify({
+                screen_name: screenName,
+                key: key,
+                searchban: searchban,
+                repost: repost,
             }),
         });
 
