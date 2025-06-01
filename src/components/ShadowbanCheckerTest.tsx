@@ -160,7 +160,7 @@ const ShadowbanCheckerTest = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            <ApiErrorNotification />
+            {/* <ApiErrorNotification /> */}
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
