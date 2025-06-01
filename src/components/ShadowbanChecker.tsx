@@ -46,7 +46,7 @@ const ShadowbanChecker = () => {
             }
 
             setLoading(true);
-            const checkResults = await apiClient.checkByUserInner(screenName, checkSearchban, checkRepost);
+            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
             setResults(checkResults);
             if (checkResults?.api_status.userSearchGroup.rate_limit) {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
