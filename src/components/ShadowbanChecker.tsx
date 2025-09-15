@@ -12,12 +12,10 @@ import {
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
 import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult, ShareShadowBanResult } from './results/StatusComponents';
-import { loadAd, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { loadAd, ShadowBanCheckerPageAdsense, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
-import { ResponsiveDMMAd } from './adsense/DMMAffiliate';
 import { IdChecker } from './util/IdChecker';
-import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -301,7 +299,7 @@ const ShadowbanChecker = () => {
                     </>
                 }
                 <CardContent className='mt-3'>
-                    <ResponsiveDMMAd />
+                    <ShadowBanCheckerPageAdsense />
                     <WhatIsShadowbanExpantionButton />
                     <CautionExpantionButton />
                     <ContactUsExpantionButton />

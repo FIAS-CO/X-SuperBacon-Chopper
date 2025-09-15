@@ -84,3 +84,10 @@ export function ResultPageAdsense3() {
   return Adsense("3963439584", "autorelaxed")
 }
 
+export function ShadowBanCheckerPageAdsense() {
+  return Adsense("9084005607", "horizontal")
+}
+
+export function PostBanCheckerPageAdsense() {
+  return Adsense("6066960025", "horizontal")
+}
