@@ -16,6 +16,7 @@ import { loadAd, ShadowBanCheckerPageAdsense, TopPageAdsense1, TopPageAdsense2 }
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
 import { IdChecker } from './util/IdChecker';
+import { ApiErrorNotification } from './alert/ApiErrorNotification';
 
 const ShadowbanChecker = () => {
     const [screenName, setScreenName] = useState('');
@@ -158,7 +159,7 @@ const ShadowbanChecker = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            {/* <ApiErrorNotification /> */}
+            <ApiErrorNotification />
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
@@ -203,24 +204,27 @@ const ShadowbanChecker = () => {
                             <input
                                 type="checkbox"
                                 id="searchban-check"
-                                checked={checkSearchban}
-                                onChange={(e) => setCheckSearchban(e.target.checked)}
+                                checked={false}//{checkSearchban}
+                                // onChange={(e) => setCheckSearchban(e.target.checked)}
+                                disabled
                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                             />
-                            <label htmlFor="searchban-check" className="text-sm text-gray-600">
-                                直近20件のポストが検索除外(Postban)されているかチェックする
+                            {/* <label htmlFor="searchban-check" className="text-sm text-gray-600"> */}
+                            <label htmlFor="searchban-check" className="text-sm text-gray-600 line-through">
+                                直近20件のポストの検索除外(Postban)をチェック
                             </label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <input
                                 type="checkbox"
                                 id="repost-check"
-                                checked={checkRepost}
-                                onChange={(e) => setCheckRepost(e.target.checked)}
+                                checked={false}//{checkRepost}
+                                disabled
+                                // onChange={(e) => setCheckRepost(e.target.checked)}
                                 className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}
                             />
-                            <label htmlFor="repost-check" className={`text-sm text-gray-600 ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
-                                リポスト、引用ポストも含めてチェックする
+                            <label htmlFor="repost-check" className={`text-sm text-gray-600 line-through ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
+                                リポスト、引用ポストも含めてチェック
                             </label>
                         </div>
 
@@ -303,7 +307,6 @@ const ShadowbanChecker = () => {
                     <WhatIsShadowbanExpantionButton />
                     <CautionExpantionButton />
                     <ContactUsExpantionButton />
-                    <TopPageAdsense2 />
                 </CardContent>
             </Card>
         </>

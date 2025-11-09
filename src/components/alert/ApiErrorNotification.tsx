@@ -10,19 +10,15 @@ export const ApiErrorNotification: React.FC = () => {
     return (
         <Alert variant="destructive" className="mb-6 max-w-screen-xl mx-auto">
             <AlertCircle className="h-5 w-5" />
-            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/10/08)</AlertTitle>
+            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/11/09)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
                 いつもご利用いただきありがとうございます。<br />
-                現在シャドウバンチェッカーのメンテナンス中のためチェックがエラーとなります。<br />
-                再開までしばらくお待ち下さい。<br />
-                <br />
-                ご迷惑をおかけして申し訳ありません。<br />
+                現在、直近のポストの検索除外チェックが使用できなくなっております。<br />
+                復旧までしばらくお待ち下さい。<br />
                 <br />
                 Thank you for using our service.<br />
-                Shadowban Checker is currently under maintenance and checks will result in errors.<br />
-                Please wait for a while until it resumes.<br />
-                <br />
-                We apologize for any inconvenience caused.
+                The recent-post exclusion check is currently unavailable.<br />
+                Please wait for a while until it is restored.
             </AlertDescription>
         </Alert>
     );
