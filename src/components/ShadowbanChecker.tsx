@@ -295,7 +295,7 @@ const ShadowbanChecker = () => {
                                     onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
                                 />
                             </div>
-                            <ResultList results={results?.tweets} filters={filters} messageForNoData={messageForNoData()} />
+                            {/* <ResultList results={results?.tweets} filters={filters} messageForNoData={messageForNoData()} /> */}
                             <Legend />
                             {results.tweets?.length !== 0 && <ShareShadowBanResult {...results!} />}
 
