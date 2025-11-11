@@ -12,7 +12,7 @@ import {
 } from "./ui/accordion";
 import { apiClient } from '../services/api';
 import { checkSucceed, FilterCheckbox, Legend, ResultList, ShadowBanCheckResult, ShareShadowBanResult } from './results/StatusComponents';
-import { loadAd, ShadowBanCheckerPageAdsense, TopPageAdsense1, TopPageAdsense2 } from './adsense/AdSenseUtil';
+import { loadAd, ShadowBanCheckerPageAdsense, TopPageAdsense1 } from './adsense/AdSenseUtil';
 import { CautionExpantionButton, ContactUsExpantionButton, WhatIsShadowbanExpantionButton } from './ExpantionButton';
 import TabNavigation from './results/TabNavigation';
 import { IdChecker } from './util/IdChecker';
@@ -24,7 +24,6 @@ const ShadowbanChecker = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [checkSearchban, setCheckSearchban] = useState(true);
-    const [checkRepost, setCheckRepost] = useState(true);
 
     const [filters, setFilters] = useState({
         searchOk: true,
@@ -45,7 +44,7 @@ const ShadowbanChecker = () => {
             }
 
             setLoading(true);
-            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, checkRepost);
+            const checkResults = await apiClient.checkByUser(screenName, checkSearchban, true);
             setResults(checkResults);
             if (checkResults?.api_status.userSearchGroup.rate_limit) {
                 setError('サーバー負荷により取得できませんでした。時間帯をずらして再度実施いただきますようお願いいたします。')
@@ -204,27 +203,12 @@ const ShadowbanChecker = () => {
                             <input
                                 type="checkbox"
                                 id="searchban-check"
-                                checked={false}//{checkSearchban}
-                                // onChange={(e) => setCheckSearchban(e.target.checked)}
-                                disabled
+                                checked={checkSearchban}
+                                onChange={(e) => setCheckSearchban(e.target.checked)}
                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                             />
-                            {/* <label htmlFor="searchban-check" className="text-sm text-gray-600"> */}
-                            <label htmlFor="searchban-check" className="text-sm text-gray-600 line-through">
+                            <label htmlFor="searchban-check" className="text-sm text-gray-600">
                                 直近20件ポストの検索除外(Postban)をチェック
-                            </label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <input
-                                type="checkbox"
-                                id="repost-check"
-                                checked={false}//{checkRepost}
-                                disabled
-                                // onChange={(e) => setCheckRepost(e.target.checked)}
-                                className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}
-                            />
-                            <label htmlFor="repost-check" className={`text-sm text-gray-600 line-through ${!checkSearchban ? 'opacity-50 pointer-events-none' : ''}`}>
-                                リポスト、引用ポストも含めてチェック
                             </label>
                         </div>
 
@@ -295,7 +279,7 @@ const ShadowbanChecker = () => {
                                     onChange={(checked) => setFilters(prev => ({ ...prev, error: checked }))}
                                 />
                             </div>
-                            {/* <ResultList results={results?.tweets} filters={filters} messageForNoData={messageForNoData()} /> */}
+                            <ResultList results={results?.tweets} filters={filters} messageForNoData={messageForNoData()} />
                             <Legend />
                             {results.tweets?.length !== 0 && <ShareShadowBanResult {...results!} />}
 
