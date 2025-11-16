@@ -31,7 +31,6 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
         <Link 
           to="https://spotlight.ikaduchi.com/x-safe-checker-lite/" 
           className={`${linkTabStyles} flex items-center space-x-2`}
-          target="_blank"
           rel="noopener noreferrer"
         >
            <img src={externalLinkIcon} alt="pin" className="w-6 h-6" />{safeTabName}
