@@ -11,7 +11,7 @@ function App() {
     <div className="fixed inset-0 bg-slate-100 overflow-auto"> {/* 画面全体をカバーする背景レイヤー */}
       <div className="relative min-h-full"> {/* コンテンツを配置するための相対位置の親要素 */}
         <Router>
-          <div className="max-w-3xl mx-auto py-8 bg-slate-100">
+          <div className="max-w-3xl mx-auto bg-slate-100">
             <Routes>
               <Route path="/" element={<ShadowbanChecker />} />
               <Route path="/sbctestqwert" element={<ShadowbanCheckerTest />} />
