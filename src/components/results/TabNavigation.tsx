@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import externalLinkIcon from '../../assets/link_other_page.svg';
 
 interface TabNavigationProps {
   isShadowbanTab: boolean;
@@ -10,6 +11,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
   const linkTabStyles = "flex-1 text-center py-4 px-4 text-gray-500 hover:text-gray-700";
   const shadowbanTabName = "Shadowban Checker";
   const postbanTabName = "Postban Checker";
+  const safeTabName = "X-Safe-Checker"
 
   return (
     <div className="w-full max-w-screen-xl mx-auto mb-6">
@@ -25,6 +27,15 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ isShadowbanTab }) => {
         ) : (
           <div className={activeTabStyles}>{postbanTabName}</div>
         )}
+
+        <Link 
+          to="https://spotlight.ikaduchi.com/x-safe-checker-lite/" 
+          className={`${linkTabStyles} flex items-center space-x-2`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+           <img src={externalLinkIcon} alt="pin" className="w-6 h-6" />{safeTabName}
+        </Link>
       </div>
     </div>
   );
