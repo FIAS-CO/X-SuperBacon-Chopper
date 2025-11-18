@@ -33,8 +33,6 @@ const ShadowbanChecker = () => {
     });
 
     const handleCheck = async () => {
-        setError('Xのエラーによりチェックが失敗しました。しばらくたってから改めてお試しください。');
-
         try {
             setError('');
 
@@ -160,7 +158,7 @@ const ShadowbanChecker = () => {
                 X（Twitter）Shadowban Checker F
             </h1>
 
-            <ApiErrorNotification />
+            {/* <ApiErrorNotification /> */}
             <Card className="w-full mx-auto">
                 <CardContent className="p-6">
                     <TopPageAdsense1 />
