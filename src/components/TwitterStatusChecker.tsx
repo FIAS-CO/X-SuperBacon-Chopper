@@ -62,7 +62,7 @@ const TwitterStatusChecker = () => {
         Xポスト検索除外チェッカー
       </h1>
 
-      <ApiErrorNotification />
+      {/* <ApiErrorNotification /> */}
       <Card className="w-full max-w-screen-xl mx-auto">
         <div className="px-6 pt-6">
           <TopPageAdsense1 />
