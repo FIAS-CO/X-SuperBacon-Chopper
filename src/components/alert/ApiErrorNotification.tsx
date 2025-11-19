@@ -10,7 +10,7 @@ export const ApiErrorNotification: React.FC = () => {
     return (
         <Alert variant="destructive" className="mb-6 max-w-screen-xl mx-auto">
             <AlertCircle className="h-5 w-5" />
-            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/11/11)</AlertTitle>
+            <AlertTitle className="ml-2 font-semibold">お知らせ(2025/11/19)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
                 いつもご利用いただきありがとうございます。<br />
                 ポストの検索除外チェックが高確率でエラーになる不具合が発生しています。<br />
