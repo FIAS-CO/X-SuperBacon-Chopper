@@ -13,12 +13,13 @@ export const ApiErrorNotification: React.FC = () => {
             <AlertTitle className="ml-2 font-semibold">お知らせ(2025/11/11)</AlertTitle>
             <AlertDescription className="ml-7 text-sm">
                 いつもご利用いただきありがとうございます。<br />
-                直近のポストの検索除外チェックが使用できなくなっております。<br />
-                復旧までしばらくお待ち下さい。<br />
+                ポストの検索除外チェックが高確率でエラーになる不具合が発生しています。<br />
+                X側のAPI障害が原因と考えられますので、回復まで気長にお待ち下さい。<br />
                 <br />
                 Thank you for using our service.<br />
-                The recent-post exclusion check is currently unavailable.<br />
-                Please wait for a while until it is restored.
+                We are currently experiencing frequent errors in the postban check.<br />
+                This issue appears to be caused by an API outage on X's side.<br />
+                We appreciate your patience while the service recovers.<br />
             </AlertDescription>
         </Alert>
     );
