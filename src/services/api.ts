@@ -26,7 +26,8 @@ export const apiClient = {
         return {
             sessionResults: data.results.map((result: any): TweetCheckResult => ({
                 url: result.url,
-                status: result.status
+                status: result.status,
+                type: result.type ?? 'UNKNOWN'
             })),
             sessionId: data.sessionId
         };
@@ -41,7 +42,8 @@ export const apiClient = {
         return {
             results: results.map((item: any) => ({
                 url: item.url,
-                status: item.checkStatus
+                status: item.checkStatus,
+                type: item.type ?? 'UNKNOWN'
             })),
             timestamp
         };
