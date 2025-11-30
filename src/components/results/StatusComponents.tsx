@@ -77,7 +77,7 @@ export const StatusBadge: React.FC<{ status: Status }> = ({ status }) => {
 const PostTypeIndicator: React.FC<{
     type: Type;
     isPinned?: boolean;
-}> = ({ type, isPinned = false }) => {
+}> = ({ type, isPinned }) => {
     const { icon, label } = isPinned
         ? { icon: pinIcon, label: '固定ポスト' }
         : { icon: TYPE_CONFIG[type].icon, label: TYPE_CONFIG[type].text };
