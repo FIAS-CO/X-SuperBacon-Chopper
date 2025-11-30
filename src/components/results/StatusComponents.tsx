@@ -78,21 +78,14 @@ const PostTypeIndicator: React.FC<{
     type: Type;
     isPinned?: boolean;
 }> = ({ type, isPinned }) => {
-    // 固定ポストが優先表示
-    if (isPinned) {
-        return (
-            <>
-                <img src={pinIcon} alt="pin" className="w-4 h-4" />
-                <span>固定ポスト</span>
-            </>
-        );
-    }
+    const { icon, label } = isPinned
+        ? { icon: pinIcon, label: '固定ポスト' }
+        : { icon: TYPE_CONFIG[type].icon, label: TYPE_CONFIG[type].text };
 
-    const config = TYPE_CONFIG[type];
     return (
         <>
-            <img src={config.icon} alt={config.text} className="w-4 h-4" />
-            <span>{config.text}</span>
+            <img src={icon} alt={label} className="w-4 h-4" />
+            <span>{label}</span>
         </>
     );
 };
