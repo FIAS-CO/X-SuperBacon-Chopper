@@ -49,7 +49,8 @@ const TwitterStatusResults = () => {
         const results = await apiClient.checkUrlBatch(urlList, encryptedKey);
         const formattedResults: TweetCheckResult[] = results.sessionResults.map((result: TweetCheckResult) => ({
           url: result.url,
-          status: result.status
+          status: result.status,
+          type: result.type ?? 'UNKNOWN'
         }));
 
         setSessionId(results.sessionId);
@@ -62,7 +63,8 @@ const TwitterStatusResults = () => {
           url,
           code: 500,
           status: 'UNKNOWN' as const,
-          message: 'Failed to check status'
+          message: 'Failed to check status',
+          type: 'UNKNOWN'
         })));
       }
     };
