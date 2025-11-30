@@ -2,10 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { Loader2, ArrowLeft, Share } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import pinIcon from '../../assets/pin.svg';  // 適切な相対パスに調整してください
+import pinIcon from '../../assets/pin.svg';
+import repostIcon from '../../assets/repost.svg';
+import quoteIcon from '../../assets/quote.svg';
+import postIcon from '../../assets/post.svg';
 
 // ステータスの型定義
 export type Status = 'AVAILABLE' | 'FORBIDDEN' | 'NOT_FOUND' | 'UNKNOWN' | 'INVALID_URL' | 'QUATE_FORBIDDEN';
+export type Type = 'POST' | 'REPOST' | 'QUOTE' | 'UNKNOWN';
 
 // ステータスに関する情報を一元管理するオブジェクト
 const STATUS_CONFIG = {
@@ -35,6 +39,29 @@ const STATUS_CONFIG = {
     }
 } as const;
 
+const TYPE_CONFIG = {
+    POST: {
+        text: 'ポスト',
+        className: 'bg-blue-100 text-blue-700',
+        icon: postIcon
+    },
+    REPOST: {
+        text: 'リポスト', 
+        className: 'bg-purple-100 text-purple-700',
+        icon: repostIcon
+    },
+    QUOTE: {
+        text: '引用ポスト',
+        className: 'bg-yellow-100 text-yellow-700',
+        icon: quoteIcon
+    },
+    UNKNOWN: {
+        text: '不明',
+        className: 'bg-gray-100 text-gray-700',
+        icon: postIcon
+    }
+} as const;
+
 // ステータス表示用のコンポーネント
 export const StatusBadge: React.FC<{ status: Status }> = ({ status }) => {
     const config = STATUS_CONFIG[status];
@@ -43,6 +70,30 @@ export const StatusBadge: React.FC<{ status: Status }> = ({ status }) => {
         <div className={`px-3 py-1 rounded-md inline-flex items-center w-fit ${config.className}`}>
             {config.text}
         </div>
+    );
+};
+
+// ポストタイプ表示用のコンポーネント（固定ポストも含む）
+const PostTypeIndicator: React.FC<{
+    type: Type;
+    isPinned?: boolean;
+}> = ({ type, isPinned }) => {
+    // 固定ポストが優先表示
+    if (isPinned) {
+        return (
+            <>
+                <img src={pinIcon} alt="pin" className="w-4 h-4" />
+                <span>固定ポスト</span>
+            </>
+        );
+    }
+
+    const config = TYPE_CONFIG[type];
+    return (
+        <>
+            <img src={config.icon} alt={config.text} className="w-4 h-4" />
+            <span>{config.text}</span>
+        </>
     );
 };
 
@@ -104,6 +155,7 @@ export interface TweetCheckResult {
     url: string;
     status?: Status;
     isPinned?: boolean;
+    type: Type;
 }
 
 export const ResultList: React.FC<{
@@ -141,12 +193,9 @@ export const ResultList: React.FC<{
                     className="flex flex-col text-left md:flex-row md:items-center md:justify-between p-4 rounded-lg border gap-2 md:gap-4"
                 >
                     <div className="flex flex-col gap-2 md:flex-1 md:min-w-0">
-                        {result.isPinned && (
-                            <div className="flex items-center gap-1 text-gray-600 text-sm">
-                                <img src={pinIcon} alt="pin" className="w-4 h-4" />
-                                <span>固定ポスト</span>
-                            </div>
-                        )}
+                        <div className="flex items-center gap-1 text-gray-600 text-sm">
+                            <PostTypeIndicator type={result.type} isPinned={result.isPinned} />
+                        </div>
                         <a
                             href={result.url}
                             target="_blank"
