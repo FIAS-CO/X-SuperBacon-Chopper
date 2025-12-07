@@ -73,6 +73,23 @@ export const StatusBadge: React.FC<{ status: Status }> = ({ status }) => {
     );
 };
 
+// ポストタイプ表示用のコンポーネント（固定ポストも含む）
+const PostTypeIndicator: React.FC<{
+    type: Type;
+    isPinned?: boolean;
+}> = ({ type, isPinned }) => {
+    const { icon, label } = isPinned
+        ? { icon: pinIcon, label: '固定ポスト' }
+        : { icon: TYPE_CONFIG[type].icon, label: TYPE_CONFIG[type].text };
+
+    return (
+        <>
+            <img src={icon} alt={label} className="w-4 h-4" />
+            <span>{label}</span>
+        </>
+    );
+};
+
 export const FilterCheckbox: React.FC<{
     id: string;
     label: string;
@@ -170,25 +187,7 @@ export const ResultList: React.FC<{
                 >
                     <div className="flex flex-col gap-2 md:flex-1 md:min-w-0">
                         <div className="flex items-center gap-1 text-gray-600 text-sm">
-                            {result.isPinned ? (
-                                <>
-                                    <img src={pinIcon} alt="pin" className="w-4 h-4" />
-                                    <span>固定ポスト</span>
-                                </>
-                            ) : (
-                                (() => {
-                                    const itemType = result.type;
-                                    const icon = TYPE_CONFIG[itemType]?.icon;
-                                    const label = TYPE_CONFIG[itemType]?.text ?? '不明';
-                                    if (!icon && !label) return null;
-                                    return (
-                                        <>
-                                            {icon && <img src={icon} alt={label} className="w-4 h-4" />}
-                                            <span>{label}</span>
-                                        </>
-                                    );
-                                })()
-                            )}
+                            <PostTypeIndicator type={result.type} isPinned={result.isPinned} />
                         </div>
                         <a
                             href={result.url}
