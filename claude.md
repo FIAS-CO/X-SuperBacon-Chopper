@@ -67,6 +67,28 @@ Twitter/Xのシャドウバン状態をチェックするWebアプリケーシ�
 - shadcn/uiのコンポーネントを優先的に使用
 - Tailwind CSSでスタイリング
 - コンポーネントは機能ごとにディレクトリで整理
+- コードコメントには"what"（何をしているか）ではなく"why"（なぜそうするか）を書く
+
+## Git Workflow Rules
+
+### Commit and Push Policy
+- **NEVER commit or push without explicit user approval**
+- Always show changes and proposed commit message first
+- Wait for user confirmation before executing git commands
+- Workflow:
+  1. Show code changes or implementation plan
+  2. Present proposed commit message
+  3. Wait for user's "OK" or approval
+  4. Only then execute git add, commit, and push
+
+### Commit Message Format
+- **Write commit messages in Japanese**
+- Follow Conventional Commits format (feat:, fix:, docs:, etc.)
+
+### When to Commit
+- Only when user explicitly requests it
+- After user reviews and approves the changes
+- Never assume user wants immediate commit
 
 ## ビルド設定
 
