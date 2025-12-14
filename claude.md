@@ -1,64 +1,64 @@
 # X-SuperBacon-Chopper
 
-Twitter/Xのシャドウバン状態をチェックするWebアプリケーション
+Web application for checking Twitter/X shadowban status
 
-## プロジェクト概要
+## Project Overview
 
-このプロジェクトは、Twitter/Xアカウントのシャドウバン状態を確認できるReactベースのWebアプリケーションです。
+React-based web application for checking Twitter/X account shadowban status.
 
-## 技術スタック
+## Tech Stack
 
-- **フレームワーク**: React 18.3 + TypeScript
-- **ビルドツール**: Vite 6.0
-- **スタイリング**: Tailwind CSS
-- **UIコンポーネント**: shadcn/ui (Radix UI ベース)
-- **ルーティング**: React Router DOM
-- **セキュリティ**: Cloudflare Turnstile
-- **広告**: Google AdSense, DMMアフィリエイト
+- **Framework**: React 18.3 + TypeScript
+- **Build Tool**: Vite 6.0
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui (Radix UI based)
+- **Routing**: React Router DOM
+- **Security**: Cloudflare Turnstile
+- **Ads**: Google AdSense, DMM Affiliate
 
-## プロジェクト構成
+## Project Structure
 
 ```
 /
 ├── src/
 │   ├── components/
-│   │   ├── ShadowbanChecker.tsx       # メインのシャドウバンチェッカー
-│   │   ├── TwitterStatusChecker.tsx    # Twitterステータスチェッカー
-│   │   ├── TwitterStatusHistory.tsx    # 履歴表示
-│   │   ├── Turnstile.tsx              # Cloudflare Turnstileコンポーネント
-│   │   ├── results/                    # チェック結果表示コンポーネント
-│   │   ├── adsense/                    # 広告関連コンポーネント
-│   │   ├── alert/                      # 通知・アラートコンポーネント
-│   │   ├── seo/                        # SEO関連コンポーネント
-│   │   ├── ui/                         # shadcn/ui UIコンポーネント
-│   │   └── util/                       # ユーティリティ
+│   │   ├── ShadowbanChecker.tsx       # Main shadowban checker
+│   │   ├── TwitterStatusChecker.tsx    # Twitter status checker
+│   │   ├── TwitterStatusHistory.tsx    # History display
+│   │   ├── Turnstile.tsx              # Cloudflare Turnstile component
+│   │   ├── results/                    # Check result display components
+│   │   ├── adsense/                    # Ad-related components
+│   │   ├── alert/                      # Notification/alert components
+│   │   ├── seo/                        # SEO-related components
+│   │   ├── ui/                         # shadcn/ui UI components
+│   │   └── util/                       # Utilities
 │   ├── services/
-│   │   └── api.ts                      # APIクライアント
-│   ├── lib/                            # ユーティリティライブラリ
-│   ├── App.tsx                         # アプリケーションルート
-│   └── main.tsx                        # エントリーポイント
-├── public/                             # 静的ファイル
-└── announcements/                      # お知らせ・アナウンスメント
+│   │   └── api.ts                      # API client
+│   ├── lib/                            # Utility libraries
+│   ├── App.tsx                         # Application root
+│   └── main.tsx                        # Entry point
+├── public/                             # Static files
+└── announcements/                      # Announcements
 
 ```
 
-## 開発スクリプト
+## Development Scripts
 
-- `npm run dev` - 開発サーバーを起動
-- `npm run build` - プロダクションビルド
-- `npm run build:dev` - 開発モードでビルド
-- `npm run build:staging` - ステージング環境用ビルド
-- `npm run publish` - 本番環境用ビルド
-- `npm run lint` - ESLintでコードチェック
-- `npm run preview` - ビルドしたアプリケーションをプレビュー
+- `npm run dev` - Start development server
+- `npm run build` - Production build
+- `npm run build:dev` - Development mode build
+- `npm run build:staging` - Staging environment build
+- `npm run publish` - Production environment build
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview built application
 
-## 主な機能
+## Key Features
 
-1. **シャドウバンチェック**: Twitter/Xアカウントのシャドウバン状態を確認
-2. **ステータス履歴**: 過去のチェック結果を表示
-3. **セキュリティ**: Cloudflare Turnstileによるボット対策
-4. **暗号化**: クライアント側での暗号化処理
-5. **SEO最適化**: React Helmetによるメタタグ管理
+1. **Shadowban Check**: Check Twitter/X account shadowban status
+2. **Status History**: Display past check results
+3. **Security**: Bot protection with Cloudflare Turnstile
+4. **Encryption**: Client-side encryption processing
+5. **SEO Optimization**: Meta tag management with React Helmet
 
 ## Coding Guidelines
 
@@ -89,14 +89,14 @@ Twitter/Xのシャドウバン状態をチェックするWebアプリケーシ�
 - After user reviews and approves the changes
 - Never assume user wants immediate commit
 
-## ビルド設定
+## Build Configuration
 
-複数のビルドモードをサポート：
-- **development**: 開発環境用
-- **staging**: ステージング環境用
-- **production**: 本番環境用
+Supports multiple build modes:
+- **development**: For development environment
+- **staging**: For staging environment
+- **production**: For production environment
 
-JavaScript難読化とコード最適化を含む。
+Includes JavaScript obfuscation and code optimization.
 
 ## Important Notes
 
