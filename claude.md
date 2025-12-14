@@ -60,14 +60,14 @@ Twitter/Xのシャドウバン状態をチェックするWebアプリケーシ�
 4. **暗号化**: クライアント側での暗号化処理
 5. **SEO最適化**: React Helmetによるメタタグ管理
 
-## コーディング規約
+## Coding Guidelines
 
-- TypeScript strict modeを使用
-- ESLintの設定に従う
-- shadcn/uiのコンポーネントを優先的に使用
-- Tailwind CSSでスタイリング
-- コンポーネントは機能ごとにディレクトリで整理
-- コードコメントには"what"（何をしているか）ではなく"why"（なぜそうするか）を書く
+- Use TypeScript strict mode
+- Follow ESLint configuration
+- Prefer shadcn/ui components
+- Style with Tailwind CSS
+- Organize components by feature in directories
+- Write code comments focusing on "why" (rationale) not "what" (implementation)
 
 ## Git Workflow Rules
 
@@ -99,8 +99,8 @@ Twitter/Xのシャドウバン状態をチェックするWebアプリケーシ�
 
 JavaScript難読化とコード最適化を含む。
 
-## 注意事項
+## Important Notes
 
-- API呼び出しには適切なエラーハンドリングが必要
-- Turnstileトークンの検証を忘れずに
-- 個人情報の取り扱いに注意
+- API calls require proper error handling
+- Always validate Turnstile tokens
+- Handle personal information with care
