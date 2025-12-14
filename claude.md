@@ -73,13 +73,12 @@ Twitter/Xのシャドウバン状態をチェックするWebアプリケーシ�
 
 ### Commit and Push Policy
 - **NEVER commit or push without explicit user approval**
-- Always show changes and proposed commit message first
+- Always present changes and commit message together in a single response
 - Wait for user confirmation before executing git commands
 - Workflow:
-  1. Show code changes or implementation plan
-  2. Present proposed commit message
-  3. Wait for user's "OK" or approval
-  4. Only then execute git add, commit, and push
+  1. Show code changes AND proposed commit message together
+  2. Wait for user's "OK" or approval
+  3. Only then execute git add, commit, and push
 
 ### Commit Message Format
 - **Write commit messages in Japanese**
