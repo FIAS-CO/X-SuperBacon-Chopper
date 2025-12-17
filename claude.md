@@ -13,7 +13,6 @@ React-based web application for checking Twitter/X account shadowban status.
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui (Radix UI based)
 - **Routing**: React Router DOM
-- **Security**: Cloudflare Turnstile
 - **Ads**: Google AdSense, DMM Affiliate
 
 ## Project Structure
@@ -25,7 +24,6 @@ React-based web application for checking Twitter/X account shadowban status.
 │   │   ├── ShadowbanChecker.tsx       # Main shadowban checker
 │   │   ├── TwitterStatusChecker.tsx    # Twitter status checker
 │   │   ├── TwitterStatusHistory.tsx    # History display
-│   │   ├── Turnstile.tsx              # Cloudflare Turnstile component
 │   │   ├── results/                    # Check result display components
 │   │   ├── adsense/                    # Ad-related components
 │   │   ├── alert/                      # Notification/alert components
@@ -56,9 +54,8 @@ React-based web application for checking Twitter/X account shadowban status.
 
 1. **Shadowban Check**: Check Twitter/X account shadowban status
 2. **Status History**: Display past check results
-3. **Security**: Bot protection with Cloudflare Turnstile
-4. **Encryption**: Client-side encryption processing
-5. **SEO Optimization**: Meta tag management with React Helmet
+3. **Encryption**: Client-side encryption processing
+4. **SEO Optimization**: Meta tag management with React Helmet
 
 ## Coding Guidelines
 
@@ -101,5 +98,4 @@ Includes JavaScript obfuscation and code optimization.
 ## Important Notes
 
 - API calls require proper error handling
-- Always validate Turnstile tokens
 - Handle personal information with care
