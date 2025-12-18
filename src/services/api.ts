@@ -3,6 +3,15 @@ import { ClientEncryption } from "../components/util/ClientEncryption";
 import { solvePoW } from "../components/util/Pow";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
+/**
+ * お知らせ設定の型定義
+ */
+export interface NotificationSettings {
+    enabled: boolean;
+    title: string;
+    message: string;
+}
 export const apiClient = {
     // encryptedKey = 暗号化されたIP
     async checkUrlBatch(urls: string[], encryptedKey: string): Promise<SessionResult> {
@@ -154,6 +163,17 @@ export const apiClient = {
 
     async getEncryptedIpAsync(): Promise<string> {
         return await _getEncryptedIpAsync();
+    },
+
+    /**
+     * お知らせ設定を取得する
+     */
+    async getNotificationSettings(): Promise<NotificationSettings> {
+        const response = await fetch(`${API_BASE_URL}/api/system-control/get-notification-settings`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch notification settings');
+        }
+        return response.json();
     },
 }
 
