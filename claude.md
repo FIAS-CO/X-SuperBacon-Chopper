@@ -2,11 +2,35 @@
 
 Web application for checking Twitter/X shadowban status
 
+## ⚠️ CRITICAL RULES（最重要・必ず守る）
+
+### Commit and Push Policy
+- **NEVER commit or push without explicit user approval**
+- Always present changes and commit message together in a single response
+- Wait for user confirmation before executing git commands
+- Workflow:
+  1. Show code changes AND proposed commit message together
+  2. Wait for user's "OK" or approval
+  3. Only then execute git add, commit, and push
+
+### Commit Message Format
+- **Write commit messages in Japanese**
+- Follow Conventional Commits format (feat:, fix:, docs:, etc.)
+
+### When to Commit
+- Only when user explicitly requests it
+- After user reviews and approves the changes
+- Never assume user wants immediate commit
+
+### Important Security & Data Handling
+- API calls require proper error handling
+- Handle personal information with care
+
 ## Project Overview
 
 React-based web application for checking Twitter/X account shadowban status.
 
-## Tech Stack
+### Tech Stack
 
 - **Framework**: React 18.3 + TypeScript
 - **Build Tool**: Vite 6.0
@@ -15,7 +39,9 @@ React-based web application for checking Twitter/X account shadowban status.
 - **Routing**: React Router DOM
 - **Ads**: Google AdSense, DMM Affiliate
 
-## Project Structure
+## Development Guidelines
+
+### Project Structure
 
 ```
 /
@@ -40,7 +66,7 @@ React-based web application for checking Twitter/X account shadowban status.
 
 ```
 
-## Development Scripts
+### Development Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Production build
@@ -50,14 +76,14 @@ React-based web application for checking Twitter/X account shadowban status.
 - `npm run lint` - Run ESLint
 - `npm run preview` - Preview built application
 
-## Key Features
+### Key Features
 
 1. **Shadowban Check**: Check Twitter/X account shadowban status
 2. **Status History**: Display past check results
 3. **Encryption**: Client-side encryption processing
 4. **SEO Optimization**: Meta tag management with React Helmet
 
-## Coding Guidelines
+### Coding Guidelines
 
 - Use TypeScript strict mode
 - Follow ESLint configuration
@@ -66,27 +92,7 @@ React-based web application for checking Twitter/X account shadowban status.
 - Organize components by feature in directories
 - Write code comments focusing on "why" (rationale) not "what" (implementation)
 
-## Git Workflow Rules
-
-### Commit and Push Policy
-- **NEVER commit or push without explicit user approval**
-- Always present changes and commit message together in a single response
-- Wait for user confirmation before executing git commands
-- Workflow:
-  1. Show code changes AND proposed commit message together
-  2. Wait for user's "OK" or approval
-  3. Only then execute git add, commit, and push
-
-### Commit Message Format
-- **Write commit messages in Japanese**
-- Follow Conventional Commits format (feat:, fix:, docs:, etc.)
-
-### When to Commit
-- Only when user explicitly requests it
-- After user reviews and approves the changes
-- Never assume user wants immediate commit
-
-## Build Configuration
+### Build Configuration
 
 Supports multiple build modes:
 - **development**: For development environment
@@ -95,7 +101,17 @@ Supports multiple build modes:
 
 Includes JavaScript obfuscation and code optimization.
 
-## Important Notes
+## ⚠️ REMINDER: Critical Rules
 
+### Commit and Push Policy
+- **NEVER commit or push without explicit user approval**
+- Always present changes and commit message together in a single response
+- Wait for user confirmation before executing git commands
+
+### Commit Message Format
+- **Write commit messages in Japanese**
+- Follow Conventional Commits format (feat:, fix:, docs:, etc.)
+
+### Important Security & Data Handling
 - API calls require proper error handling
 - Handle personal information with care
