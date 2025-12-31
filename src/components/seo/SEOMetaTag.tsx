@@ -17,7 +17,7 @@ const SEOMetaTags = ({
   keywords = 'シャドウバン,X,ポスト,Twitter,ツイート,検索除外,チェッカー,SNS,ソーシャルメディア,検索除外,除外検索,調べ方,検索',
   ogTitle,
   ogDescription,
-  ogImage = '/api/placeholder/1200/630',
+  ogImage = '/og-image.jpg',
   twitterCard = 'summary_large_image',
   canonicalUrl,
 }: SEOMetaTagsProps) => {
